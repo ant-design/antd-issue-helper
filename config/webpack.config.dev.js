@@ -139,7 +139,11 @@ module.exports = {
         loader: 'style!css?importLoaders=1!postcss'
       },
       {
-        test: /\.less$/,
+        test: /node_modules\/antd\/.+\.less$/,
+        loader: `style!css?importLoaders=1!postcss!less?{"sourceMap":true,"modifyVars":${JSON.stringify({ "font-size-base": "14px" })}}`
+      },
+      {
+        test: /src\/.+\.less$/,
         loader: 'style!css?modules&importLoaders=1!postcss!less'
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify

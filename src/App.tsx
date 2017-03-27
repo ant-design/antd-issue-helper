@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Layout } from 'antd';
+import Intro from './Intro';
 import IssueForm from './IssueForm';
 
 const styles: any = require('./App.less');
@@ -18,6 +19,7 @@ class App extends React.Component<null, null> {
           </div>
         </Header>
         <Content className={styles.content}>
+          <Intro />
           <IssueForm />
         </Content>
         <Footer style={{ textAlign: 'center' }}>

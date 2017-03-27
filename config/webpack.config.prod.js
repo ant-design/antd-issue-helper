@@ -149,7 +149,15 @@ module.exports = {
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
       {
-        test: /\.less/,
+        test: /node_modules\/antd\/.+\.less$/,
+        loader: ExtractTextPlugin.extract(
+          'style',
+          'css?importLoaders=1!postcss!less?{"modifyVars":${JSON.stringify({ "font-size-base": "14px" })}}',
+          extractTextPluginOptions
+        )
+      },
+      {
+        test: /src\/.+\.less$/,
         loader: ExtractTextPlugin.extract(
           'style',
           'css?modules&importLoaders=1!postcss!less',
