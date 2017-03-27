@@ -18,6 +18,7 @@
     "lodash.debounce": "^4.0.8",
     "react": "15.4.2",
     "react-dom": "15.4.2",
+    "remarkable": "^1.7.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

@@ -5,6 +5,8 @@ import debounce from 'lodash.debounce';
 import * as api from './api';
 import BugForm from './BugForm';
 import FeatureForm from './FeatureForm';
+import PreviewModal from './PreviewModal';
+import createPreview from './createPreview';
 
 const styles: any = require('./IssueForm.less');
 const FormItem = Form.Item;
@@ -17,6 +19,7 @@ export interface IssueFormProps {
 export interface IssueFormState {
   versions: string[];
   similarIssues: any[];
+  preview: boolean;
 };
 
 class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
@@ -26,6 +29,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
     this.state = {
       versions: [],
       similarIssues: [],
+      preview: false,
     };
 
     this.handleTitleChange = debounce(this.handleTitleChange, 500);
@@ -56,11 +60,16 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
     this.fetchIssues();
   }
 
+  handlePreview = () => {
+    this.setState({ preview: true });
+  }
+
   render() {
     const { form } = this.props;
-    const { versions, similarIssues } = this.state;
+    const { versions, similarIssues, preview } = this.state;
     const { getFieldDecorator, getFieldValue } = form;
     const issueType = getFieldValue('type');
+    const content = createPreview(issueType, form.getFieldsValue());
 
     const similarIssuesList = (
       <FormItem>
@@ -77,6 +86,9 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
 
     return (
       <Form layout="horizontal">
+        <PreviewModal
+          visible={preview} content={content}
+        />
         <FormItem>
            <Col span={11}>
               <FormItem
@@ -123,7 +135,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
         )}
         <FormItem>
           <div className={styles.submitBtn}>
-            <Button type="primary" htmlType="submit" size="large">Preview</Button>
+            <Button type="primary" size="large" onClick={this.handlePreview}>Preview</Button>
           </div>
         </FormItem>
       </Form>
