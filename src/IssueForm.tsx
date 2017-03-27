@@ -62,7 +62,10 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
       <Form layout="horizontal">
         <FormItem>
            <Col span={11}>
-              <FormItem label="I am opening an issue for">
+              <FormItem
+                label="I am opening an issue for"
+                help="Please make sure to file the issue at appropriate repo."
+              >
                 {getFieldDecorator('repo', {
                   initialValue: 'ant-design',
                 })(
@@ -104,8 +107,11 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
           </FormItem>
         }
         <FormItem>
-          <Col span={5}>
-            <FormItem label="Version">
+          <Col span={11}>
+            <FormItem
+              label="Version"
+              help="Check if the issue is reproducible with the latest stable version."
+            >
               {getFieldDecorator('version', {
                 initialValue: versions[0],
               })(
@@ -117,15 +123,29 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
               )}
             </FormItem>
           </Col>
-          <Col span={18} offset={1}>
-            <FormItem label="Link to minimal reproduction">
+          <Col span={12} offset={1}>
+            <FormItem
+              label="Link to minimal reproduction"
+              help={
+                <span>
+                  Please provide a online demo by forking this <a href="http://codepen.io/benjycui/pen/KgPZrE?editors=001" target="_blank">Codepen</a> or GitHub repo.
+                </span>
+              }
+            >
               {getFieldDecorator('reproduce', {})(
                 <Input />
               )}
             </FormItem>
           </Col>
         </FormItem>
-        <FormItem label="Step to reproduce">
+        <FormItem
+          label="Step to reproduce"
+          help={
+            <span>
+              Clear and concise reproduction instructions are important for us to be able to triage your issue in a timely manner. Note that you can use <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a> to format lists and code.
+            </span>
+          }
+        >
           <Input type="textarea" autosize={{ minRows: 2 }} />
         </FormItem>
         <FormItem label="What is expected?">
@@ -134,7 +154,10 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
         <FormItem label="What is actually happening?">
           <Input type="textarea" autosize={{ minRows: 2 }} />
         </FormItem>
-        <FormItem label="Any additional comments?(optional)">
+        <FormItem
+          label="Any additional comments?(optional)"
+          help="e.g. some background/context of how you ran into this bug."
+        >
           <Input type="textarea" autosize={{ minRows: 2 }} />
         </FormItem>
         <FormItem>
