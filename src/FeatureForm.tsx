@@ -19,7 +19,11 @@ export default function FeatureForm({ form }: FeatureFormProps) {
           <span>Explain your use case, context, and rationale behind this feature request. More importantly, what is the end user experience you are trying to build that led to the need for this feature?</span>
         )}
       >
-        {getFieldDecorator('motivation', {})(
+        {getFieldDecorator('motivation', {
+          rules: [
+            { required: true },
+          ]
+        })(
           <Input type="textarea" autosize={{ minRows: 2 }} />
         )}
       </FormItem>
@@ -29,7 +33,11 @@ export default function FeatureForm({ form }: FeatureFormProps) {
           <span>Describe how you propose to solve the problem and provide code samples of how the API would work once implemented. Note that you can use <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a> to format your code blocks.</span>
         )}
       >
-        {getFieldDecorator('proposal', {})(
+        {getFieldDecorator('proposal', {
+          rules: [
+            { required: true },
+          ]
+        })(
           <Input type="textarea" autosize={{ minRows: 2 }} />
         )}
       </FormItem>

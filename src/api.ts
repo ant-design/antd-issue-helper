@@ -14,7 +14,7 @@ export function fetchVersions(repo: string) {
 
 export function fetchIssues(repo: string, keyword: string) {
   const q = encodeURIComponent(`is:issue repo:ant-design/${repo} ${keyword}`);
-  return fetch(`${endpoint}/search/issues?q=${q}&per_page=10`)
+  return fetch(`${endpoint}/search/issues?q=${q}&per_page=5`)
     .then((response: Response) => response.json())
     .then(json => json.items);
 }

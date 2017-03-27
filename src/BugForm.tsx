@@ -42,8 +42,12 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
               </span>
             )}
           >
-            {getFieldDecorator('reproduce', {})(
-              <Input />
+            {getFieldDecorator('reproduction', {
+              rules: [
+                { required: true },
+              ]
+            })(
+              <Input type="url" />
             )}
           </FormItem>
         </Col>
@@ -56,19 +60,39 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
           </span>
         )}
       >
-        <Input type="textarea" autosize={{ minRows: 2 }} />
+        {getFieldDecorator('steps', {
+          rules: [
+            { required: true },
+          ]
+        })(
+          <Input type="textarea" autosize={{ minRows: 2 }} />
+        )}
       </FormItem>
       <FormItem label="What is expected?">
-        <Input type="textarea" autosize={{ minRows: 2 }} />
+        {getFieldDecorator('expected', {
+          rules: [
+            { required: true },
+          ]
+        })(
+          <Input type="textarea" autosize={{ minRows: 2 }} />
+        )}
       </FormItem>
       <FormItem label="What is actually happening?">
-        <Input type="textarea" autosize={{ minRows: 2 }} />
+        {getFieldDecorator('actual', {
+          rules: [
+            { required: true },
+          ]
+        })(
+          <Input type="textarea" autosize={{ minRows: 2 }} />
+        )}
       </FormItem>
       <FormItem
         label="Any additional comments?(optional)"
         help="e.g. some background/context of how you ran into this bug."
       >
-        <Input type="textarea" autosize={{ minRows: 2 }} />
+        {getFieldDecorator('extra', {})(
+          <Input type="textarea" autosize={{ minRows: 2 }} />
+        )}
       </FormItem>
     </div>
   );

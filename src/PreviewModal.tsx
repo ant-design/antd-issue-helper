@@ -18,7 +18,15 @@ export default function PreviewModal({
   onCreate,
 }: PreviewModalProps) {
   return (
-    <Modal title="Issue Preview" visible={visible}>
+    <Modal
+      title="Issue Preview"
+      okText="Create"
+      cancelText="Cancel"
+      width="680"
+      visible={visible}
+      onCancel={onCancel}
+      onOk={onCreate}
+    >
       <div dangerouslySetInnerHTML={{ __html: md.render(content )}} />
     </Modal>
   );
