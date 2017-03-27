@@ -1,22 +1,29 @@
 import * as React from 'react';
-import { Button } from 'antd';
-import './App.css';
+import { Layout } from 'antd';
+import IssueForm from './IssueForm';
 
-const logo = require('./logo.svg');
+const styles: any = require('./App.less');
+const { Header, Content, Footer } = Layout;
 
 class App extends React.Component<null, null> {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button>Hello</Button>
-      </div>
+      <Layout className="layout">
+        <Header className={styles.header}>
+          <div className={styles.logo}>
+            <img alt="logo" src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg" />
+            <span>
+              Issue Helper
+            </span>
+          </div>
+        </Header>
+        <Content className={styles.content}>
+          <IssueForm />
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Ant Design ©2016 Created by Ant UED
+        </Footer>
+      </Layout>
     );
   }
 }
