@@ -57,6 +57,18 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { versions, similarIssues } = this.state;
+    const similarIssuesList = (
+      <FormItem>
+        <h3>Similar Issues:</h3>
+        <ul>
+          {similarIssues.map(issue => (
+            <li key={issue.id}>
+              <a href={issue.html_url} target="_blank" rel="noreferer noopener">{issue.title}</a>
+            </li>
+          ))}
+        </ul>
+      </FormItem>
+    );
 
     return (
       <Form layout="horizontal">
@@ -94,18 +106,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
             <Input onChange={this.handleTitleChange}/>
           )}
         </FormItem>
-        {similarIssues.length > 0 &&
-          <FormItem>
-            <h3>Similar Issues:</h3>
-            <ul>
-              {similarIssues.map(issue =>
-                <li key={issue.id}>
-                  <a href={issue.html_url} target="_blank" rel="noreferer noopener">{issue.title}</a>
-                </li>
-              )}
-            </ul>
-          </FormItem>
-        }
+        {similarIssues.length > 0 && similarIssuesList}
         <FormItem>
           <Col span={11}>
             <FormItem
@@ -115,7 +116,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
               {getFieldDecorator('version', {
                 initialValue: versions[0],
               })(
-                <Select showSearch>
+                <Select showSearch={true}>
                   {versions.map(version =>
                     <Option key={version}>{version}</Option>
                   )}
@@ -126,11 +127,11 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
           <Col span={12} offset={1}>
             <FormItem
               label="Link to minimal reproduction"
-              help={
+              help={(
                 <span>
                   Please provide a online demo by forking this <a href="http://codepen.io/benjycui/pen/KgPZrE?editors=001" target="_blank">Codepen</a> or GitHub repo.
                 </span>
-              }
+              )}
             >
               {getFieldDecorator('reproduce', {})(
                 <Input />
@@ -140,11 +141,11 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
         </FormItem>
         <FormItem
           label="Step to reproduce"
-          help={
+          help={(
             <span>
               Clear and concise reproduction instructions are important for us to be able to triage your issue in a timely manner. Note that you can use <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a> to format lists and code.
             </span>
-          }
+          )}
         >
           <Input type="textarea" autosize={{ minRows: 2 }} />
         </FormItem>
