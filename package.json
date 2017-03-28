@@ -65,7 +65,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "trans": "atool-l10n"
+    "trans": "atool-l10n",
+    "deploy": "scripts/deploy.sh"
   },
   "jest": {
     "collectCoverageFrom": [
