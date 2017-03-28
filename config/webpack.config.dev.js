@@ -46,7 +46,9 @@ module.exports = {
     // We ship a few polyfills by default:
     require.resolve('./polyfills'),
     // Finally, this is your app's code:
-    paths.appIndexJs
+    paths.enLocaleJs,
+    paths.zhLocaleJs,
+    paths.appIndexJs,
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
@@ -115,7 +117,8 @@ module.exports = {
           /\.css$/,
           /\.less/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.md/,
         ],
         loader: 'url',
         query: {
@@ -159,7 +162,11 @@ module.exports = {
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      {
+        test: /\.md$/,
+        loader: "html!markdown"
+      },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]

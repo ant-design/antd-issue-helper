@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, Col, Input, Select } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { FormattedMessage } from 'react-intl';
+import I18n from './I18n';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -19,8 +21,8 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
       <FormItem>
         <Col span={11}>
           <FormItem
-            label="Version"
-            help="Check if the issue is reproducible with the latest stable version."
+            label={<FormattedMessage id="issue.version" defaultMessage="Version" />}
+            help={<FormattedMessage id="issue.versionHelp" defaultMessage="Check if the issue is reproducible with the latest stable version." />}
           >
             {getFieldDecorator('version', {
               initialValue: versions[0],
@@ -35,12 +37,8 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
         </Col>
         <Col span={12} offset={1}>
           <FormItem
-            label="Link to minimal reproduction"
-            help={(
-              <span>
-                Please provide a online demo by forking this <a href="http://codepen.io/benjycui/pen/KgPZrE?editors=001" target="_blank">Codepen</a> or GitHub repo.
-              </span>
-            )}
+            label={<FormattedMessage id="issue.reproduction" defaultMessage="Link to minimal reproduction" />}
+            help={<I18n id="reproHelp" />}
           >
             {getFieldDecorator('reproduction', {
               rules: [
@@ -53,12 +51,8 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
         </Col>
       </FormItem>
       <FormItem
-        label="Step to reproduce"
-        help={(
-          <span>
-            Clear and concise reproduction instructions are important for us to be able to triage your issue in a timely manner. Note that you can use <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a> to format lists and code.
-          </span>
-        )}
+        label={<FormattedMessage id="issue.steps" defaultMessage="Step to reproduce" />}
+        help={<I18n id="stepsHelp" />}
       >
         {getFieldDecorator('steps', {
           rules: [
@@ -68,7 +62,9 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
           <Input type="textarea" autosize={{ minRows: 2 }} />
         )}
       </FormItem>
-      <FormItem label="What is expected?">
+      <FormItem
+        label={<FormattedMessage id="issue.expected" defaultMessage="What is expected?" />}
+      >
         {getFieldDecorator('expected', {
           rules: [
             { required: true },
@@ -77,7 +73,9 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
           <Input type="textarea" autosize={{ minRows: 2 }} />
         )}
       </FormItem>
-      <FormItem label="What is actually happening?">
+      <FormItem
+        label={<FormattedMessage id="issue.actually" defaultMessage="What is actually happening?" />}
+      >
         {getFieldDecorator('actual', {
           rules: [
             { required: true },
@@ -87,8 +85,8 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
         )}
       </FormItem>
       <FormItem
-        label="Any additional comments?(optional)"
-        help="e.g. some background/context of how you ran into this bug."
+        label={<FormattedMessage id="issue.extra" defaultMessage="Any additional comments?(optional)" />}
+        help={<FormattedMessage id="issue.extraHelp" defaultMessage="e.g. some background/context of how you ran into this bug." />}
       >
         {getFieldDecorator('extra', {})(
           <Input type="textarea" autosize={{ minRows: 2 }} />

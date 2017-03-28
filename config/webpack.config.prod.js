@@ -54,6 +54,8 @@ module.exports = {
   // In production, we only want to load the polyfills and the app code.
   entry: [
     require.resolve('./polyfills'),
+    paths.enLocaleJs,
+    paths.zhLocaleJs,
     paths.appIndexJs
   ],
   output: {
@@ -113,7 +115,8 @@ module.exports = {
           /\.css$/,
           /\.less/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.md/,
         ],
         loader: 'url',
         query: {
@@ -125,7 +128,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         include: paths.appSrc,
-        loader: 'babel|ts',
+        loader: 'babel!ts',
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -152,7 +155,7 @@ module.exports = {
         test: /node_modules\/antd\/.+\.less$/,
         loader: ExtractTextPlugin.extract(
           'style',
-          'css?importLoaders=1!postcss!less?{"modifyVars":${JSON.stringify({ "font-size-base": "14px" })}}',
+          `css?importLoaders=1!postcss!less?{"modifyVars":${JSON.stringify({ "font-size-base": "14px" })}}`,
           extractTextPluginOptions
         )
       },
@@ -178,7 +181,11 @@ module.exports = {
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      {
+        test: /\.md$/,
+        loader: "html!markdown"
+      },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]

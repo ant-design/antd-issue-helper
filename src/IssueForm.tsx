@@ -1,6 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import { Form, Col, Input, Select, Button } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { FormattedMessage } from 'react-intl';
 import debounce from 'lodash.debounce';
 import * as api from './api';
 import BugForm from './BugForm';
@@ -124,8 +125,8 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
         <FormItem>
            <Col span={11}>
               <FormItem
-                label="I am opening an issue for"
-                help="Please make sure to file the issue at appropriate repo."
+                label={<FormattedMessage id="issue.repo" defaultMessage="I am opening an issue for" />}
+                help={<FormattedMessage id="issue.repoHelp" defaultMessage="Please make sure to file the issue at appropriate repo." />}
               >
                 {getFieldDecorator('repo', {
                   initialValue: 'ant-design',
@@ -138,19 +139,27 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
               </FormItem>
            </Col>
            <Col span={12} offset={1}>
-              <FormItem label="This is a">
+              <FormItem
+                label={<FormattedMessage id="issue.type" defaultMessage="This is a" />}
+              >
                 {getFieldDecorator('type', {
                   initialValue: 'bug',
                 })(
                   <Select>
-                    <Option key="bug">Bug Report</Option>
-                    <Option key="feature">Feature Request</Option>
+                    <Option key="bug">
+                      <FormattedMessage id="issue.type.bug" defaultMessage="Bug Report" />
+                    </Option>
+                    <Option key="feature">>
+                      <FormattedMessage id="issue.type.feature" defaultMessage="Feature Request" />
+                    </Option>
                   </Select>
                 )}
               </FormItem>
            </Col>
         </FormItem>
-        <FormItem label="Title">
+        <FormItem
+          label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
+        >
           {getFieldDecorator('title', {
             rules: [
               { required: true },
@@ -160,7 +169,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
           )}
         </FormItem>
         {similarIssues.length > 0 && similarIssuesList}
-        {issueType === 'bug' ? (
+        {issueType !== 'feature' ? (
           <BugForm
             form={form}
             versions={versions}
