@@ -59,7 +59,7 @@ class App extends React.Component<null, AppState> {
           </Content>
         </IntlProvider>
         <Footer style={{ textAlign: 'center' }}>
-          Ant Design © {(new Date).getFullYear()} Created by Ant UED
+          Inspired by <a href="https://new-issue.vuejs.org/" target="_blank">Vue Issue Helper</a>
         </Footer>
       </Layout>
     );
