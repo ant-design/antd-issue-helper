@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, Button } from 'antd';
 
 const Remarkable: any = require('remarkable');
 const md = new Remarkable();
@@ -20,12 +20,13 @@ export default function PreviewModal({
   return (
     <Modal
       title="Issue Preview"
-      okText="Create"
-      cancelText="Cancel"
+      cancelText=""
       width="680px"
       visible={visible}
       onCancel={onCancel}
-      onOk={onCreate}
+      footer={(
+        <Button onClick={onCreate} type="primary">Create</Button>
+      )}
     >
       <div dangerouslySetInnerHTML={{ __html: md.render(content )}} />
     </Modal>
