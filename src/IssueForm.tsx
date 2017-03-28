@@ -162,7 +162,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
                       <Option key="bug">
                         <FormattedMessage id="issue.type.bug" defaultMessage="Bug Report" />
                       </Option>
-                      <Option key="feature">>
+                      <Option key="feature">
                         <FormattedMessage id="issue.type.feature" defaultMessage="Feature Request" />
                       </Option>
                     </Select>
