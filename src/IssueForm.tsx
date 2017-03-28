@@ -7,6 +7,7 @@ import * as api from './api';
 import BugForm from './BugForm';
 import FeatureForm from './FeatureForm';
 import PreviewModal from './PreviewModal';
+import ReproModal from './ReproModal';
 import createPreview from './createPreview';
 
 const styles: any = require('./IssueForm.less');
@@ -21,9 +22,12 @@ export interface IssueFormState {
   versions: string[];
   similarIssues: any[];
   preview: boolean;
+  reproModal: boolean;
 };
 
 class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
+  formRef: HTMLElement;
+
   constructor(props: IssueFormProps) {
     super(props);
 
@@ -31,6 +35,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
       versions: [],
       similarIssues: [],
       preview: false,
+      reproModal: false,
     };
 
     this.handleTitleChange = debounce(this.handleTitleChange, 500);
@@ -38,6 +43,12 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
 
   componentDidMount() {
     this.fetchVerions('ant-design');
+    this.formRef.addEventListener('click', (e: Event) => {
+      if ((e.target as any).getAttribute('href') === '#modal') {
+        e.preventDefault();
+        this.setState({ reproModal: true });
+      }
+    });
   }
 
   fetchVerions(repo: string) {
@@ -96,7 +107,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
 
   render() {
     const { form } = this.props;
-    const { versions, similarIssues, preview } = this.state;
+    const { versions, similarIssues, preview, reproModal } = this.state;
     const { getFieldDecorator, getFieldValue } = form;
     const issueType = getFieldValue('type');
     const content = this.getContent(issueType);
@@ -115,75 +126,78 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
     );
 
     return (
-      <Form layout="horizontal" onSubmit={this.handlePreview}>
-        <PreviewModal
-          visible={preview}
-          content={content}
-          onCancel={this.handleClosePreview}
-          onCreate={this.handleCreate}
-        />
-        <FormItem>
-           <Col span={11}>
-              <FormItem
-                label={<FormattedMessage id="issue.repo" defaultMessage="I am opening an issue for" />}
-                help={<FormattedMessage id="issue.repoHelp" defaultMessage="Please make sure to file the issue at appropriate repo." />}
-              >
-                {getFieldDecorator('repo', {
-                  initialValue: 'ant-design',
-                })(
-                  <Select onChange={this.handleRepoChange}>
-                    <Option key="ant-design">antd</Option>
-                    <Option key="ant-design-mobile">antd-mobile</Option>
-                  </Select>
-                )}
-              </FormItem>
-           </Col>
-           <Col span={12} offset={1}>
-              <FormItem
-                label={<FormattedMessage id="issue.type" defaultMessage="This is a" />}
-              >
-                {getFieldDecorator('type', {
-                  initialValue: 'bug',
-                })(
-                  <Select>
-                    <Option key="bug">
-                      <FormattedMessage id="issue.type.bug" defaultMessage="Bug Report" />
-                    </Option>
-                    <Option key="feature">>
-                      <FormattedMessage id="issue.type.feature" defaultMessage="Feature Request" />
-                    </Option>
-                  </Select>
-                )}
-              </FormItem>
-           </Col>
-        </FormItem>
-        <FormItem
-          label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
-        >
-          {getFieldDecorator('title', {
-            rules: [
-              { required: true },
-            ]
-          })(
-            <Input onChange={this.handleTitleChange}/>
-          )}
-        </FormItem>
-        {similarIssues.length > 0 && similarIssuesList}
-        {issueType !== 'feature' ? (
-          <BugForm
-            form={form}
-            versions={versions}
-            similarIssues={similarIssues}
+      <div ref={node => (this.formRef = node)}>
+        <Form layout="horizontal" onSubmit={this.handlePreview}>
+          <PreviewModal
+            visible={preview}
+            content={content}
+            onCancel={this.handleClosePreview}
+            onCreate={this.handleCreate}
           />
-        ) : (
-          <FeatureForm form={form} />
-        )}
-        <FormItem>
-          <div className={styles.submitBtn}>
-            <Button type="primary" size="large" htmlType="submit">Preview</Button>
-          </div>
-        </FormItem>
-      </Form>
+          <ReproModal visible={reproModal} onCancel={() => this.setState({ reproModal: false })} />
+          <FormItem>
+             <Col span={11}>
+                <FormItem
+                  label={<FormattedMessage id="issue.repo" defaultMessage="I am opening an issue for" />}
+                  help={<FormattedMessage id="issue.repoHelp" defaultMessage="Please make sure to file the issue at appropriate repo." />}
+                >
+                  {getFieldDecorator('repo', {
+                    initialValue: 'ant-design',
+                  })(
+                    <Select onChange={this.handleRepoChange}>
+                      <Option key="ant-design">antd</Option>
+                      <Option key="ant-design-mobile">antd-mobile</Option>
+                    </Select>
+                  )}
+                </FormItem>
+             </Col>
+             <Col span={12} offset={1}>
+                <FormItem
+                  label={<FormattedMessage id="issue.type" defaultMessage="This is a" />}
+                >
+                  {getFieldDecorator('type', {
+                    initialValue: 'bug',
+                  })(
+                    <Select>
+                      <Option key="bug">
+                        <FormattedMessage id="issue.type.bug" defaultMessage="Bug Report" />
+                      </Option>
+                      <Option key="feature">>
+                        <FormattedMessage id="issue.type.feature" defaultMessage="Feature Request" />
+                      </Option>
+                    </Select>
+                  )}
+                </FormItem>
+             </Col>
+          </FormItem>
+          <FormItem
+            label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
+          >
+            {getFieldDecorator('title', {
+              rules: [
+                { required: true },
+              ]
+            })(
+              <Input onChange={this.handleTitleChange}/>
+            )}
+          </FormItem>
+          {similarIssues.length > 0 && similarIssuesList}
+          {issueType !== 'feature' ? (
+            <BugForm
+              form={form}
+              versions={versions}
+              similarIssues={similarIssues}
+            />
+          ) : (
+            <FeatureForm form={form} />
+          )}
+          <FormItem>
+            <div className={styles.submitBtn}>
+              <Button type="primary" size="large" htmlType="submit">Preview</Button>
+            </div>
+          </FormItem>
+        </Form>
+      </div>
     );
   }
 }

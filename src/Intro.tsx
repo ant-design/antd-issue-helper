@@ -36,7 +36,7 @@ export default class Intro extends React.Component<null, IntroState> {
     const { modalVisible } = this.state;
 
     return (
-      <div className={styles.intro} ref={node => (this.introRef = node)}>
+      <div className={`${styles.intro} paragraph`} ref={node => (this.introRef = node)}>
         <IntroModal visible={modalVisible} onCancel={this.handleCancel} />
         <I18n id="intro" />
       </div>

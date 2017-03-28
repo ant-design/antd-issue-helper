@@ -2,12 +2,12 @@ import React from 'react';
 import { Modal } from 'antd';
 import I18n from './I18n';
 
-export interface IntroModalProps {
+export interface ReproModalProps {
   visible: boolean;
   onCancel: () => any;
 }
 
-export default function IntroModal({ visible, onCancel }: IntroModalProps) {
+export default function ReproModal({ visible, onCancel }: ReproModalProps) {
   return (
     <Modal
       title="The reason behind our strict issue policy"
