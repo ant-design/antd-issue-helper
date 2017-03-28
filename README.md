@@ -1,4 +1,4 @@
-# antd-issue-helper
+# Ant Design Issue helper
 
 
 ## Development
