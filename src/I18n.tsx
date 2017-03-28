@@ -23,9 +23,10 @@ export default class I18n extends React.Component<I18nProps, null> {
   render() {
     const { id, ...restProps } = this.props;
     const { locale } = this.context;
+    const html = texts[locale][id];
 
     return (
-      <div {...restProps} dangerouslySetInnerHTML={{ __html: texts[locale][id] }} />
+      <div {...restProps} dangerouslySetInnerHTML={{ __html: html }} />
     );
   }
 }

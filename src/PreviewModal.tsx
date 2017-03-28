@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
+import { FormattedMessage } from 'react-intl';
 
 const Remarkable: any = require('remarkable');
 const md = new Remarkable();
@@ -25,7 +26,9 @@ export default function PreviewModal({
       visible={visible}
       onCancel={onCancel}
       footer={(
-        <Button onClick={onCreate} type="primary">Create</Button>
+        <Button onClick={onCreate} type="primary">
+          <FormattedMessage id="issue.create" defaultMessage="Create" />
+        </Button>
       )}
     >
       <div className="paragraph" dangerouslySetInnerHTML={{ __html: md.render(content )}} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
+import { FormattedMessage } from 'react-intl';
 import I18n from './I18n';
 
 export interface IntroModalProps {
@@ -10,7 +11,7 @@ export interface IntroModalProps {
 export default function IntroModal({ visible, onCancel }: IntroModalProps) {
   return (
     <Modal
-      title="The reason behind our strict issue policy"
+      title={<FormattedMessage id="intro.modal" defaultMessage="The reason behind our strict issue policy" />}
       footer=""
       visible={visible}
       onCancel={onCancel}

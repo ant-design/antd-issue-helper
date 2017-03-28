@@ -17,7 +17,7 @@ export default class Intro extends React.Component<null, IntroState> {
 
   componentDidMount() {
     this.introRef.addEventListener('click', (e: Event) => {
-      if ((e.target as any).getAttribute('href') === '#modal') {
+      if ((e.target as any).getAttribute('href') === '#intro-modal') {
         this.handleClick(e);
       }
     });

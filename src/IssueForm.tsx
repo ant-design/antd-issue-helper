@@ -52,12 +52,16 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
 
   componentDidMount() {
     this.fetchVerions(params.repo);
-    this.formRef.addEventListener('click', (e: Event) => {
-      if ((e.target as any).getAttribute('href') === '#modal') {
-        e.preventDefault();
-        this.setState({ reproModal: true });
-      }
-    });
+    this.bindModalHandler();
+   }
+
+  bindModalHandler() {
+   this.formRef.addEventListener('click', (e: Event) => {
+     if ((e.target as any).getAttribute('href') === '#repro-modal') {
+       e.preventDefault();
+       this.setState({ reproModal: true });
+     }
+   });
   }
 
   fetchVerions(repo: string) {
