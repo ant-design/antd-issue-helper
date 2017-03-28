@@ -25,6 +25,15 @@ export interface IssueFormState {
   reproModal: boolean;
 };
 
+const params: any = location.search.slice(1).split('&').reduce((acc, param) => {
+  const [key, value] = param.split('=');
+  return { ...acc, [key]: value };
+}, {});
+
+if (!params.repo) {
+  params.repo = 'ant-design';
+}
+
 class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
   formRef: HTMLElement;
 
@@ -42,7 +51,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
   }
 
   componentDidMount() {
-    this.fetchVerions('ant-design');
+    this.fetchVerions(params.repo);
     this.formRef.addEventListener('click', (e: Event) => {
       if ((e.target as any).getAttribute('href') === '#modal') {
         e.preventDefault();
@@ -142,7 +151,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
                   help={<FormattedMessage id="issue.repoHelp" defaultMessage="Please make sure to file the issue at appropriate repo." />}
                 >
                   {getFieldDecorator('repo', {
-                    initialValue: 'ant-design',
+                    initialValue: params.repo,
                   })(
                     <Select onChange={this.handleRepoChange}>
                       <Option key="ant-design">antd</Option>
