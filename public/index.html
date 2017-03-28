@@ -14,6 +14,9 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Ant Design Issue Helper</title>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+      <link href=".<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% } %>
   </head>
   <body>
     <div id="root"></div>
@@ -30,5 +33,8 @@
     <script type="text/javascript">
       window.appLocale = {};
     </script>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+      <script src=".<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
   </body>
 </html>
