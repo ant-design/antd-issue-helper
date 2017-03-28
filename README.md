@@ -1,4 +1,4 @@
-# Ant Design Issue helper
+# Ant Design Issue Helper
 
 
 ## Development
