@@ -11,13 +11,18 @@ export interface AppState {
   locale: string;
 }
 
+function checkIfCn() {
+  // safari is 'zh-cn', while chrome and other is 'zh-CN'
+  return window.navigator.language.toLowerCase() === 'zh-cn';
+}
+
 class App extends React.Component<null, AppState> {
   static childContextTypes = {
     locale: PropTypes.string,
   };
 
   state = {
-    locale: 'en',
+    locale: checkIfCn() ? 'zh' : 'en',
   };
 
   getChildContext() {
