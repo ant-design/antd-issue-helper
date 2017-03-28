@@ -158,8 +158,8 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
                     initialValue: params.repo,
                   })(
                     <Select onChange={this.handleRepoChange}>
-                      <Option key="ant-design">antd</Option>
-                      <Option key="ant-design-mobile">antd-mobile</Option>
+                      <Option key="ant-design">ant-design</Option>
+                      <Option key="ant-design-mobile">ant-design-mobile</Option>
                     </Select>
                   )}
                 </FormItem>
