@@ -11,9 +11,12 @@ export interface AppState {
   locale: string;
 }
 
-function checkIfCn() {
-  // safari is 'zh-cn', while chrome and other is 'zh-CN'
-  return window.navigator.language.toLowerCase() === 'zh-cn';
+function getLocale() {
+  const cache = localStorage.getItem('locale')
+  if (cache) {
+    return cache;
+  }
+  return window.navigator.language.toLowerCase() === 'zh-cn' ? 'zh' : 'en';
 }
 
 class App extends React.Component<null, AppState> {
@@ -22,7 +25,7 @@ class App extends React.Component<null, AppState> {
   };
 
   state = {
-    locale: checkIfCn() ? 'zh' : 'en',
+    locale: getLocale(),
   };
 
   getChildContext() {
@@ -34,7 +37,9 @@ class App extends React.Component<null, AppState> {
   handleLocaleChange = () => {
     this.setState(({ locale }) => ({
       locale: locale === 'en' ? 'zh' : 'en',
-    }));
+    }), () => {
+      localStorage.setItem('locale', this.state.locale);
+    });
   }
 
   render() {
