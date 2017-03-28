@@ -15,6 +15,7 @@
     "babel-plugin-import": "^1.1.1",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
+    "compare-versions": "^3.0.0",
     "less-loader": "^4.0.2",
     "lodash.debounce": "^4.0.8",
     "react": "15.4.2",
