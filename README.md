@@ -7,3 +7,9 @@
 $ yarn
 $ yarn start
 ```
+
+## Deployment
+
+```
+$ yarn deploy
+```
