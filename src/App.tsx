@@ -59,7 +59,7 @@ class App extends React.Component<null, AppState> {
           </Content>
         </IntlProvider>
         <Footer style={{ textAlign: 'center' }}>
-          Inspired by <a href="https://new-issue.vuejs.org/" target="_blank">Vue Issue Helper</a>
+          Inspired by <a href="https://new-issue.vuejs.org/" target="_blank">Vue Issue Helper</a> · <a href="https://github.com/ant-design/antd-issue-helper">Source Code</a>
         </Footer>
       </Layout>
     );
