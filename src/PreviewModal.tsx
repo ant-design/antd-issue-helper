@@ -28,7 +28,7 @@ export default function PreviewModal({
         <Button onClick={onCreate} type="primary">Create</Button>
       )}
     >
-      <div dangerouslySetInnerHTML={{ __html: md.render(content )}} />
+      <div className="paragraph" dangerouslySetInnerHTML={{ __html: md.render(content )}} />
     </Modal>
   );
 }
