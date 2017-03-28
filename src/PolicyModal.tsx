@@ -15,7 +15,7 @@ export default function PolicyModal({ visible, onCancel }: PolicyModalProps) {
       footer=""
       visible={visible}
       onCancel={onCancel}
-      width="680"
+      width="680px"
     >
       <div className={styles.policy}>
         <p>As a free and open source project, Ant Design also has limited maintainer bandwidth. That means the only way to ensure the project's sustainability is to:</p>

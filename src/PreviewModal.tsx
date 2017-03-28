@@ -22,7 +22,7 @@ export default function PreviewModal({
       title="Issue Preview"
       okText="Create"
       cancelText="Cancel"
-      width="680"
+      width="680px"
       visible={visible}
       onCancel={onCancel}
       onOk={onCreate}
