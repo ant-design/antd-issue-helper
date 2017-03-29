@@ -52,13 +52,14 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
       </FormItem>
       <FormItem
         label={<FormattedMessage id="issue.environment" defaultMessage="Environment" />}
+        help={<FormattedMessage id="issue.environmentHelp" defaultMessage="OS version, browser version, react-native version..." />}
       >
         {getFieldDecorator('environment', {
           rules: [
             { required: true },
           ]
         })(
-          <Input placeholder="OS version, browser version, react-native version..." />
+          <Input />
         )}
       </FormItem>
       <FormItem

@@ -20,7 +20,7 @@ export default function PreviewModal({
 }: PreviewModalProps) {
   return (
     <Modal
-      title="Issue Preview"
+      title={<FormattedMessage id="previewModal.title" defaultMessage="Issue Preview" />}
       cancelText=""
       width="680px"
       visible={visible}

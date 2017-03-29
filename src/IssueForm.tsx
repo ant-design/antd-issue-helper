@@ -206,7 +206,9 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
           )}
           <FormItem>
             <div className={styles.submitBtn}>
-              <Button type="primary" size="large" htmlType="submit">Preview</Button>
+              <Button type="primary" size="large" htmlType="submit">
+                <FormattedMessage id="issue.preview" defaultMessage="Preview" />
+              </Button>
             </div>
           </FormItem>
         </Form>
