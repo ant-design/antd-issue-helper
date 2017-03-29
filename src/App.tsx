@@ -53,9 +53,9 @@ class App extends React.Component<null, AppState> {
           <div className={styles.headerContainer}>
             <div className={styles.logo}>
               <img alt="logo" src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg" />
-              <span>
+              <h1>
                 Issue Helper
-              </span>
+              </h1>
             </div>
             <div className={styles.locale}>
               <Button size="small" onClick={this.handleLocaleChange}>{locale === 'en' ? '中文' : 'English'}</Button>
