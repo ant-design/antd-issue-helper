@@ -51,6 +51,17 @@ export default function BugForm({ form, versions, similarIssues }: BugFormProps)
         </Col>
       </FormItem>
       <FormItem
+        label={<FormattedMessage id="issue.environment" defaultMessage="Environment" />}
+      >
+        {getFieldDecorator('environment', {
+          rules: [
+            { required: true },
+          ]
+        })(
+          <Input placeholder="OS version, browser version, react-native version..." />
+        )}
+      </FormItem>
+      <FormItem
         label={<FormattedMessage id="issue.steps" defaultMessage="Step to reproduce" />}
         help={<I18n id="stepsHelp" />}
       >

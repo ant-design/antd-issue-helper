@@ -18,7 +18,7 @@ export interface I18nProps {
 export default class I18n extends React.Component<I18nProps, null> {
   static contextTypes = {
     locale: PropTypes.string,
-  }
+  };
 
   render() {
     const { id, ...restProps } = this.props;

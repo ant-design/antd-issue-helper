@@ -7,6 +7,7 @@ export default function createPreview(issueType: string, values: any) {
 
 function createBugPreview({
   version,
+  environment,
   reproduction,
   steps,
   expected,
@@ -16,6 +17,9 @@ function createBugPreview({
   return `
 ### Version
 ${version}
+
+### Environment
+${environment}
 
 ### Reproduction link
 [${reproduction}](${reproduction})
