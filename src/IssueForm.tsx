@@ -65,8 +65,11 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
   }
 
   fetchVerions(repo: string) {
+    const { form } = this.props;
     api.fetchVersions(repo)
-       .then((versions: string[]) => this.setState({ versions }));
+       .then((versions: string[]) => this.setState({ versions }, () => {
+         form.resetFields(['version']);
+       }));
   }
 
   fetchIssues() {
