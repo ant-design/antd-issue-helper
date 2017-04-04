@@ -18,7 +18,7 @@ export interface IssueFormProps {
 };
 
 export interface IssueFormState {
-  versions: string[];
+  repoVersions: { [repo: string]: string[] };
   similarIssues: any[];
   preview: boolean;
   reproModal: boolean;
@@ -40,7 +40,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
     super(props);
 
     this.state = {
-      versions: [],
+      repoVersions: {},
       similarIssues: [],
       preview: false,
       reproModal: false,
@@ -62,11 +62,13 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
   }
 
   fetchVerions(repo: string) {
-    const { form } = this.props;
     api.fetchVersions(repo)
-       .then((versions: string[]) => this.setState({ versions }, () => {
-         form.resetFields(['version']);
-       }));
+      .then((versions: string[]) => this.setState({
+        repoVersions: {
+          ...this.state.repoVersions,
+          [repo]: versions,
+        }
+      }));
   }
 
   fetchIssues() {
@@ -82,7 +84,11 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
   }
 
   handleRepoChange = (repo: string) => {
-    this.fetchVerions(repo);
+    const { form } = this.props;
+    form.resetFields(['version']);
+    if (!this.state.repoVersions[repo]) {
+      this.fetchVerions(repo);
+    }
   }
 
   handleTitleBlur = () => {
@@ -120,10 +126,12 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
 
   render() {
     const { form } = this.props;
-    const { versions, similarIssues, preview, reproModal } = this.state;
+    const { repoVersions, similarIssues, preview, reproModal } = this.state;
     const { getFieldDecorator, getFieldValue } = form;
     const issueType = getFieldValue('type');
     const content = this.getContent(issueType);
+    const repo = form.getFieldValue('repo');
+    const versions = repoVersions[repo] || [];
 
     const similarIssuesList = (
       <FormItem>
