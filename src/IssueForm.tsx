@@ -2,7 +2,6 @@ import React, { SyntheticEvent } from 'react';
 import { Form, Col, Input, Select, Button } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 import { FormattedMessage } from 'react-intl';
-import debounce from 'lodash.debounce';
 import * as api from './api';
 import BugForm from './BugForm';
 import FeatureForm from './FeatureForm';
@@ -46,8 +45,6 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
       preview: false,
       reproModal: false,
     };
-
-    this.handleTitleChange = debounce(this.handleTitleChange, 500);
   }
 
   componentDidMount() {
@@ -88,7 +85,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
     this.fetchVerions(repo);
   }
 
-  handleTitleChange = () => {
+  handleTitleBlur = () => {
     this.fetchIssues();
   }
 
@@ -194,7 +191,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
                 { required: true },
               ]
             })(
-              <Input onChange={this.handleTitleChange}/>
+              <Input onBlur={this.handleTitleBlur}/>
             )}
           </FormItem>
           {similarIssues.length > 0 && similarIssuesList}

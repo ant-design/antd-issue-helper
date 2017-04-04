@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@types/jest": "^19.2.2",
-    "@types/lodash.debounce": "^4.0.2",
     "@types/node": "^7.0.10",
     "@types/react": "^15.0.18",
     "@types/react-dom": "^0.14.23",
@@ -17,7 +16,6 @@
     "babel-preset-react": "^6.23.0",
     "compare-versions": "^3.0.0",
     "less-loader": "^4.0.2",
-    "lodash.debounce": "^4.0.8",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-intl": "^2.2.3",
