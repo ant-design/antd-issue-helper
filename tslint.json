@@ -1,5 +1,8 @@
 {
-    "extends": ["tslint-react"],
+    "extends": [
+      "tslint-react",
+      "tslint-config-prettier"
+    ],
     "rules": {
         "align": [
             true,
@@ -63,7 +66,7 @@
         ],
         "quotemark": [true, "single", "jsx-double"],
         "radix": true,
-        "semicolon": [true, "always"],
+        "semicolon": [true, "always", "ignore-bound-class-methods"],
         "switch-default": true,
 
         "trailing-comma": false,
@@ -94,6 +97,7 @@
             "check-separator",
             "check-type",
             "check-typecast"
-        ]
+        ],
+        "jsx-wrap-multiline": false
     }
 }

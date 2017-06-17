@@ -5431,6 +5431,10 @@ ts-loader@^1.3.1:
     object-assign "^4.1.0"
     semver "^5.0.1"
 
+tslint-config-prettier@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.1.0.tgz#40c026a56e4da27063b3e9bcd71f4f8109fee369"
+
 tslint-loader@^3.3.0:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/tslint-loader/-/tslint-loader-3.4.3.tgz#ac1eaf57d35eff383d0b008fa67b0813e8b51c54"

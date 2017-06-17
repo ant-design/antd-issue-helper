@@ -1,9 +1,9 @@
 const compareVersions: any = require('compare-versions');
 
 interface Response {
-  json(): any;
   status: number;
   statusText: string;
+  json(): any;
 }
 
 const endpoint = 'https://api.github.com';

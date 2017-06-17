@@ -27,7 +27,7 @@ export interface IssueFormState {
 const params: any = location.search.slice(1).split('&').reduce((acc, param) => {
   const [key, value] = param.split('=');
   return { ...acc, [key]: value };
-}, {});
+}, {}); // tslint:disable-line
 
 if (!params.repo) {
   params.repo = 'ant-design';
