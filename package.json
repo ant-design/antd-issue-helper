@@ -102,7 +102,7 @@
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$"
   },
   "lint-staged": {
-    "*.js": [
+    "src/*.{ts,tsx}": [
       "prettier --single-quote --trailing-comma all --write src/",
       "git add"
     ]
