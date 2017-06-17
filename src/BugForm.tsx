@@ -40,9 +40,9 @@ export default function BugForm({
             })(
               <Select showSearch={true}>
                 {versions.map(version =>
-                  <Option key={version}>{version}</Option>
+                  <Option key={version}>{version}</Option>,
                 )}
-              </Select>
+              </Select>,
             )}
           </FormItem>
         </Col>
@@ -132,7 +132,7 @@ export default function BugForm({
         }
       >
         {getFieldDecorator('extra', {})(
-          <Input type="textarea" autosize={{ minRows: 2 }} />
+          <Input type="textarea" autosize={{ minRows: 2 }} />,
         )}
       </FormItem>
     </div>

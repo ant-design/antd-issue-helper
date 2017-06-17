@@ -8,7 +8,7 @@ export interface IntroState {
   modalVisible: boolean;
 }
 
-export default class Intro extends React.Component<null, IntroState> {
+export default class Intro extends React.Component<{}, IntroState> {
   introRef: HTMLElement;
 
   state = {

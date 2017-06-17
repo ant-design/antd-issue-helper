@@ -103,7 +103,7 @@
   },
   "lint-staged": {
     "src/*.{ts,tsx}": [
-      "prettier --single-quote --trailing-comma all --write src/",
+      "prettier --single-quote --trailing-comma all --write src/**/*.{ts.tsx}",
       "git add"
     ]
   }

@@ -22,7 +22,7 @@ export function fetchVersions(repo: string) {
     .then((response: Response) => response.json())
     .then(releases => releases.map((r: any) => r.tag_name))
     .then(versions =>
-      versions.sort((a: string, b: string) => -compareVersions(a, b))
+      versions.sort((a: string, b: string) => -compareVersions(a, b)),
     );
 }
 

@@ -10,6 +10,7 @@ req.keys().forEach((mod: string) => {
   texts[locale][id] = req(mod);
 });
 
+// prettier-ignore
 export interface I18nProps { // tslint:disable-line
   id: string;
   [name: string]: any;

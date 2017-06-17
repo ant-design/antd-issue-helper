@@ -19,7 +19,7 @@ function getLocale() {
   return window.navigator.language.toLowerCase() === 'zh-cn' ? 'zh' : 'en';
 }
 
-class App extends React.Component<null, AppState> {
+class App extends React.Component<{}, AppState> {
   static childContextTypes = {
     locale: PropTypes.string,
   };
@@ -41,7 +41,7 @@ class App extends React.Component<null, AppState> {
       }),
       () => {
         localStorage.setItem('locale', this.state.locale);
-      }
+      },
     );
   };
 
