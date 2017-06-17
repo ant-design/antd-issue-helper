@@ -11,7 +11,12 @@ export interface IntroModalProps {
 export default function IntroModal({ visible, onCancel }: IntroModalProps) {
   return (
     <Modal
-      title={<FormattedMessage id="intro.modal" defaultMessage="The reason behind our strict issue policy" />}
+      title={
+        <FormattedMessage
+          id="intro.modal"
+          defaultMessage="The reason behind our strict issue policy"
+        />
+      }
       footer=""
       visible={visible}
       onCancel={onCancel}
@@ -20,4 +25,4 @@ export default function IntroModal({ visible, onCancel }: IntroModalProps) {
       <I18n className="paragraph" id="introModal" />
     </Modal>
   );
-};
+}

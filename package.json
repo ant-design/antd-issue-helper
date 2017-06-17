@@ -16,6 +16,7 @@
     "babel-preset-react": "^6.23.0",
     "compare-versions": "^3.0.0",
     "less-loader": "^4.0.2",
+    "prettier": "^1.4.4",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-intl": "^2.2.3",
@@ -40,9 +41,11 @@
     "html-loader": "^0.4.5",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.3",
+    "husky": "^0.13.4",
     "jest": "18.1.0",
     "json-loader": "0.5.4",
     "less": "^2.7.2",
+    "lint-staged": "^3.6.1",
     "markdown-loader": "^2.0.0",
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
@@ -64,7 +67,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "trans": "atool-l10n",
-    "deploy": "scripts/deploy.sh"
+    "deploy": "scripts/deploy.sh",
+    "precommit": "lint-staged"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -95,5 +99,11 @@
       "js"
     ],
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --trailing-comma all --write src/",
+      "git add"
+    ]
   }
 }

@@ -12,7 +12,7 @@ export interface AppState {
 }
 
 function getLocale() {
-  const cache = localStorage.getItem('locale')
+  const cache = localStorage.getItem('locale');
   if (cache) {
     return cache;
   }
@@ -35,12 +35,15 @@ class App extends React.Component<null, AppState> {
   }
 
   handleLocaleChange = () => {
-    this.setState(({ locale }) => ({
-      locale: locale === 'en' ? 'zh' : 'en',
-    }), () => {
-      localStorage.setItem('locale', this.state.locale);
-    });
-  }
+    this.setState(
+      ({ locale }) => ({
+        locale: locale === 'en' ? 'zh' : 'en',
+      }),
+      () => {
+        localStorage.setItem('locale', this.state.locale);
+      }
+    );
+  };
 
   render() {
     const { locale } = this.state;
@@ -52,13 +55,18 @@ class App extends React.Component<null, AppState> {
         <Header className={styles.header}>
           <div className={styles.headerContainer}>
             <div className={styles.logo}>
-              <img alt="logo" src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg" />
+              <img
+                alt="logo"
+                src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg"
+              />
               <h1>
                 Issue Helper
               </h1>
             </div>
             <div className={styles.locale}>
-              <Button size="small" onClick={this.handleLocaleChange}>{locale === 'en' ? '中文' : 'English'}</Button>
+              <Button size="small" onClick={this.handleLocaleChange}>
+                {locale === 'en' ? '中文' : 'English'}
+              </Button>
             </div>
           </div>
         </Header>
@@ -69,7 +77,14 @@ class App extends React.Component<null, AppState> {
           </Content>
         </IntlProvider>
         <Footer style={{ textAlign: 'center' }}>
-          Inspired by <a href="https://new-issue.vuejs.org/" target="_blank">Vue Issue Helper</a> · <a href="https://github.com/ant-design/antd-issue-helper">Source Code</a>
+          Inspired by{' '}
+          <a href="https://new-issue.vuejs.org/" target="_blank">
+            Vue Issue Helper
+          </a>{' '}
+          ·{' '}
+          <a href="https://github.com/ant-design/antd-issue-helper">
+            Source Code
+          </a>
         </Footer>
       </Layout>
     );

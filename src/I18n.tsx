@@ -4,7 +4,7 @@ const req = (require as any).context('../locales', true, /\.md$/);
 const texts = { en: {}, zh: {} };
 
 req.keys().forEach((mod: string) => {
-  const matches: any = mod.match('\.\/(.+)\/(.+)\.md');
+  const matches: any = mod.match('./(.+)/(.+).md');
   const locale = matches[1] as string;
   const id = matches[2] as string;
   texts[locale][id] = req(mod);
@@ -25,8 +25,6 @@ export default class I18n extends React.Component<I18nProps, null> {
     const { locale } = this.context;
     const html = texts[locale][id];
 
-    return (
-      <div {...restProps} dangerouslySetInnerHTML={{ __html: html }} />
-    );
+    return <div {...restProps} dangerouslySetInnerHTML={{ __html: html }} />;
   }
 }

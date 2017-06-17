@@ -21,7 +21,9 @@ export function fetchVersions(repo: string) {
     .then(checkStatus)
     .then((response: Response) => response.json())
     .then(releases => releases.map((r: any) => r.tag_name))
-    .then(versions => versions.sort((a: string, b: string) => -compareVersions(a, b)));
+    .then(versions =>
+      versions.sort((a: string, b: string) => -compareVersions(a, b))
+    );
 }
 
 export function fetchIssues(repo: string, keyword: string) {

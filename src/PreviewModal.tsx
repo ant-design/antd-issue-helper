@@ -20,18 +20,26 @@ export default function PreviewModal({
 }: PreviewModalProps) {
   return (
     <Modal
-      title={<FormattedMessage id="previewModal.title" defaultMessage="Issue Preview" />}
+      title={
+        <FormattedMessage
+          id="previewModal.title"
+          defaultMessage="Issue Preview"
+        />
+      }
       cancelText=""
       width="680px"
       visible={visible}
       onCancel={onCancel}
-      footer={(
+      footer={
         <Button onClick={onCreate} type="primary">
           <FormattedMessage id="issue.create" defaultMessage="Create" />
         </Button>
-      )}
+      }
     >
-      <div className="paragraph" dangerouslySetInnerHTML={{ __html: md.render(content )}} />
+      <div
+        className="paragraph"
+        dangerouslySetInnerHTML={{ __html: md.render(content) }}
+      />
     </Modal>
   );
 }

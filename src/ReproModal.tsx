@@ -11,7 +11,12 @@ export interface ReproModalProps {
 export default function ReproModal({ visible, onCancel }: ReproModalProps) {
   return (
     <Modal
-      title={<FormattedMessage id="repro.about" defaultMessage="About Reproductions" />}
+      title={
+        <FormattedMessage
+          id="repro.about"
+          defaultMessage="About Reproductions"
+        />
+      }
       footer=""
       visible={visible}
       onCancel={onCancel}
@@ -20,4 +25,4 @@ export default function ReproModal({ visible, onCancel }: ReproModalProps) {
       <I18n className="paragraph" id="reproModal" />
     </Modal>
   );
-};
+}

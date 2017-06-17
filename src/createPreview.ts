@@ -12,7 +12,7 @@ function createBugPreview({
   steps,
   expected,
   actual,
-  extra
+  extra,
 }: any) {
   return `
 ### Version
@@ -37,10 +37,7 @@ ${extra ? `---\n${extra}` : ''}
 `.trim();
 }
 
-function createFeaturePreview({
-  motivation,
-  proposal
-}: any) {
+function createFeaturePreview({ motivation, proposal }: any) {
   return `
 ### What problem does this feature solve?
 ${motivation}
