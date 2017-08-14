@@ -20,6 +20,7 @@ export function fetchVersions(repo: string) {
   return fetch(`${endpoint}/repos/ant-design/${repo}/releases`)
     .then(checkStatus)
     .then((response: Response) => response.json())
+    .then(releases => releases.filter((r: any) => !r.prerelease))
     .then(releases => releases.map((r: any) => r.tag_name))
     .then(versions =>
       versions.sort((a: string, b: string) => -compareVersions(a, b)),
