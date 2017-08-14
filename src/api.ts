@@ -17,7 +17,7 @@ function checkStatus(response: Response) {
 }
 
 export function fetchVersions(repo: string) {
-  return fetch(`${endpoint}/repos/ant-design/${repo}/releases`)
+  return fetch(`${endpoint}/repos/ant-design/${repo}/releases?per_page=100`)
     .then(checkStatus)
     .then((response: Response) => response.json())
     .then(releases => releases.filter((r: any) => !r.prerelease))
