@@ -6,6 +6,7 @@ import I18n from './I18n';
 
 const FormItem = Form.Item;
 const { Option } = Select;
+const { TextArea } = Input;
 
 export interface BugFormProps {
   form: WrappedFormUtils;
@@ -91,7 +92,7 @@ export default function BugForm({
       >
         {getFieldDecorator('steps', {
           rules: [{ required: true }],
-        })(<Input type="textarea" autosize={{ minRows: 2 }} />)}
+        })(<TextArea autosize={{ minRows: 2 }} />)}
       </FormItem>
       <FormItem
         label={
@@ -103,7 +104,7 @@ export default function BugForm({
       >
         {getFieldDecorator('expected', {
           rules: [{ required: true }],
-        })(<Input type="textarea" autosize={{ minRows: 2 }} />)}
+        })(<TextArea autosize={{ minRows: 2 }} />)}
       </FormItem>
       <FormItem
         label={
@@ -115,7 +116,7 @@ export default function BugForm({
       >
         {getFieldDecorator('actual', {
           rules: [{ required: true }],
-        })(<Input type="textarea" autosize={{ minRows: 2 }} />)}
+        })(<TextArea autosize={{ minRows: 2 }} />)}
       </FormItem>
       <FormItem
         label={
@@ -131,9 +132,7 @@ export default function BugForm({
           />
         }
       >
-        {getFieldDecorator('extra', {})(
-          <Input type="textarea" autosize={{ minRows: 2 }} />,
-        )}
+        {getFieldDecorator('extra', {})(<TextArea autosize={{ minRows: 2 }} />)}
       </FormItem>
     </div>
   );
