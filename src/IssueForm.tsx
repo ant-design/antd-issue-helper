@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import * as React from 'react';
 import { Form, Col, Input, Select, Button } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 import { FormattedMessage } from 'react-intl';
@@ -9,7 +9,7 @@ import PreviewModal from './PreviewModal';
 import ReproModal from './ReproModal';
 import createPreview from './createPreview';
 
-const styles: any = require('./IssueForm.less');
+const styles: any = require('./IssueForm.module.less');
 const FormItem = Form.Item;
 const { Option } = Select;
 
@@ -34,7 +34,7 @@ if (!params.repo) {
 }
 
 class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
-  formRef: HTMLElement;
+  formRef: HTMLElement | null;
 
   constructor(props: IssueFormProps) {
     super(props);
@@ -53,7 +53,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
   }
 
   bindModalHandler() {
-    this.formRef.addEventListener('click', (e: Event) => {
+    this.formRef!.addEventListener('click', (e: Event) => {
       if ((e.target as any).getAttribute('href') === '#repro-modal') {
         e.preventDefault();
         this.setState({ reproModal: true });
@@ -91,24 +91,24 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
     if (!this.state.repoVersions[repo]) {
       this.fetchVerions(repo);
     }
-  };
+  }
 
   handleTitleBlur = () => {
     this.fetchIssues();
-  };
+  }
 
-  handlePreview = (e: SyntheticEvent<HTMLElement>) => {
+  handlePreview = (e: React.SyntheticEvent<HTMLElement>) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err: any, values: any) => {
       if (!err) {
         this.setState({ preview: true });
       }
     });
-  };
+  }
 
   handleClosePreview = () => {
     this.setState({ preview: false });
-  };
+  }
 
   handleCreate = () => {
     const { form } = this.props;
@@ -125,7 +125,7 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
     window.open(
       `https://github.com/ant-design/${repo}/issues/new?title=${title}&body=${body}${label}`,
     );
-  };
+  }
 
   getContent(issueType: string) {
     return createPreview(issueType, this.props.form.getFieldsValue());
@@ -232,13 +232,13 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
             })(<Input onBlur={this.handleTitleBlur} />)}
           </FormItem>
           {similarIssues.length > 0 && similarIssuesList}
-          {issueType !== 'feature'
-            ? <BugForm
+          {issueType !== 'feature' ? (
+              <BugForm
                 form={form}
                 versions={versions}
                 similarIssues={similarIssues}
               />
-            : <FeatureForm form={form} />}
+          ) : <FeatureForm form={form} />}
           <FormItem>
             <div className={styles.submitBtn}>
               <Button type="primary" size="large" htmlType="submit">

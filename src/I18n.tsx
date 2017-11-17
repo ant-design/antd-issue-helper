@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-const req = (require as any).context('../locales', true, /\.md$/);
+const req = (require as any).context('./locales', true, /\.md$/);
 const texts = { en: {}, zh: {} };
 
 req.keys().forEach((mod: string) => {
@@ -16,7 +17,7 @@ export interface I18nProps { // tslint:disable-line
   [name: string]: any;
 }
 
-export default class I18n extends React.Component<I18nProps, null> {
+export default class I18n extends React.Component<I18nProps, {}> {
   static contextTypes = {
     locale: PropTypes.string,
   };

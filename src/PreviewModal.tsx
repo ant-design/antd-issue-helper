@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Modal, Button } from 'antd';
 import { FormattedMessage } from 'react-intl';
 
@@ -30,11 +30,11 @@ export default function PreviewModal({
       width="680px"
       visible={visible}
       onCancel={onCancel}
-      footer={
+      footer={(
         <Button onClick={onCreate} type="primary">
           <FormattedMessage id="issue.create" defaultMessage="Create" />
         </Button>
-      }
+      )}
     >
       <div
         className="paragraph"

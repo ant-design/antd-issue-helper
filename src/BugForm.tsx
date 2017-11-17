@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Form, Col, Input, Select } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 import { FormattedMessage } from 'react-intl';

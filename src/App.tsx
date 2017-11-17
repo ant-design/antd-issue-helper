@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { Layout, Button } from 'antd';
 import Intro from './Intro';
 import IssueForm from './IssueForm';
 
-const styles: any = require('./App.less');
+const styles: any = require('./App.module.less');
 const { Header, Content, Footer } = Layout;
 
 export interface AppState {
@@ -43,7 +44,7 @@ class App extends React.Component<{}, AppState> {
         localStorage.setItem('locale', this.state.locale);
       },
     );
-  };
+  }
 
   render() {
     const { locale } = this.state;

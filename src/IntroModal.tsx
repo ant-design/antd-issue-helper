@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Modal } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import I18n from './I18n';

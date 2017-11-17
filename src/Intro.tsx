@@ -1,22 +1,22 @@
-import React from 'react';
+import  * as React from 'react';
 import IntroModal from './IntroModal';
 import I18n from './I18n';
 
-const styles: any = require('./Intro.less');
+const styles: any = require('./Intro.module.less');
 
 export interface IntroState {
   modalVisible: boolean;
 }
 
 export default class Intro extends React.Component<{}, IntroState> {
-  introRef: HTMLElement;
+  introRef: HTMLElement | null;
 
   state = {
     modalVisible: false,
   };
 
   componentDidMount() {
-    this.introRef.addEventListener('click', (e: Event) => {
+    this.introRef!.addEventListener('click', (e: Event) => {
       if ((e.target as any).getAttribute('href') === '#intro-modal') {
         this.handleClick(e);
       }
@@ -26,11 +26,11 @@ export default class Intro extends React.Component<{}, IntroState> {
   handleClick = (e: Event) => {
     e.preventDefault();
     this.setState({ modalVisible: true });
-  };
+  }
 
   handleCancel = () => {
     this.setState({ modalVisible: false });
-  };
+  }
 
   render() {
     const { modalVisible } = this.state;
