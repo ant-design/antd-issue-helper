@@ -5,7 +5,7 @@
   "dependencies": {
     "@types/prop-types": "^15.5.2",
     "@types/react-intl": "^2.3.2",
-    "antd": "v3.0.0",
+    "antd": "^3.0.0",
     "compare-versions": "^3.1.0",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
