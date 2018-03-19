@@ -13,6 +13,7 @@ function createBugPreview({
   expected,
   actual,
   extra,
+  repo,
 }: any) {
   return `
 ### Version
@@ -22,7 +23,7 @@ ${version}
 ${environment}
 
 ### Reproduction link
-[${reproduction}](${reproduction})
+${createReproductionLink(reproduction)}
 
 ### Steps to reproduce
 ${steps}
@@ -45,4 +46,16 @@ ${motivation}
 ### What does the proposed API look like?
 ${proposal}
 `.trim();
+}
+
+function createReproductionLink(link: string) {
+  if (!link) {
+    return;
+  }
+
+  if (~link.indexOf('codesandbox.io')) {
+    return `[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](${link})`;
+  }
+
+  return `[${link}](${link})`;
 }
