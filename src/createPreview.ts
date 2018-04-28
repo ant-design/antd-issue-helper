@@ -53,7 +53,7 @@ function createReproductionLink(link: string) {
     return;
   }
 
-  if (~link.indexOf('codesandbox.io')) {
+  if (link.indexOf('codesandbox.io') >= 0) {
     return `[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](${link})`;
   }
 
