@@ -4,6 +4,7 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import { Layout, Button } from 'antd';
 import Intro from './Intro';
 import IssueForm from './IssueForm';
+import logo from './logo.svg';
 
 const styles: any = require('./App.module.less');
 const { Header, Content, Footer } = Layout;
@@ -44,7 +45,7 @@ class App extends React.Component<{}, AppState> {
         localStorage.setItem('locale', this.state.locale);
       },
     );
-  }
+  };
 
   render() {
     const { locale } = this.state;
@@ -56,13 +57,8 @@ class App extends React.Component<{}, AppState> {
         <Header className={styles.header}>
           <div className={styles.headerContainer}>
             <div className={styles.logo}>
-              <img
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-              />
-              <h1>
-                Issue Helper
-              </h1>
+              <img alt="logo" src={logo} />
+              <h1>Issue Helper</h1>
             </div>
             <div className={styles.locale}>
               <Button size="small" onClick={this.handleLocaleChange}>
@@ -82,10 +78,7 @@ class App extends React.Component<{}, AppState> {
           <a href="https://new-issue.vuejs.org/" target="_blank">
             Vue Issue Helper
           </a>{' '}
-          ·{' '}
-          <a href="https://github.com/ant-design/antd-issue-helper">
-            Source Code
-          </a>
+          · <a href="https://github.com/eggjs/egg-issue-helper">Source Code</a>
         </Footer>
       </Layout>
     );
