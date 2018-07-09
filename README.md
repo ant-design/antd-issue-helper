@@ -1,4 +1,4 @@
-# Ant Design Issue Helper
+# Egg.js Issue Helper
 
 Inspired by https://github.com/vuejs/vue-issue-helper
 
