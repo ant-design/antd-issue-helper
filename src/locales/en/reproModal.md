@@ -14,10 +14,10 @@ Some users would give us a link to a real project and hope we can help them figu
 
 - You are already familiar with your codebase, but we are not. It is extremely time-consuming to hunt a bug in a big and unfamiliar codebase.
 
-- The problematic behavior may very well be caused by your code rather than by a bug in antd.
+- The problematic behavior may very well be caused by your code rather than by a bug in Egg.js.
 
 A **minimal** reproduction means it demonstrates the bug, and the bug only. It should only contain the bare minimum amount of code that can reliably cause the bug. Try your best to get rid of anything that aren't directly related to the problem.
 
 ##### How to create a repro
 
-Unless your bug can only be reproduced with a built setup, we prefer reproductions made with [Codepen for antd](http://codepen.io/benjycui/pen/KgPZrE?editors=001) / [CodePen for antd-mobile](http://codepen.io/paranoidjk/pen/LWpaKe)]. If your bug involves a build setup, you can create a project using [antd-init](https://github.com/ant-design/antd-init) and provide the link to a GitHub repository.
+You can create a project using [egg-init](https://github.com/eggjs/egg-init) and provide the link to a GitHub repository.

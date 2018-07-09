@@ -1,5 +1,5 @@
 {
-  "name": "antd-issue-helper",
+  "name": "egg-issue-helper",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +20,7 @@
     "build": "react-app-rewired build --scripts-version react-scripts-ts",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "deploy": "npm run build && cd build && git init && git commit --allow-empty -m 'Update' && git checkout -b gh-pages && git add . && git commit -am 'Update' && git push git@github.com:ant-design/antd-issue-helper.git gh-pages --force"
+    "deploy": "npm run build && cd build && git init && git commit --allow-empty -m 'Update' && git checkout -b gh-pages && git add . && git commit -am 'Update' && git push git@github.com:eggjs/egg-issue-helper.git gh-pages --force"
   },
   "devDependencies": {
     "@types/jest": "^21.1.6",

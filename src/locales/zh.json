@@ -1,13 +1,8 @@
 {
   "intro.modal": "为什么要有这么严格的 issue 规定",
-  "issue.environmentHelp": "系统版本、浏览器版本、 react-native 版本等等信息",
   "issue.create": "创建",
-  "issue.environment": "环境",
-  "issue.actually": "实际的结果是什么？",
   "issue.type": "这是一个",
-  "issue.expected": "期望的结果是什么？",
   "issue.type.bug": "错误报告",
-  "issue.extra": "补充说明（可选）",
   "issue.type.feature": "功能要求",
   "issue.motivation": "这个功能解决了什么问题？",
   "issue.extraHelp": "比如：遇到这个 bug 的业务场景、上下文。",
