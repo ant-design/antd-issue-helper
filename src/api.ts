@@ -17,7 +17,7 @@ function checkStatus(response: Response) {
 }
 
 export function fetchVersions(repo: string) {
-  return fetch(`${endpoint}/repos/ant-design/${repo}/releases?per_page=100`)
+  return fetch(`${endpoint}/repos/eggjs/${repo}/releases?per_page=100`)
     .then(checkStatus)
     .then((response: Response) => response.json())
     .then(releases => releases.filter((r: any) => !r.prerelease))
@@ -28,7 +28,7 @@ export function fetchVersions(repo: string) {
 }
 
 export function fetchIssues(repo: string, keyword: string) {
-  const q = encodeURIComponent(`is:issue repo:ant-design/${repo} ${keyword}`);
+  const q = encodeURIComponent(`is:issue repo:eggjs/${repo} ${keyword}`);
   return fetch(`${endpoint}/search/issues?q=${q}&per_page=5`)
     .then(checkStatus)
     .then((response: Response) => response.json())
