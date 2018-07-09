@@ -27,7 +27,7 @@ export default function FeatureForm({ form }: FeatureFormProps) {
       >
         {getFieldDecorator('motivation', {
           rules: [{ required: true }],
-        })(<TextArea autosize={{ minRows: 2 }} />)}
+        })(<TextArea autosize={{ minRows: 4 }} />)}
       </FormItem>
       <FormItem
         label={
@@ -40,7 +40,7 @@ export default function FeatureForm({ form }: FeatureFormProps) {
       >
         {getFieldDecorator('proposal', {
           rules: [{ required: true }],
-        })(<TextArea autosize={{ minRows: 2 }} />)}
+        })(<TextArea autosize={{ minRows: 8 }} />)}
       </FormItem>
     </div>
   );

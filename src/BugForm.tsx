@@ -66,24 +66,6 @@ export default function BugForm({
       <FormItem
         label={
           <FormattedMessage
-            id="issue.environment"
-            defaultMessage="Environment"
-          />
-        }
-        help={
-          <FormattedMessage
-            id="issue.environmentHelp"
-            defaultMessage="OS version, browser version, react-native version..."
-          />
-        }
-      >
-        {getFieldDecorator('environment', {
-          rules: [{ required: true }],
-        })(<Input />)}
-      </FormItem>
-      <FormItem
-        label={
-          <FormattedMessage
             id="issue.steps"
             defaultMessage="Step to reproduce"
           />
@@ -92,47 +74,7 @@ export default function BugForm({
       >
         {getFieldDecorator('steps', {
           rules: [{ required: true }],
-        })(<TextArea autosize={{ minRows: 2 }} />)}
-      </FormItem>
-      <FormItem
-        label={
-          <FormattedMessage
-            id="issue.expected"
-            defaultMessage="What is expected?"
-          />
-        }
-      >
-        {getFieldDecorator('expected', {
-          rules: [{ required: true }],
-        })(<TextArea autosize={{ minRows: 2 }} />)}
-      </FormItem>
-      <FormItem
-        label={
-          <FormattedMessage
-            id="issue.actually"
-            defaultMessage="What is actually happening?"
-          />
-        }
-      >
-        {getFieldDecorator('actual', {
-          rules: [{ required: true }],
-        })(<TextArea autosize={{ minRows: 2 }} />)}
-      </FormItem>
-      <FormItem
-        label={
-          <FormattedMessage
-            id="issue.extra"
-            defaultMessage="Any additional comments?(optional)"
-          />
-        }
-        help={
-          <FormattedMessage
-            id="issue.extraHelp"
-            defaultMessage="e.g. some background/context of how you ran into this bug."
-          />
-        }
-      >
-        {getFieldDecorator('extra', {})(<TextArea autosize={{ minRows: 2 }} />)}
+        })(<TextArea autosize={{ minRows: 8 }} />)}
       </FormItem>
     </div>
   );
