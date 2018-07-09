@@ -14,10 +14,10 @@
 
 - 你对你的项目的代码结构可能已经非常熟悉，但我们并不是。阅读、运行、分析一个完全陌生的项目是极其耗费时间和精力的。
 
-- 由于涉及了大量业务代码，问题可能是你的代码错误，而不是 antd 的 bug 所导致的。
+- 由于涉及了大量业务代码，问题可能是你的代码错误，而不是 Egg.js 的 bug 所导致的。
 
 一个最小化的重现意味着它精确地定位了 bug 本身 - 它应当只包含能够触发 bug 的**最少量**的代码。你应当尽可能地剔除任何跟该 bug 无关的部分。
 
 ##### 如何提供一个重现
 
-除非你的 bug 只有在构建工具下才能重现，否则我们建议使用 [CodeSandbox for antd](https://u.ant.design/codesandbox-repro) / [CodePen for antd-mobile](http://codepen.io/paranoidjk/pen/LWpaKe) 来提供重现。如果你的 bug 必须用到构建工具，那么我们建议使用 [antd-init](https://github.com/ant-design/antd-init) 来搭建一个新项目，推送到 GitHub 并提供仓库的链接。
+我们建议使用 [egg-init](https://github.com/eggjs/egg-init) 来搭建一个新项目，推送到 GitHub 并提供仓库的链接。
