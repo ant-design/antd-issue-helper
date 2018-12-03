@@ -196,6 +196,7 @@ ${content}
                   <Select onChange={this.handleRepoChange}>
                     <Option key="ant-design">ant-design</Option>
                     <Option key="ant-design-mobile">ant-design-mobile</Option>
+                    <Option key="ant-design-mobile-rn">ant-design-mobile-rn</Option>
                   </Select>,
                 )}
               </FormItem>
