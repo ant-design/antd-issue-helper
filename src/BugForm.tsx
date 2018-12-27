@@ -23,8 +23,10 @@ export default function BugForm({
 
   return (
     <div>
+      {/* ==================================== Environment ==================================== */}
       <FormItem>
         <Col span={11}>
+          {/* antd version */}
           <FormItem
             label={
               <FormattedMessage id="issue.version" defaultMessage="Version" />
@@ -48,39 +50,89 @@ export default function BugForm({
           </FormItem>
         </Col>
         <Col span={12} offset={1}>
+          {/* react version */}
           <FormItem
             label={
               <FormattedMessage
-                id="issue.reproduction"
-                defaultMessage="Link to minimal reproduction"
+                id="issue.react"
+                defaultMessage="React"
               />
             }
-            help={<I18n id="reproHelp" />}
+            help={
+              <FormattedMessage
+                id="issue.reactHelp"
+                defaultMessage="react/react-native version..."
+              />
+            }
           >
-            {getFieldDecorator('reproduction', {
+            {getFieldDecorator('react', {
               rules: [{ required: true }],
-            })(<Input type="url" />)}
+            })(<Input />)}
           </FormItem>
         </Col>
       </FormItem>
+
+      <FormItem>
+        {/* System */}
+        <Col span={11}>
+          <FormItem
+            label={
+              <FormattedMessage
+                id="issue.system"
+                defaultMessage="System"
+              />
+            }
+            help={
+              <FormattedMessage
+                id="issue.systemHelp"
+                defaultMessage="System version..."
+              />
+            }
+          >
+            {getFieldDecorator('system', {
+              rules: [{ required: true }],
+            })(<Input />)}
+          </FormItem>
+        </Col>
+
+        {/* Browser */}
+        <Col span={12} offset={1}>
+          <FormItem
+            label={
+              <FormattedMessage
+                id="issue.browser"
+                defaultMessage="Browser"
+              />
+            }
+            help={
+              <FormattedMessage
+                id="issue.browserHelp"
+                defaultMessage="Browser version..."
+              />
+            }
+          >
+            {getFieldDecorator('browser', {
+              rules: [{ required: true }],
+            })(<Input />)}
+          </FormItem>
+        </Col>
+      </FormItem>
+
+      {/* ==================================== Reproduce ==================================== */}
       <FormItem
         label={
           <FormattedMessage
-            id="issue.environment"
-            defaultMessage="Environment"
+            id="issue.reproduction"
+            defaultMessage="Link to minimal reproduction"
           />
         }
-        help={
-          <FormattedMessage
-            id="issue.environmentHelp"
-            defaultMessage="OS version, browser version, react-native version..."
-          />
-        }
+        help={<I18n id="reproHelp" />}
       >
-        {getFieldDecorator('environment', {
+        {getFieldDecorator('reproduction', {
           rules: [{ required: true }],
-        })(<Input />)}
+        })(<Input type="url" />)}
       </FormItem>
+
       <FormItem
         label={
           <FormattedMessage

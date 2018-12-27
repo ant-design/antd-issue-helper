@@ -1,4 +1,4 @@
-Maintaining open source projects is [hard work](https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/). As Ant Design's user base has grown, we are getting more and more usage questions, bug reports, feature requests and pull requests every single day.
+Maintaining open source projects is <a href="https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/" target="_blank">hard work</a>. As Ant Design's user base has grown, we are getting more and more usage questions, bug reports, feature requests and pull requests every single day.
 
 As a free and open source project, Ant Design also has limited maintainer bandwidth. That means the only way to ensure the project's sustainability is to:
 
