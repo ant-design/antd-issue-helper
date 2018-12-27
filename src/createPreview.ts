@@ -7,7 +7,9 @@ export default function createPreview(issueType: string, values: any) {
 
 function createBugPreview({
   version,
-  environment,
+  react,
+  system,
+  browser,
   reproduction,
   steps,
   expected,
@@ -16,12 +18,6 @@ function createBugPreview({
   repo,
 }: any) {
   return `
-### Version
-${version}
-
-### Environment
-${environment}
-
 ### Reproduction link
 ${createReproductionLink(reproduction)}
 
@@ -33,6 +29,13 @@ ${expected}
 
 ### What is actually happening?
 ${actual}
+
+| Environment | Info |
+|---|---|
+| antd | ${version} |
+| React | ${react} |
+| System | ${system} |
+| Browser | ${browser} |
 
 ${extra ? `---\n${extra}` : ''}
 `.trim();
