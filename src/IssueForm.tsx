@@ -74,17 +74,20 @@ class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
       }
 
       // Next frame (IE 9 not support RAF)
-      setTimeout(() => {
-        // Remove useless value
-        const currentValues = getFieldsValue();
-        keys.forEach((key) => {
-          if (!(key in currentValues)) {
-            delete values[key];
-          }
-        });
+      setTimeout(
+        () => {
+          // Remove useless value
+          const currentValues = getFieldsValue();
+          keys.forEach((key) => {
+            if (!(key in currentValues)) {
+              delete values[key];
+            }
+          });
 
-        setFieldsValue(values);
-      }, 100);
+          setFieldsValue(values);
+        },
+        100,
+      );
     }
   }
 
