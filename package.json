@@ -11,9 +11,9 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-intl": "^2.4.0",
-    "react-scripts-ts": "2.8.0",
+    "react-scripts-ts": "3.1.0",
     "remarkable": "^1.7.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
     "start": "react-app-rewired start --scripts-version react-scripts-ts",
@@ -23,17 +23,17 @@
     "deploy": "npm run build && cd build && git init && git commit --allow-empty -m 'Update' && git checkout -b gh-pages && git add . && git commit -am 'Update' && git push git@github.com:ant-design/antd-issue-helper.git gh-pages --force"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.6",
-    "@types/node": "^8.0.53",
+    "@types/jest": "^24.0.9",
+    "@types/node": "^11.9.5",
     "@types/react": "^16.0.24",
     "@types/react-dom": "^16.0.3",
     "babel-core": "^6.26.0",
     "babel-plugin-import": "^1.6.2",
-    "babel-preset-react-app": "^3.1.0",
+    "babel-preset-react-app": "^7.0.1",
     "html-loader": "^0.5.1",
-    "markdown-loader": "^2.0.1",
+    "markdown-loader": "^5.0.0",
     "react-app-rewire-less-modules": "andriijas/react-app-rewire-less-modules",
-    "react-app-rewired": "^1.3.5",
+    "react-app-rewired": "^2.1.0",
     "ts-import-plugin": "^1.4.2"
   }
 }
