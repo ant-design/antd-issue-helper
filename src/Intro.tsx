@@ -1,48 +1,36 @@
-import  * as React from 'react';
-import IntroModal from './IntroModal';
-import I18n from './I18n';
+import * as React from "react";
+import IntroModal from "./IntroModal";
+import I18n from "./I18n";
+import { state } from "reactive.macro";
+import styles from "./Intro.module.scss";
 
-const styles: any = require('./Intro.module.less');
+const Intro: React.FC = () => {
+  let modalVisible = state(false);
+  const introRef = React.useRef<null | HTMLDivElement>(null);
 
-export interface IntroState {
-  modalVisible: boolean;
-}
+  const handleClick = React.useCallback((e: Event) => {
+    e.preventDefault();
+    modalVisible = true;
+  }, []);
 
-export default class Intro extends React.Component<{}, IntroState> {
-  introRef: HTMLElement | null;
+  const handleCancel = React.useCallback(() => {
+    modalVisible = false;
+  }, []);
 
-  state = {
-    modalVisible: false,
-  };
-
-  componentDidMount() {
-    this.introRef!.addEventListener('click', (e: Event) => {
-      if ((e.target as any).getAttribute('href') === '#intro-modal') {
-        this.handleClick(e);
+  React.useEffect(() => {
+    introRef.current!.addEventListener("click", (e: Event) => {
+      if ((e.target as any).getAttribute("href") === "#intro-modal") {
+        handleClick(e);
       }
     });
-  }
+  }, []);
 
-  handleClick = (e: Event) => {
-    e.preventDefault();
-    this.setState({ modalVisible: true });
-  }
+  return (
+    <div className={`${styles.intro} paragraph`} ref={introRef}>
+      <IntroModal visible={modalVisible} onCancel={handleCancel} />
+      <I18n id="intro" />
+    </div>
+  );
+};
 
-  handleCancel = () => {
-    this.setState({ modalVisible: false });
-  }
-
-  render() {
-    const { modalVisible } = this.state;
-
-    return (
-      <div
-        className={`${styles.intro} paragraph`}
-        ref={node => (this.introRef = node)}
-      >
-        <IntroModal visible={modalVisible} onCancel={this.handleCancel} />
-        <I18n id="intro" />
-      </div>
-    );
-  }
-}
+export default Intro;

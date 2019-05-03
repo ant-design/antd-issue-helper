@@ -1,5 +1,5 @@
 .header {
-  transition: opacity .5s;
+  transition: opacity 0.5s;
   background: #fff;
 }
 
@@ -57,17 +57,21 @@ p {
     border-collapse: collapse;
     margin-bottom: 16px;
 
-    &, th, td {
+    &,
+    th,
+    td {
       border: 1px solid #e8e8e8;
     }
 
     thead {
-      th, td {
+      th,
+      td {
         background: #fafafa;
       }
     }
 
-    th, td {
+    th,
+    td {
       padding: 8px 12px;
     }
   }
@@ -76,7 +80,8 @@ p {
     margin-bottom: 15px;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding: 0 15px 15px 15px;
     margin-left: 15px;
   }

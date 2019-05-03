@@ -1,57 +1,21 @@
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import { Layout, Button } from 'antd';
-import Intro from './Intro';
-import IssueForm from './IssueForm';
+import * as React from "react";
+import { IntlProvider, addLocaleData } from "react-intl";
+import { Layout, Button } from "antd.macro";
+import Intro from "./Intro";
+import IssueForm from "./IssueForm";
+import LocaleContext, { switchLocale } from "./LocaleContext";
+import styles from "./App.module.scss";
 
-const styles: any = require('./App.module.less');
 const { Header, Content, Footer } = Layout;
 
-export interface AppState {
-  locale: string;
-}
+const App: React.FC = () => {
+  const locale = React.useContext(LocaleContext);
 
-function getLocale() {
-  const cache = localStorage.getItem('locale');
-  if (cache) {
-    return cache;
-  }
-  return window.navigator.language.toLowerCase() === 'zh-cn' ? 'zh' : 'en';
-}
+  const appLocale = window.appLocale[locale];
+  addLocaleData(appLocale.data);
 
-class App extends React.Component<{}, AppState> {
-  static childContextTypes = {
-    locale: PropTypes.string,
-  };
-
-  state = {
-    locale: getLocale(),
-  };
-
-  getChildContext() {
-    return {
-      locale: this.state.locale,
-    };
-  }
-
-  handleLocaleChange = () => {
-    this.setState(
-      ({ locale }) => ({
-        locale: locale === 'en' ? 'zh' : 'en',
-      }),
-      () => {
-        localStorage.setItem('locale', this.state.locale);
-      },
-    );
-  }
-
-  render() {
-    const { locale } = this.state;
-    const appLocale = (window as any).appLocale[locale];
-    addLocaleData(appLocale.data);
-
-    return (
+  return (
+    <LocaleContext.Provider>
       <Layout className="layout">
         <Header className={styles.header}>
           <div className={styles.headerContainer}>
@@ -60,13 +24,11 @@ class App extends React.Component<{}, AppState> {
                 alt="logo"
                 src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
               />
-              <h1>
-                Issue Helper
-              </h1>
+              <h1>Issue Helper</h1>
             </div>
             <div className={styles.locale}>
-              <Button size="small" onClick={this.handleLocaleChange}>
-                {locale === 'en' ? '中文' : 'English'}
+              <Button size="small" onClick={switchLocale}>
+                {locale === "en" ? "中文" : "English"}
               </Button>
             </div>
           </div>
@@ -77,19 +39,23 @@ class App extends React.Component<{}, AppState> {
             <IssueForm />
           </Content>
         </IntlProvider>
-        <Footer style={{ textAlign: 'center' }}>
-          Inspired by{' '}
-          <a href="https://new-issue.vuejs.org/" target="_blank">
+        <Footer style={{ textAlign: "center" }}>
+          Inspired by{" "}
+          <a
+            href="https://new-issue.vuejs.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Vue Issue Helper
-          </a>{' '}
-          ·{' '}
+          </a>{" "}
+          ·{" "}
           <a href="https://github.com/ant-design/antd-issue-helper">
             Source Code
           </a>
         </Footer>
       </Layout>
-    );
-  }
-}
+    </LocaleContext.Provider>
+  );
+};
 
 export default App;

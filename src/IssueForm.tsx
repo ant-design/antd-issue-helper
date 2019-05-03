@@ -1,167 +1,130 @@
-import * as React from 'react';
-import { Form, Col, Input, Select, Button, Radio } from 'antd';
-import { WrappedFormUtils } from 'antd/lib/form/Form';
-import { FormattedMessage } from 'react-intl';
-import * as api from './api';
-import BugForm from './BugForm';
-import FeatureForm from './FeatureForm';
-import PreviewModal from './PreviewModal';
-import ReproModal from './ReproModal';
-import createPreview from './createPreview';
+import * as React from "react";
+import { Form, Col, Input, Select, Button, Radio } from "antd.macro";
+import { WrappedFormUtils } from "antd/lib/form/Form";
+import { FormattedMessage } from "react-intl";
+import BugForm from "./BugForm";
+import FeatureForm from "./FeatureForm";
+import PreviewModal from "./PreviewModal";
+import ReproModal from "./ReproModal";
+import createPreview from "./createPreview";
+import { state } from "reactive.macro";
+import useSimilarIssues from "./hooks/useSimilarIssues";
+import useVersions from "./hooks/useVersions";
+import styles from "./IssueForm.module.scss";
 
-const styles: any = require('./IssueForm.module.less');
 const FormItem = Form.Item;
 const { Option } = Select;
 
-export interface IssueFormProps {
+export interface Props {
   form: WrappedFormUtils;
 }
 
-export interface IssueFormState {
-  repoVersions: { [repo: string]: string[] };
-  similarIssues: any[];
-  preview: boolean;
-  reproModal: boolean;
-}
-
-const params: any = location.search.slice(1).split('&').reduce((acc, param) => {
-  const [key, value] = param.split('=');
-  return { ...acc, [key]: value };
-}, {}); // tslint:disable-line
+const params: any = window.location.search
+  .slice(1)
+  .split("&")
+  .reduce((acc, param) => {
+    const [key, value] = param.split("=");
+    return { ...acc, [key]: value };
+  }, {}); // tslint:disable-line
 
 if (!params.repo) {
-  params.repo = 'ant-design';
+  params.repo = "ant-design";
 }
 
-class IssueForm extends React.Component<IssueFormProps, IssueFormState> {
-  formRef: HTMLElement | null;
+const IssueForm: React.FC<Props> = ({ form }) => {
+  let preview = state(false);
+  let reproModal = state(false);
 
-  constructor(props: IssueFormProps) {
-    super(props);
+  const formRef = React.useRef<HTMLDivElement | null>(null);
+  const { similarIssues, searchIssues } = useSimilarIssues();
+  const { repoVersions, fetchVersions } = useVersions();
 
-    this.state = {
-      repoVersions: {},
-      similarIssues: [],
-      preview: false,
-      reproModal: false,
-    };
-  }
+  const {
+    getFieldDecorator,
+    getFieldValue,
+    getFieldsValue,
+    setFieldsValue
+  } = form;
 
-  componentDidMount() {
-    this.fetchVersions(params.repo);
-    this.bindModalHandler();
-
-    this.restoreValues();
-  }
+  const bindModalHandler = React.useCallback(() => {
+    formRef.current!.addEventListener("click", (e: Event) => {
+      if ((e.target as any).getAttribute("href") === "#repro-modal") {
+        e.preventDefault();
+        reproModal = true;
+      }
+    });
+  }, []);
 
   // Load form data from localStorage
-  restoreValues(omitFields: Array<string> = []) {
-    const cache = localStorage.getItem('form');
+  const restoreValues = React.useCallback((omitFields: Array<string> = []) => {
+    const cache = localStorage.getItem("form");
     if (cache) {
-      const { setFieldsValue, getFieldsValue } = this.props.form;
       const values = JSON.parse(cache);
       const keys = Object.keys(values);
 
       // Remove unless fields
-      omitFields.forEach((key) => {
+      omitFields.forEach(key => {
         delete values[key];
       });
 
       if (values.type) {
         setFieldsValue({
-          type: values.type,
+          type: values.type
         });
       }
 
       // Next frame (IE 9 not support RAF)
-      setTimeout(
-        () => {
-          // Remove useless value
-          const currentValues = getFieldsValue();
-          keys.forEach((key) => {
-            if (!(key in currentValues)) {
-              delete values[key];
-            }
-          });
+      setTimeout(() => {
+        // Remove useless value
+        const currentValues = getFieldsValue();
+        keys.forEach(key => {
+          if (!(key in currentValues)) {
+            delete values[key];
+          }
+        });
 
-          setFieldsValue(values);
-        },
-        100,
-      );
+        setFieldsValue(values);
+      }, 100);
     }
-  }
+  }, []);
 
-  bindModalHandler() {
-    this.formRef!.addEventListener('click', (e: Event) => {
-      if ((e.target as any).getAttribute('href') === '#repro-modal') {
-        e.preventDefault();
-        this.setState({ reproModal: true });
-      }
-    });
-  }
-
-  fetchVersions(repo: string) {
-    api.fetchVersions(repo).then((versions: string[]) =>
-      this.setState({
-        repoVersions: {
-          ...this.state.repoVersions,
-          [repo]: versions,
-        },
-      }),
-    );
-  }
-
-  fetchIssues() {
-    const { form } = this.props;
-    const repo = form.getFieldValue('repo');
-    const title = form.getFieldValue('title');
-    if (title) {
-      api
-        .fetchIssues(repo, title)
-        .then(issues => this.setState({ similarIssues: issues }));
-    } else {
-      this.setState({ similarIssues: [] });
+  const handleRepoChange = React.useCallback((repo: string) => {
+    form.resetFields(["version"]);
+    if (!repoVersions[repo]) {
+      fetchVersions(repo);
     }
-  }
+  }, []);
 
-  handleRepoChange = (repo: string) => {
-    const { form } = this.props;
-    form.resetFields(['version']);
-    if (!this.state.repoVersions[repo]) {
-      this.fetchVersions(repo);
-    }
-  }
+  const handleTypeChange = React.useCallback(() => {
+    restoreValues(["type"]);
+  }, []);
 
-  handleTypeChange = () => {
-    this.restoreValues(['type']);
-  }
+  const handleTitleBlur = React.useCallback(() => {
+    const repo = getFieldValue("repo");
+    const title = getFieldValue("title");
+    searchIssues(repo, title);
+  }, []);
 
-  handleTitleBlur = () => {
-    this.fetchIssues();
-  }
+  const handlePreview = React.useCallback(
+    (e: React.SyntheticEvent<HTMLElement>) => {
+      e.preventDefault();
+      form.validateFieldsAndScroll((err: any) => {
+        if (!err) {
+          preview = true;
+        }
+      });
+    },
+    []
+  );
 
-  handlePreview = (e: React.SyntheticEvent<HTMLElement>) => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err: any, values: any) => {
-      if (!err) {
-        this.setState({ preview: true });
-      }
-    });
-  }
-
-  handleClosePreview = () => {
-    this.setState({ preview: false });
-  }
-
-  handleCreate = () => {
-    const { form } = this.props;
-    const issueType = form.getFieldValue('type');
-    const repo = form.getFieldValue('repo');
-    const title = encodeURIComponent(form.getFieldValue('title')).replace(
+  const handleCreate = React.useCallback(() => {
+    const issueType = getFieldValue("type");
+    const repo = getFieldValue("repo");
+    const title = encodeURIComponent(getFieldValue("title")).replace(
       /%2B/gi,
-      '+',
+      "+"
     );
-    const content = this.getContent(issueType);
+    const content = getContent(issueType);
     const withConfirm = `
 - [ ] I have searched the [issues](https://github.com/ant-design/${repo}/issues) \
 of this repository and believe that this is not a duplicate.
@@ -169,141 +132,142 @@ of this repository and believe that this is not a duplicate.
 ${content}
 `;
     const withMarker = `${withConfirm}\n\n<!-- generated by ant-design-issue-helper. DO NOT REMOVE -->`;
-    const body = encodeURIComponent(withMarker).replace(/%2B/gi, '+');
-    const label = issueType === 'feature' ? '&labels=Feature%20Request' : '';
+    const body = encodeURIComponent(withMarker).replace(/%2B/gi, "+");
+    const label = issueType === "feature" ? "&labels=Feature%20Request" : "";
 
     localStorage.clear();
 
     window.open(
-      `https://github.com/ant-design/${repo}/issues/new?title=${title}&body=${body}${label}`,
+      `https://github.com/ant-design/${repo}/issues/new?title=${title}&body=${body}${label}`
     );
-  }
+  }, []);
 
-  getContent(issueType: string) {
-    return createPreview(issueType, this.props.form.getFieldsValue());
-  }
+  React.useEffect(() => {
+    fetchVersions(params.repo);
+    bindModalHandler();
+    restoreValues();
+  }, []);
 
-  render() {
-    const { form } = this.props;
-    const { repoVersions, similarIssues, preview, reproModal } = this.state;
-    const { getFieldDecorator, getFieldValue } = form;
-    const issueType = getFieldValue('type');
-    const content = this.getContent(issueType);
-    const repo = form.getFieldValue('repo');
-    const versions = repoVersions[repo] || [];
+  const getContent = (issueType: string) => {
+    return createPreview(issueType, getFieldsValue());
+  };
 
-    const similarIssuesList = (
-      <FormItem>
-        <h3>Similar Issues:</h3>
-        <ul>
-          {similarIssues.map(issue =>
-            <li key={issue.id}>
-              <a href={issue.html_url} target="_blank" rel="noreferer noopener">
-                {issue.title}
-              </a>
-            </li>,
-          )}
-        </ul>
-      </FormItem>
-    );
+  const issueType = getFieldValue("type");
+  const content = getContent(issueType);
+  const repo = getFieldValue("repo");
+  const versions = repoVersions[repo] || [];
 
-    return (
-      <div ref={node => (this.formRef = node)}>
-        <Form layout="horizontal" onSubmit={this.handlePreview}>
-          <PreviewModal
-            visible={preview}
-            content={content}
-            onCancel={this.handleClosePreview}
-            onCreate={this.handleCreate}
-          />
-          <ReproModal
-            visible={reproModal}
-            onCancel={() => this.setState({ reproModal: false })}
-          />
-          <FormItem>
-            <Col span={11}>
-              <FormItem
-                label={
-                  <FormattedMessage
-                    id="issue.repo"
-                    defaultMessage="I am opening an issue for"
-                  />
-                }
-                help={
-                  <FormattedMessage
-                    id="issue.repoHelp"
-                    defaultMessage="Please make sure to file the issue at appropriate repo."
-                  />
-                }
-              >
-                {getFieldDecorator('repo', {
-                  initialValue: params.repo,
-                })(
-                  <Select onChange={this.handleRepoChange}>
-                    <Option key="ant-design">ant-design</Option>
-                    <Option key="ant-design-mobile">ant-design-mobile</Option>
-                    <Option key="ant-design-mobile-rn">ant-design-mobile-rn</Option>
-                  </Select>,
-                )}
-              </FormItem>
-            </Col>
-            <Col span={12} offset={1}>
-              <FormItem
-                label={
-                  <FormattedMessage
-                    id="issue.type"
-                    defaultMessage="This is a"
-                  />
-                }
-              >
-                {getFieldDecorator('type', {
-                  initialValue: 'bug',
-                })(
-                  <Radio.Group onChange={this.handleTypeChange} className={styles.radioGroup}>
-                    <Radio.Button value="bug">
-                      <FormattedMessage
-                        id="issue.type.bug"
-                        defaultMessage="Bug Report"
-                      />
-                    </Radio.Button>
-                    <Radio.Button value="feature">
-                      <FormattedMessage
-                        id="issue.type.feature"
-                        defaultMessage="Feature Request"
-                      />
-                    </Radio.Button>
-                  </Radio.Group>
-                )}
-              </FormItem>
-            </Col>
-          </FormItem>
-          <FormItem
-            label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
-          >
-            {getFieldDecorator('title', {
-              rules: [{ required: true }],
-            })(<Input onBlur={this.handleTitleBlur} />)}
-          </FormItem>
-          {similarIssues.length > 0 && similarIssuesList}
-          {issueType !== 'feature' ? (
-              <BugForm
-                form={form}
-                versions={versions}
-                similarIssues={similarIssues}
-              />
-          ) : <FeatureForm form={form} />}
-          <FormItem>
-            <div className={styles.submitBtn}>
-              <Button type="primary" size="large" htmlType="submit">
-                <FormattedMessage id="issue.preview" defaultMessage="Preview" />
-              </Button>
-            </div>
-          </FormItem>
-        </Form>
-      </div>
-    );
-  }
-}
+  const similarIssuesList = (
+    <FormItem>
+      <h3>Similar Issues:</h3>
+      <ul>
+        {similarIssues.map(issue => (
+          <li key={issue.id}>
+            <a href={issue.html_url} target="_blank" rel="noreferrer noopener">
+              {issue.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </FormItem>
+  );
+
+  return (
+    <div ref={formRef}>
+      <Form layout="horizontal" onSubmit={handlePreview}>
+        <PreviewModal
+          visible={preview}
+          content={content}
+          onCancel={() => (preview = false)}
+          onCreate={handleCreate}
+        />
+        <ReproModal
+          visible={reproModal}
+          onCancel={() => (reproModal = false)}
+        />
+        <FormItem>
+          <Col span={11}>
+            <FormItem
+              label={
+                <FormattedMessage
+                  id="issue.repo"
+                  defaultMessage="I am opening an issue for"
+                />
+              }
+              help={
+                <FormattedMessage
+                  id="issue.repoHelp"
+                  defaultMessage="Please make sure to file the issue at appropriate repo."
+                />
+              }
+            >
+              {getFieldDecorator("repo", {
+                initialValue: params.repo
+              })(
+                <Select onChange={handleRepoChange}>
+                  <Option key="ant-design">ant-design</Option>
+                  <Option key="ant-design-mobile">ant-design-mobile</Option>
+                  <Option key="ant-design-mobile-rn">
+                    ant-design-mobile-rn
+                  </Option>
+                </Select>
+              )}
+            </FormItem>
+          </Col>
+          <Col span={12} offset={1}>
+            <FormItem
+              label={
+                <FormattedMessage id="issue.type" defaultMessage="This is a" />
+              }
+            >
+              {getFieldDecorator("type", {
+                initialValue: "bug"
+              })(
+                <Radio.Group
+                  onChange={handleTypeChange}
+                  className={styles.radioGroup}
+                >
+                  <Radio.Button value="bug">
+                    <FormattedMessage
+                      id="issue.type.bug"
+                      defaultMessage="Bug Report"
+                    />
+                  </Radio.Button>
+                  <Radio.Button value="feature">
+                    <FormattedMessage
+                      id="issue.type.feature"
+                      defaultMessage="Feature Request"
+                    />
+                  </Radio.Button>
+                </Radio.Group>
+              )}
+            </FormItem>
+          </Col>
+        </FormItem>
+        <FormItem
+          label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
+        >
+          {getFieldDecorator("title", {
+            rules: [{ required: true }]
+          })(<Input onBlur={handleTitleBlur} />)}
+        </FormItem>
+        {similarIssues.length > 0 && similarIssuesList}
+        {issueType !== "feature" ? (
+          <BugForm form={form} versions={versions} />
+        ) : (
+          <FeatureForm form={form} />
+        )}
+        <FormItem>
+          <div className={styles.submitBtn}>
+            <Button type="primary" size="large" htmlType="submit">
+              <FormattedMessage id="issue.preview" defaultMessage="Preview" />
+            </Button>
+          </div>
+        </FormItem>
+      </Form>
+    </div>
+  );
+};
 
 export default Form.create({
   // Types is wrong in antd 3.3.0, have to cast as any
@@ -311,18 +275,18 @@ export default Form.create({
     const values: any = args[2];
     let preForm = {};
     try {
-      preForm = JSON.parse(localStorage.getItem('form') as string) || {};
+      preForm = JSON.parse(localStorage.getItem("form") as string) || {};
     } catch (err) {
       // Do nothing
     }
-    const cacheForm = {
-      ...preForm,
+    const cacheForm: any = {
+      ...preForm
     };
-    Object.keys(values).forEach((key) => {
+    Object.keys(values).forEach(key => {
       if (values[key]) {
         cacheForm[key] = values[key];
       }
     });
-    localStorage.setItem('form', JSON.stringify(cacheForm, null, 2));
-  },
+    localStorage.setItem("form", JSON.stringify(cacheForm, null, 2));
+  }
 })(IssueForm);

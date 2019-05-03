@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { Modal } from 'antd';
-import { FormattedMessage } from 'react-intl';
-import I18n from './I18n';
+import * as React from "react";
+import { Modal } from "antd.macro";
+import { FormattedMessage } from "react-intl";
+import I18n from "./I18n";
 
-export interface ReproModalProps {
+interface Props {
   visible: boolean;
   onCancel: () => any;
 }
 
-export default function ReproModal({ visible, onCancel }: ReproModalProps) {
+const ReproModal: React.FC<Props> = ({ visible, onCancel }) => {
   return (
     <Modal
       title={
@@ -25,4 +25,6 @@ export default function ReproModal({ visible, onCancel }: ReproModalProps) {
       <I18n className="paragraph" id="reproModal" />
     </Modal>
   );
-}
+};
+
+export default ReproModal;

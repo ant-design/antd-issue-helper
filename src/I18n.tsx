@@ -1,32 +1,42 @@
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import * as React from "react";
+import { importMDX } from "mdx.macro";
+import LocaleContext from "./LocaleContext";
 
-const req = (require as any).context('./locales', true, /\.md$/);
-const texts = { en: {}, zh: {} };
+const texts: any = {
+  en: {
+    intro: importMDX.sync("./locales/en/intro.md"),
+    introModal: importMDX.sync("./locales/en/introModal.md"),
+    motivationHelp: importMDX.sync("./locales/en/motivationHelp.md"),
+    proposalHelp: importMDX.sync("./locales/en/proposalHelp.md"),
+    reproHelp: importMDX.sync("./locales/en/reproHelp.md"),
+    reproModal: importMDX.sync("./locales/en/reproModal.md"),
+    stepsHelp: importMDX.sync("./locales/en/stepsHelp.md")
+  },
+  zh: {
+    intro: importMDX.sync("./locales/zh/intro.md"),
+    introModal: importMDX.sync("./locales/zh/introModal.md"),
+    motivationHelp: importMDX.sync("./locales/zh/motivationHelp.md"),
+    proposalHelp: importMDX.sync("./locales/zh/proposalHelp.md"),
+    reproHelp: importMDX.sync("./locales/zh/reproHelp.md"),
+    reproModal: importMDX.sync("./locales/zh/reproModal.md"),
+    stepsHelp: importMDX.sync("./locales/zh/stepsHelp.md")
+  }
+};
 
-req.keys().forEach((mod: string) => {
-  const matches: any = mod.match('./(.+)/(.+).md');
-  const locale = matches[1] as string;
-  const id = matches[2] as string;
-  texts[locale][id] = req(mod);
-});
-
-// prettier-ignore
-export interface I18nProps { // tslint:disable-line
+export interface Props {
   id: string;
   [name: string]: any;
 }
 
-export default class I18n extends React.Component<I18nProps, {}> {
-  static contextTypes = {
-    locale: PropTypes.string,
-  };
+const I18n: React.FC<Props> = ({ id, ...restProps }) => {
+  const locale = React.useContext(LocaleContext);
+  const Text = texts[locale][id];
 
-  render() {
-    const { id, ...restProps } = this.props;
-    const { locale } = this.context;
-    const html = texts[locale][id];
+  return (
+    <div {...restProps}>
+      <Text />
+    </div>
+  );
+};
 
-    return <div {...restProps} dangerouslySetInnerHTML={{ __html: html }} />;
-  }
-}
+export default I18n;
