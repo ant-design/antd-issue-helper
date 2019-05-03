@@ -8,26 +8,21 @@ const Intro: React.FC = () => {
   let modalVisible = state(false);
   const introRef = React.useRef<null | HTMLDivElement>(null);
 
-  const handleClick = React.useCallback((e: Event) => {
-    e.preventDefault();
-    modalVisible = true;
-  }, []);
-
-  const handleCancel = React.useCallback(() => {
-    modalVisible = false;
-  }, []);
-
   React.useEffect(() => {
     introRef.current!.addEventListener("click", (e: Event) => {
       if ((e.target as any).getAttribute("href") === "#intro-modal") {
-        handleClick(e);
+        e.preventDefault();
+        modalVisible = true;
       }
     });
   }, []);
 
   return (
     <div className={`${styles.intro} paragraph`} ref={introRef}>
-      <IntroModal visible={modalVisible} onCancel={handleCancel} />
+      <IntroModal
+        visible={modalVisible}
+        onCancel={() => (modalVisible = false)}
+      />
       <I18n id="intro" />
     </div>
   );
