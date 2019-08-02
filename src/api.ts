@@ -23,6 +23,23 @@ function checkStatus(response: Response) {
   }
 }
 
+function orderVersions(versions: string[]): string[] {
+  const normalVersions: string[] = [];
+  const nextVersions: string[] = [];
+  versions.forEach(version => {
+    if (version.match(/^\d+\.\d+\.\d+$/)) {
+      normalVersions.push(version);
+    } else {
+      nextVersions.push(version);
+    }
+  });
+
+  return [
+    ...normalVersions.sort((a: string, b: string) => -compareVersions(a, b)),
+    ...nextVersions.sort((a: string, b: string) => -compareVersions(a, b))
+  ];
+}
+
 export function fetchVersions(repo: string) {
   const npmPromise = fetch(`${npmEndpoint}/${npmMapping[repo]}`)
     .then(checkStatus)
@@ -30,9 +47,7 @@ export function fetchVersions(repo: string) {
     .then(({ versions }) =>
       Object.keys(versions).filter(ver => !ver.includes("-"))
     )
-    .then(versions =>
-      versions.sort((a: string, b: string) => -compareVersions(a, b))
-    )
+    .then(versions => orderVersions(versions))
     .then(versions => versions.slice(0, 100));
 
   // We use github versions first, but if failed use npm versions as backup
@@ -41,9 +56,7 @@ export function fetchVersions(repo: string) {
     .then((response: Response) => response.json())
     .then(releases => releases.filter((r: any) => !r.prerelease))
     .then(releases => releases.map((r: any) => r.tag_name))
-    .then(versions =>
-      versions.sort((a: string, b: string) => -compareVersions(a, b))
-    )
+    .then(versions => orderVersions(versions))
     .catch(err => {
       console.warn(err);
       return npmPromise;
