@@ -1344,13 +1344,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
-  version "16.0.27"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.27.tgz#341899469ea2e98b48b11c18afb4d8361d03b013"
-
-"@types/react@16.8.15":
-  version "16.8.15"
-  resolved "https://registry.npmjs.org/@types/react/-/react-16.8.15.tgz#a76515fed5aa3e996603056f54427fec5f2a5122"
+"@types/react@*", "@types/react@16.8.25":
+  version "16.8.25"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.25.tgz#0247613ab58b1b11ba10fed662e1947c5f2bb89c"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
