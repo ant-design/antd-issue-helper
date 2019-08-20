@@ -21,7 +21,7 @@ const BugForm: React.FC<Props> = ({
     {/* ==================================== Environment ==================================== */}
     <FormItem>
       <Col span={11}>
-        {/* antd version */}
+        {/* version */}
         <FormItem
           label={
             <FormattedMessage id="issue.version" defaultMessage="Version" />
@@ -44,24 +44,7 @@ const BugForm: React.FC<Props> = ({
           )}
         </FormItem>
       </Col>
-      <Col span={12} offset={1}>
-        {/* react version */}
-        <FormItem
-          label={<FormattedMessage id="issue.react" defaultMessage="React" />}
-          help={
-            <FormattedMessage
-              id="issue.reactHelp"
-              defaultMessage="react/react-native version..."
-            />
-          }
-        >
-          {getFieldDecorator("react", {
-            rules: [{ required: true }]
-          })(<Input />)}
-        </FormItem>
-      </Col>
     </FormItem>
-
     <FormItem>
       {/* System */}
       <Col span={11}>

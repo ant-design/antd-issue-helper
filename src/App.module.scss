@@ -17,18 +17,20 @@ p {
 .logo {
   height: 64px;
   line-height: 64px;
+  display: flex;
+  align-items: center;
 
   h1 {
     font-size: 18px;
     font-weight: normal;
-    display: inline;
     margin-left: 8px;
+    margin-bottom: 0px;
   }
 
   img {
     float: left;
     width: 40px;
-    height: 64px;
+    height: 40px;
     line-height: 64px;
   }
 

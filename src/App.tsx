@@ -22,7 +22,7 @@ const App: React.FC = () => {
             <div className={styles.logo}>
               <img
                 alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                src="https://cdn.nlark.com/yuque/0/2019/png/103291/1566268402622-0b252d0e-482d-4b14-8f52-8861e201fbec.png"
               />
               <h1>Issue Helper</h1>
             </div>
@@ -42,16 +42,22 @@ const App: React.FC = () => {
         <Footer style={{ textAlign: "center" }}>
           Inspired by{" "}
           <a
-            href="https://new-issue.vuejs.org/"
+            href="https://new-issue.vuejs.org"
             target="_blank"
             rel="noopener noreferrer"
           >
             Vue Issue Helper
           </a>{" "}
-          ·{" "}
-          <a href="https://github.com/ant-design/antd-issue-helper">
-            Source Code
+          · Forked from{" "}
+          <a
+            href="http://new-issue.ant.design"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ant Design Issue Helper
           </a>
+          ·{" "}
+          <a href="https://github.com/antvis/antv-issue-helper">Source Code</a>
         </Footer>
       </Layout>
     </LocaleContext.Provider>

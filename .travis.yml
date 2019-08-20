@@ -5,9 +5,9 @@ script:
   - npm run build
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
-  local-dir: build
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard, marked secure
+  keep_history: true
+  local_dir: build
   on:
     branch: master
