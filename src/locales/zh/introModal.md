@@ -1,6 +1,6 @@
-维护开源项目是<a href="https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/" target="_blank">非常辛苦的工作</a>。随着 Ant Design 在社区越来越受欢迎，我们每天都在收到越来越多的问题， bug 报告，功能需求和 Pull Requests。
+维护开源项目是<a href="https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/" target="_blank">非常辛苦的工作</a>。随着 AntV 在社区越来越受欢迎，我们每天都在收到越来越多的问题， bug 报告，功能需求和 Pull Requests。
 
-作为一个完全免费使用的开源项目，Ant Design 的维护人手是有限的。这意味着想要让项目长期的可持续发展，我们必须：
+作为一个完全免费使用的开源项目，AntV 的维护人手是有限的。这意味着想要让项目长期的可持续发展，我们必须：
 
 1. 给予更具体的工作更高的优先级（比如 bug 的修复和新功能的开发）；
 2. 提高 issue 处理的效率。

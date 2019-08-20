@@ -20,4 +20,4 @@
 
 ##### 如何提供一个重现
 
-除非你的 bug 只有在构建工具下才能重现，否则我们建议使用 <a href="https://u.ant.design/codesandbox-repro" target="_blank">CodeSandbox for antd</a> / <a href="http://codepen.io/paranoidjk/pen/LWpaKe" target="_blank">CodePen for antd-mobile</a> 来提供重现。如果你的 bug 必须用到构建工具，那么我们建议使用 <a href="https://ant.design/docs/react/use-with-create-react-app-cn" target="_blank">create-react-app</a> 来搭建一个新项目，推送到 GitHub 并提供仓库的链接。
+我们建议使用 <a href="https://codesandbox.io/s/g2-reproduction-template-6ipi1" target="_blank">g2</a> / <a href="https://codesandbox.io/s/g6-reproduction-template-uvzdf" target="_blank">g6</a> / <a href="https://codesandbox.io/s/f2-reproduction-template-un2dz" target="_blank">f2</a> / <a href="https://codesandbox.io/s/l7-reproduction-template-5m868" target="_blank">L7</a> 模板来提供重现，或是 GitHub 仓库的链接。

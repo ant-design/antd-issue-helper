@@ -1,6 +1,6 @@
-# Ant Design Issue Helper
+# AntV Issue Helper
 
-Inspired by https://github.com/vuejs/vue-issue-helper
+Inspired by https://github.com/vuejs/vue-issue-helper and forked from https://github.com/ant-design/antd-issue-helper.
 
 ## Development
 

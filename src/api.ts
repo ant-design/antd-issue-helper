@@ -10,9 +10,10 @@ const npmEndpoint = "https://registry.npm.taobao.org";
 const endpoint = "https://api.github.com";
 
 const npmMapping: { [repo: string]: string } = {
-  "ant-design": "antd",
-  "ant-design-mobile": "antd-mobile",
-  "ant-design-mobile-rn": "@ant-design/react-native"
+  g2: "@antv/g2",
+  g6: "@antv/g6",
+  f2: "@antv/f2",
+  L7: "@antv/l7"
 };
 
 function checkStatus(response: Response) {
@@ -49,22 +50,23 @@ export function fetchVersions(repo: string) {
     )
     .then(versions => orderVersions(versions))
     .then(versions => versions.slice(0, 100));
+  return npmPromise;
 
-  // We use github versions first, but if failed use npm versions as backup
-  return fetch(`${endpoint}/repos/ant-design/${repo}/releases?per_page=100`)
-    .then(checkStatus)
-    .then((response: Response) => response.json())
-    .then(releases => releases.filter((r: any) => !r.prerelease))
-    .then(releases => releases.map((r: any) => r.tag_name))
-    .then(versions => orderVersions(versions))
-    .catch(err => {
-      console.warn(err);
-      return npmPromise;
-    });
+  // // We use github versions first, but if failed use npm versions as backup
+  // return fetch(`${endpoint}/repos/antvis/${repo}/releases?per_page=100`)
+  //   .then(checkStatus)
+  //   .then((response: Response) => response.json())
+  //   .then(releases => releases.filter((r: any) => !r.prerelease))
+  //   .then(releases => releases.map((r: any) => r.tag_name))
+  //   .then(versions => orderVersions(versions))
+  //   .catch(err => {
+  //     console.warn(err);
+  //     return npmPromise;
+  //   });
 }
 
 export function fetchIssues(repo: string, keyword: string) {
-  const q = encodeURIComponent(`is:issue repo:ant-design/${repo} ${keyword}`);
+  const q = encodeURIComponent(`is:issue repo:antvis/${repo} ${keyword}`);
   return fetch(`${endpoint}/search/issues?q=${q}&per_page=5`)
     .then(checkStatus)
     .then((response: Response) => response.json())
