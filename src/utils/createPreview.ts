@@ -7,7 +7,6 @@ export default function createPreview(issueType: string, values: any) {
 
 function createBugPreview({
   version,
-  react,
   system,
   browser,
   reproduction,
@@ -32,8 +31,7 @@ ${actual}
 
 | Environment | Info |
 |---|---|
-| antd | ${version} |
-| React | ${react} |
+| ${repo} | ${version} |
 | System | ${system} |
 | Browser | ${browser} |
 

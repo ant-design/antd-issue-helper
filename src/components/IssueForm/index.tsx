@@ -1,16 +1,16 @@
-import * as React from "react";
-import { Form, Col, Input, Select, Button, Radio } from "antd.macro";
-import { WrappedFormUtils } from "antd/lib/form/Form";
-import { FormattedMessage } from "react-intl";
-import BugForm from "./BugForm";
-import FeatureForm from "./FeatureForm";
-import PreviewModal from "./PreviewModal";
-import ReproModal from "./ReproModal";
-import createPreview from "./createPreview";
-import { state } from "reactive.macro";
-import useSimilarIssues from "./hooks/useSimilarIssues";
-import useVersions from "./hooks/useVersions";
-import styles from "./IssueForm.module.scss";
+import * as React from 'react';
+import { Form, Col, Input, Select, Button, Radio } from 'antd';
+import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { FormattedMessage } from 'umi-plugin-locale';
+import { state } from 'reactive.macro';
+import useSimilarIssues from '@/hooks/useSimilarIssues';
+import useVersions from '@/hooks/useVersions';
+import BugForm from './BugForm';
+import FeatureForm from './FeatureForm';
+import PreviewModal from './PreviewModal';
+import ReproModal from './ReproModal';
+import createPreview from '../../utils/createPreview';
+import styles from './index.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -21,14 +21,14 @@ export interface Props {
 
 const params: any = window.location.search
   .slice(1)
-  .split("&")
+  .split('&')
   .reduce((acc, param) => {
-    const [key, value] = param.split("=");
+    const [key, value] = param.split('=');
     return { ...acc, [key]: value };
   }, {}); // tslint:disable-line
 
 if (!params.repo) {
-  params.repo = "g2";
+  params.repo = 'g2';
 }
 
 const IssueForm: React.FC<Props> = ({ form }) => {
@@ -39,16 +39,11 @@ const IssueForm: React.FC<Props> = ({ form }) => {
   const { similarIssues, searchIssues } = useSimilarIssues();
   const { repoVersions, fetchVersions } = useVersions();
 
-  const {
-    getFieldDecorator,
-    getFieldValue,
-    getFieldsValue,
-    setFieldsValue
-  } = form;
+  const { getFieldDecorator, getFieldValue, getFieldsValue, setFieldsValue } = form;
 
   const bindModalHandler = React.useCallback(() => {
-    formRef.current!.addEventListener("click", (e: Event) => {
-      if ((e.target as any).getAttribute("href") === "#repro-modal") {
+    formRef.current!.addEventListener('click', (e: Event) => {
+      if ((e.target as any).getAttribute('href') === '#repro-modal') {
         e.preventDefault();
         reproModal = true;
       }
@@ -57,7 +52,7 @@ const IssueForm: React.FC<Props> = ({ form }) => {
 
   // Load form data from localStorage
   const restoreValues = React.useCallback((omitFields: Array<string> = []) => {
-    const cache = localStorage.getItem("form");
+    const cache = localStorage.getItem('form');
     if (cache) {
       const values = JSON.parse(cache);
       const keys = Object.keys(values);
@@ -69,7 +64,7 @@ const IssueForm: React.FC<Props> = ({ form }) => {
 
       if (values.type) {
         setFieldsValue({
-          type: values.type
+          type: values.type,
         });
       }
 
@@ -89,41 +84,35 @@ const IssueForm: React.FC<Props> = ({ form }) => {
   }, []);
 
   const handleRepoChange = React.useCallback((repo: string) => {
-    form.resetFields(["version"]);
+    form.resetFields(['version']);
     if (!repoVersions[repo]) {
       fetchVersions(repo);
     }
   }, []);
 
   const handleTypeChange = React.useCallback(() => {
-    restoreValues(["type"]);
+    restoreValues(['type']);
   }, []);
 
   const handleTitleBlur = React.useCallback(() => {
-    const repo = getFieldValue("repo");
-    const title = getFieldValue("title");
+    const repo = getFieldValue('repo');
+    const title = getFieldValue('title');
     searchIssues(repo, title);
   }, []);
 
-  const handlePreview = React.useCallback(
-    (e: React.SyntheticEvent<HTMLElement>) => {
-      e.preventDefault();
-      form.validateFieldsAndScroll((err: any) => {
-        if (!err) {
-          preview = true;
-        }
-      });
-    },
-    []
-  );
+  const handlePreview = React.useCallback((e: React.SyntheticEvent<HTMLElement>) => {
+    e.preventDefault();
+    form.validateFieldsAndScroll((err: any) => {
+      if (!err) {
+        preview = true;
+      }
+    });
+  }, []);
 
   const handleCreate = React.useCallback(() => {
-    const issueType = getFieldValue("type");
-    const repo = getFieldValue("repo");
-    const title = encodeURIComponent(getFieldValue("title")).replace(
-      /%2B/gi,
-      "+"
-    );
+    const issueType = getFieldValue('type');
+    const repo = getFieldValue('repo');
+    const title = encodeURIComponent(getFieldValue('title')).replace(/%2B/gi, '+');
     const content = getContent(issueType);
     const withConfirm = `
 - [ ] I have searched the [issues](https://github.com/antvis/${repo}/issues) \
@@ -132,14 +121,12 @@ of this repository and believe that this is not a duplicate.
 ${content}
 `;
     const withMarker = `${withConfirm}\n\n<!-- generated by antv-issue-helper. DO NOT REMOVE -->`;
-    const body = encodeURIComponent(withMarker).replace(/%2B/gi, "+");
-    const label = issueType === "feature" ? "&labels=Feature%20Request" : "";
+    const body = encodeURIComponent(withMarker).replace(/%2B/gi, '+');
+    const label = issueType === 'feature' ? '&labels=Feature%20Request' : '';
 
     localStorage.clear();
 
-    window.open(
-      `https://github.com/antvis/${repo}/issues/new?title=${title}&body=${body}${label}`
-    );
+    window.open(`https://github.com/antvis/${repo}/issues/new?title=${title}&body=${body}${label}`);
   }, []);
 
   React.useEffect(() => {
@@ -152,9 +139,9 @@ ${content}
     return createPreview(issueType, getFieldsValue());
   };
 
-  const issueType = getFieldValue("type");
+  const issueType = getFieldValue('type');
   const content = getContent(issueType);
-  const repo = getFieldValue("repo");
+  const repo = getFieldValue('repo');
   const versions = repoVersions[repo] || [];
 
   const similarIssuesList = (
@@ -181,18 +168,12 @@ ${content}
           onCancel={() => (preview = false)}
           onCreate={handleCreate}
         />
-        <ReproModal
-          visible={reproModal}
-          onCancel={() => (reproModal = false)}
-        />
+        <ReproModal visible={reproModal} onCancel={() => (reproModal = false)} />
         <FormItem>
           <Col span={11}>
             <FormItem
               label={
-                <FormattedMessage
-                  id="issue.repo"
-                  defaultMessage="I am opening an issue for"
-                />
+                <FormattedMessage id="issue.repo" defaultMessage="I am opening an issue for" />
               }
               help={
                 <FormattedMessage
@@ -201,57 +182,42 @@ ${content}
                 />
               }
             >
-              {getFieldDecorator("repo", {
-                initialValue: params.repo
+              {getFieldDecorator('repo', {
+                initialValue: params.repo,
               })(
                 <Select onChange={handleRepoChange}>
                   <Option key="g2">g2</Option>
                   <Option key="g6">g6</Option>
                   <Option key="f2">f2</Option>
                   <Option key="L7">L7</Option>
-                </Select>
+                </Select>,
               )}
             </FormItem>
           </Col>
           <Col span={12} offset={1}>
-            <FormItem
-              label={
-                <FormattedMessage id="issue.type" defaultMessage="This is a" />
-              }
-            >
-              {getFieldDecorator("type", {
-                initialValue: "bug"
+            <FormItem label={<FormattedMessage id="issue.type" defaultMessage="This is a" />}>
+              {getFieldDecorator('type', {
+                initialValue: 'bug',
               })(
-                <Radio.Group
-                  onChange={handleTypeChange}
-                  className={styles.radioGroup}
-                >
+                <Radio.Group onChange={handleTypeChange} className={styles.radioGroup}>
                   <Radio.Button value="bug">
-                    <FormattedMessage
-                      id="issue.type.bug"
-                      defaultMessage="Bug Report"
-                    />
+                    <FormattedMessage id="issue.type.bug" defaultMessage="Bug Report" />
                   </Radio.Button>
                   <Radio.Button value="feature">
-                    <FormattedMessage
-                      id="issue.type.feature"
-                      defaultMessage="Feature Request"
-                    />
+                    <FormattedMessage id="issue.type.feature" defaultMessage="Feature Request" />
                   </Radio.Button>
-                </Radio.Group>
+                </Radio.Group>,
               )}
             </FormItem>
           </Col>
         </FormItem>
-        <FormItem
-          label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
-        >
-          {getFieldDecorator("title", {
-            rules: [{ required: true }]
+        <FormItem label={<FormattedMessage id="issue.title" defaultMessage="Title" />}>
+          {getFieldDecorator('title', {
+            rules: [{ required: true }],
           })(<Input onBlur={handleTitleBlur} />)}
         </FormItem>
         {similarIssues.length > 0 && similarIssuesList}
-        {issueType !== "feature" ? (
+        {issueType !== 'feature' ? (
           <BugForm form={form} versions={versions} />
         ) : (
           <FeatureForm form={form} />
@@ -274,18 +240,18 @@ export default Form.create({
     const values: any = args[2];
     let preForm = {};
     try {
-      preForm = JSON.parse(localStorage.getItem("form") as string) || {};
+      preForm = JSON.parse(localStorage.getItem('form') as string) || {};
     } catch (err) {
       // Do nothing
     }
     const cacheForm: any = {
-      ...preForm
+      ...preForm,
     };
     Object.keys(values).forEach(key => {
       if (values[key]) {
         cacheForm[key] = values[key];
       }
     });
-    localStorage.setItem("form", JSON.stringify(cacheForm, null, 2));
-  }
+    localStorage.setItem('form', JSON.stringify(cacheForm, null, 2));
+  },
 })(IssueForm);

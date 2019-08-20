@@ -1,4 +1,5 @@
-{
+export default {
+  "common.close": "Close",
   "intro.modal": "the reason behind our strict policy issue",
   "issue.create": "Create",
   "issue.browser": "Browser",

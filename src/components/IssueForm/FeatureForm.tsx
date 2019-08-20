@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Form, Input } from "antd.macro";
-import { WrappedFormUtils } from "antd/lib/form/Form";
-import { FormattedMessage } from "react-intl";
-import I18n from "./I18n";
+import * as React from 'react';
+import { Form, Input } from 'antd';
+import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { FormattedMessage } from 'umi-plugin-locale';
+import I18n from '../I18n';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -22,8 +22,8 @@ const FeatureForm: React.FC<Props> = ({ form: { getFieldDecorator } }) => (
       }
       help={<I18n id="motivationHelp" />}
     >
-      {getFieldDecorator("motivation", {
-        rules: [{ required: true }]
+      {getFieldDecorator('motivation', {
+        rules: [{ required: true }],
       })(<TextArea autosize={{ minRows: 2 }} />)}
     </FormItem>
     <FormItem
@@ -35,8 +35,8 @@ const FeatureForm: React.FC<Props> = ({ form: { getFieldDecorator } }) => (
       }
       help={<I18n id="proposalHelp" />}
     >
-      {getFieldDecorator("proposal", {
-        rules: [{ required: true }]
+      {getFieldDecorator('proposal', {
+        rules: [{ required: true }],
       })(<TextArea autosize={{ minRows: 2 }} />)}
     </FormItem>
   </div>

@@ -1,4 +1,5 @@
-{
+export default {
+  "common.close": "关闭",
   "intro.modal": "为什么要有这么严格的 issue 规定",
   "issue.create": "创建",
   "issue.react": "React",

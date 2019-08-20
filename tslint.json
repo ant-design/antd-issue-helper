@@ -1,0 +1,15 @@
+{
+  "extends": ["tslint-react", "tslint-eslint-rules", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["**/node_modules/**", "**/.git/**", "**/build/**", "**/dist/**"]
+  },
+  "rules": {
+    "eofline": true,
+    "no-console": true,
+    "no-construct": true,
+    "no-debugger": true,
+    "no-reference": true,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false
+  }
+}
