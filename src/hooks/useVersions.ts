@@ -1,4 +1,4 @@
-import * as api from "../api";
+import * as api from "../utils/api";
 import { state } from "reactive.macro";
 
 export default function useVersions() {

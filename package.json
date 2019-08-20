@@ -2,57 +2,62 @@
   "name": "antd-issue-helper",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "test": "echo \"Error: no test specified\"",
+    "lint:es": "eslint --ext .js src mock tests",
+    "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "precommit": "lint-staged"
+  },
   "dependencies": {
-    "antd": "^3.16.6",
+    "antd": "^3.19.5",
     "compare-versions": "^3.1.0",
+    "dva": "^2.6.0-beta.6",
+    "mdx.macro": "^0.2.8",
     "react": "^16.8.6",
-    "react-context-io": "^0.0.7",
     "react-dom": "^16.8.6",
-    "react-intl": "^2.4.0",
-    "react-scripts": "3.0.0",
-    "remarkable": "^1.7.1",
+    "reactive.macro": "^0.0.7",
+    "remarkable": "^1.7.4",
     "whatwg-fetch": "^2.0.3"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "CI=false react-scripts build",
-    "test": "echo \"Error: no test specified\"",
-    "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "deploy": "npm run build && cp CNAME build && cp build && cd build && git init && git commit --allow-empty -m 'Update' && git checkout -b gh-pages && git add . && git commit -am 'Update' && git push git@github.com:antvis/antv-issue-helper.git gh-pages --force"
-  },
   "devDependencies": {
-    "@types/jest": "24.0.12",
-    "@types/node": "11.13.9",
-    "@types/react": "16.8.15",
-    "@types/react-dom": "16.8.4",
-    "@types/react-intl": "^2.3.2",
-    "@types/remarkable": "^1.7.4",
-    "antd.macro": "^1.0.1",
-    "husky": "^2.2.0",
-    "mdx.macro": "^0.2.8",
-    "node-sass": "^4.12.0",
-    "prettier": "^1.17.0",
-    "pretty-quick": "^1.10.0",
-    "reactive.macro": "^0.0.7",
-    "source-map-explorer": "^1.8.0",
-    "typescript": "^3.4.5"
+    "@types/jest": "^23.3.12",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-test-renderer": "^16.0.3",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.4.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.18.2",
+    "react-test-renderer": "^16.7.0",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^3.6.0",
+    "umi": "^2.7.0",
+    "umi-plugin-react": "^1.8.0",
+    "umi-types": "^0.3.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "lint-staged"
     }
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+  "lint-staged": {
+    "**/*.{js,ts,jsx,tsx}": [
+      "prettier --write",
+      "git add"
     ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
   }
 }

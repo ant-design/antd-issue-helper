@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Modal } from "antd.macro";
-import { FormattedMessage } from "react-intl";
-import I18n from "./I18n";
+import * as React from 'react';
+import { Button, Modal } from 'antd';
+import { FormattedMessage } from 'umi-plugin-locale';
+import I18n from '../I18n';
 
 interface Props {
   visible: boolean;
@@ -16,7 +16,11 @@ const IntroModal: React.FC<Props> = ({ visible, onCancel }) => (
         defaultMessage="The reason behind our strict issue policy"
       />
     }
-    footer=""
+    footer={
+      <Button type="primary" onClick={onCancel}>
+        <FormattedMessage id="common.close" defaultMessage="Close" />
+      </Button>
+    }
     visible={visible}
     onCancel={onCancel}
     width="680px"
