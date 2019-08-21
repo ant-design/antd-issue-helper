@@ -1,9 +1,13 @@
 language: node_js
 notifications:
   email:
-    - tjudengfuping@gmail.com
+    - dengfuping_develop@163.com
 node_js:
   - stable
+before_install:
+  - rm -rf node_modules
+script:
+  - npm run build
 deploy:
   provider: surge
   project: ./dist/
