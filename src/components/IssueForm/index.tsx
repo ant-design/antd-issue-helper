@@ -5,6 +5,7 @@ import { FormattedMessage } from 'umi-plugin-locale';
 import { state } from 'reactive.macro';
 import useSimilarIssues from '@/hooks/useSimilarIssues';
 import useVersions from '@/hooks/useVersions';
+import { REPO_LIST } from '@/constants';
 import BugForm from './BugForm';
 import FeatureForm from './FeatureForm';
 import PreviewModal from './PreviewModal';
@@ -28,6 +29,7 @@ const params: any = window.location.search
   }, {}); // tslint:disable-line
 
 if (!params.repo) {
+  // g2 by default
   params.repo = 'g2';
 }
 
@@ -52,7 +54,7 @@ const IssueForm: React.FC<Props> = ({ form }) => {
 
   // Load form data from localStorage
   const restoreValues = React.useCallback((omitFields: Array<string> = []) => {
-    const cache = localStorage.getItem('form');
+    const cache = localStorage.getItem('antv-issue-helper-form');
     if (cache) {
       const values = JSON.parse(cache);
       const keys = Object.keys(values);
@@ -132,7 +134,7 @@ ${content}
   React.useEffect(() => {
     fetchVersions(params.repo);
     bindModalHandler();
-    restoreValues();
+    // restoreValues();
   }, []);
 
   const getContent = (issueType: string) => {
@@ -186,10 +188,11 @@ ${content}
                 initialValue: params.repo,
               })(
                 <Select onChange={handleRepoChange}>
-                  <Option key="g2">g2</Option>
-                  <Option key="g6">g6</Option>
-                  <Option key="f2">f2</Option>
-                  <Option key="L7">L7</Option>
+                  {REPO_LIST.map(item => (
+                    <Option key={item} value={item}>
+                      {item}
+                    </Option>
+                  ))}
                 </Select>,
               )}
             </FormItem>
@@ -240,7 +243,7 @@ export default Form.create({
     const values: any = args[2];
     let preForm = {};
     try {
-      preForm = JSON.parse(localStorage.getItem('form') as string) || {};
+      preForm = JSON.parse(localStorage.getItem('antv-issue-helper-form') as string) || {};
     } catch (err) {
       // Do nothing
     }
@@ -252,6 +255,6 @@ export default Form.create({
         cacheForm[key] = values[key];
       }
     });
-    localStorage.setItem('form', JSON.stringify(cacheForm, null, 2));
+    localStorage.setItem('antv-issue-helper-form', JSON.stringify(cacheForm, null, 2));
   },
 })(IssueForm);

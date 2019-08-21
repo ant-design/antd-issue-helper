@@ -34,7 +34,9 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
           })(
             <Select showSearch={true}>
               {versions.map(version => (
-                <Option key={version}>{version}</Option>
+                <Option key={version} value={version}>
+                  {version}
+                </Option>
               ))}
             </Select>,
           )}

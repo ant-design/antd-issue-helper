@@ -1,4 +1,6 @@
-const compareVersions: any = require("compare-versions");
+import { REPO_CONFIG } from '@/constants';
+
+const compareVersions: any = require('compare-versions');
 
 interface Response {
   status: number;
@@ -6,15 +8,8 @@ interface Response {
   json(): any;
 }
 
-const npmEndpoint = "https://registry.npm.taobao.org";
-const endpoint = "https://api.github.com";
-
-const npmMapping: { [repo: string]: string } = {
-  g2: "@antv/g2",
-  g6: "@antv/g6",
-  f2: "@antv/f2",
-  L7: "@antv/l7"
-};
+const npmEndpoint = 'https://registry.npm.taobao.org';
+const endpoint = 'https://api.github.com';
 
 function checkStatus(response: Response) {
   if (response.status >= 200 && response.status < 300) {
@@ -37,17 +32,15 @@ function orderVersions(versions: string[]): string[] {
 
   return [
     ...normalVersions.sort((a: string, b: string) => -compareVersions(a, b)),
-    ...nextVersions.sort((a: string, b: string) => -compareVersions(a, b))
+    ...nextVersions.sort((a: string, b: string) => -compareVersions(a, b)),
   ];
 }
 
 export function fetchVersions(repo: string) {
-  const npmPromise = fetch(`${npmEndpoint}/${npmMapping[repo]}`)
+  const npmPromise = fetch(`${npmEndpoint}/${REPO_CONFIG[repo].package}`)
     .then(checkStatus)
     .then((response: Response) => response.json())
-    .then(({ versions }) =>
-      Object.keys(versions).filter(ver => !ver.includes("-"))
-    )
+    .then(({ versions }) => Object.keys(versions).filter(ver => !ver.includes('-')))
     .then(versions => orderVersions(versions))
     .then(versions => versions.slice(0, 100));
   return npmPromise;
