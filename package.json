@@ -6,7 +6,8 @@
     "start": "umi dev",
     "build": "umi build && cp dist/index.html dist/200.html",
     "test": "echo \"Error: no test specified\"",
-    "lint:es": "eslint --ext .js src mock tests",
+    "lint": "npm run lint:es && npm run lint:ts",
+    "lint:es": "eslint --ext .js src",
     "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "dependencies": {
