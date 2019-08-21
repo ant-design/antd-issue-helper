@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "build": "umi build",
+    "build": "umi build && cp dist/index.html dist/200.html",
     "test": "echo \"Error: no test specified\"",
     "lint:es": "eslint --ext .js src mock tests",
     "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\""

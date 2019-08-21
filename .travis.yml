@@ -1,4 +1,3 @@
-sudo: true
 language: node_js
 notifications:
   email:
@@ -6,10 +5,9 @@ notifications:
 node_js:
   - stable
 deploy:
-  provider: heroku
+  provider: surge
+  project: ./dist/
   skip_cleanup: true
-  app: antv-issue-helper
+  domain: antv-issue-helper.surge.sh
   on:
-    repo: antvis/antv-issue-helper
-  api_key:
-    secure: iOZ1kwfjOYvQ3mNyXbonl6aqRmUf5quCDgyPCMLEzP+bh/EiVmxziZUxhFTdK1ih+tfGnshxppHFdlIDgexDde8ShYg7DI1c8KVE/Vx4W1J8PR0Z3ZlzOG5mSZGq1O3VWhGauZrh1b3jzcmdfmJbXolR1XzvcVx5xrpRfpur8fPWraTVh84oytM0hyEIl1J41OxdXibWJPzbTfZoVH4hXg2eisofGMjcbm+oFzAde8vyTCfTnctTBKC9eJo2ItXwheWPOle3pE6PCcTYPV05l2EemD/zu29iYaTtu5YU+DpnJa3p4Ww2Y76vam6VnEtpoJaUpJu2gwUNm3Lx0JakNajNvVdrH1+pHlBl/Bte4c2QfByCZdRAfT+7ovhpExaITw6GKrlnrt576qJrIKEY9fLLg9In4WCgs6/L+SJ9/97M4IL1iYq7NrOZMB26mgTGiTs3PRRkvIQMzhaNjtTfMGIYfMJ0c+1GfxV6Rd4amKcqfUeEa4a4rUMJdoz5AooqBx6p6c5UX5bUu6IWfXi/d0VUWNzLFI+IJXXROQNFVWjPwPHu0dWPvuFFoqtjUfcGYsumQceEdjiYPedNltwaLZ9clmFmsIO9Q56mhg4SNHWjT3FmCXg6HntPZsfN5f5gPicrhFXa6F5wltGuanpdgjIotLP6meghq/bHyYR1NoQ=
+    branch: master
