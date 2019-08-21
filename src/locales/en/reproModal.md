@@ -20,4 +20,4 @@ A **minimal** reproduction means it demonstrates the bug, and the bug only. It s
 
 ##### How to create a repro
 
-We prefer reproductions made with <a href="https://codesandbox.io/s/g2-reproduction-template-6ipi1" target="_blank">g2</a> / <a href="https://codesandbox.io/s/g6-reproduction-template-uvzdf" target="_blank">g6</a> / <a href="https://codesandbox.io/s/f2-reproduction-template-un2dz" target="_blank">f2</a> / <a href="https://codesandbox.io/s/l7-reproduction-template-5m868" target="_blank">L7</a>, or a minimal GitHub repository.
+We prefer reproductions made with <a href="https://codesandbox.io/s/g2-reproduction-template-6ipi1" target="_blank">g2</a> / <a href="https://codesandbox.io/s/g6-reproduction-template-uvzdf" target="_blank">g6</a> / <a href="https://codesandbox.io/s/f2-reproduction-template-un2dz" target="_blank">f2</a> / <a href="https://codesandbox.io/s/l7-reproduction-template-5m868" target="_blank">l7</a>, or a minimal GitHub repository.
