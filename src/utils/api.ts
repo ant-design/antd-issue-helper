@@ -1,3 +1,5 @@
+import { REPO_CONFIG } from '@/constants';
+
 const compareVersions: any = require('compare-versions');
 
 interface Response {
@@ -8,13 +10,6 @@ interface Response {
 
 const npmEndpoint = 'https://registry.npm.taobao.org';
 const endpoint = 'https://api.github.com';
-
-const npmMapping: { [repo: string]: string } = {
-  g2: '@antv/g2',
-  g6: '@antv/g6',
-  f2: '@antv/f2',
-  l7: '@antv/l7',
-};
 
 function checkStatus(response: Response) {
   if (response.status >= 200 && response.status < 300) {
@@ -42,7 +37,7 @@ function orderVersions(versions: string[]): string[] {
 }
 
 export function fetchVersions(repo: string) {
-  const npmPromise = fetch(`${npmEndpoint}/${npmMapping[repo]}`)
+  const npmPromise = fetch(`${npmEndpoint}/${REPO_CONFIG[repo].package}`)
     .then(checkStatus)
     .then((response: Response) => response.json())
     .then(({ versions }) => Object.keys(versions).filter(ver => !ver.includes('-')))

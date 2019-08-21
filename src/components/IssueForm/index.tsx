@@ -5,6 +5,7 @@ import { FormattedMessage } from 'umi-plugin-locale';
 import { state } from 'reactive.macro';
 import useSimilarIssues from '@/hooks/useSimilarIssues';
 import useVersions from '@/hooks/useVersions';
+import { REPO_LIST } from '@/constants';
 import BugForm from './BugForm';
 import FeatureForm from './FeatureForm';
 import PreviewModal from './PreviewModal';
@@ -28,6 +29,7 @@ const params: any = window.location.search
   }, {}); // tslint:disable-line
 
 if (!params.repo) {
+  // g2 by default
   params.repo = 'g2';
 }
 
@@ -186,18 +188,11 @@ ${content}
                 initialValue: params.repo,
               })(
                 <Select onChange={handleRepoChange}>
-                  <Option key="g2" value="g2">
-                    g2
-                  </Option>
-                  <Option key="g6" value="g6">
-                    g6
-                  </Option>
-                  <Option key="f2" value="f2">
-                    f2
-                  </Option>
-                  <Option key="l7" value="l7">
-                    l7
-                  </Option>
+                  {REPO_LIST.map(item => (
+                    <Option key={item} value={item}>
+                      {item}
+                    </Option>
+                  ))}
                 </Select>,
               )}
             </FormItem>
