@@ -1,5 +1,5 @@
-import * as api from "../utils/api";
-import { state } from "reactive.macro";
+import * as api from '../utils/api';
+import { state } from 'reactive.macro';
 
 export default function useSimilarIssues() {
   let similarIssues: any[] = state([]);
@@ -14,6 +14,6 @@ export default function useSimilarIssues() {
 
   return {
     similarIssues,
-    searchIssues
+    searchIssues,
   };
 }
