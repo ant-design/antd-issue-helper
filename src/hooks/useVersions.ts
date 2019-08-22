@@ -1,5 +1,5 @@
-import * as api from "../utils/api";
-import { state } from "reactive.macro";
+import * as api from '../utils/api';
+import { state } from 'reactive.macro';
 
 export default function useVersions() {
   let repoVersions: { [repo: string]: string[] } = state({});
@@ -9,8 +9,8 @@ export default function useVersions() {
       (versions: string[]) =>
         (repoVersions = {
           ...repoVersions,
-          [repo]: versions
-        })
+          [repo]: versions,
+        }),
     );
   };
 

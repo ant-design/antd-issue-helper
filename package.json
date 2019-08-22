@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\"",
     "lint": "npm run lint:es && npm run lint:ts",
     "lint:es": "eslint --ext .js src",
-    "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\""
+    "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "prettier": "prettier --write '**/*.{js,ts,json}'"
   },
   "dependencies": {
     "antd": "^3.19.5",
