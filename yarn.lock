@@ -979,6 +979,32 @@
   version "9.0.1"
   resolved "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
 
+"@formatjs/intl-listformat@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-listformat/-/intl-listformat-1.2.6.tgz#73d6f7f1ad3447f7cffcda28949987e7c235e66f"
+  dependencies:
+    "@formatjs/intl-utils" "^1.4.3"
+
+"@formatjs/intl-relativetimeformat@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-relativetimeformat/-/intl-relativetimeformat-4.4.5.tgz#96a8edf5791931123789c18b6be26b725b8e2937"
+  dependencies:
+    "@formatjs/intl-utils" "^1.4.3"
+
+"@formatjs/intl-unified-numberformat@^2.1.6":
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-unified-numberformat/-/intl-unified-numberformat-2.1.6.tgz#57fcb63c16f1fa1c800e0f91f8d913db6147f723"
+  dependencies:
+    "@formatjs/intl-utils" "^1.4.3"
+
+"@formatjs/intl-utils@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-1.4.3.tgz#97e8d79ec6ab8173b95bd285ce4b1ef9be6c4c24"
+
+"@formatjs/macro@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@formatjs/macro/-/macro-0.2.5.tgz#4f93ed3db2f8ca688ae863cc885e20dd012612a3"
+
 "@hapi/address@2.x.x":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@hapi/address/-/address-2.0.0.tgz#9f05469c88cb2fd3dcd624776b54ee95c312126a"
@@ -1293,6 +1319,10 @@
   dependencies:
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
+
+"@types/invariant@^2.2.30":
+  version "2.2.30"
+  resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.30.tgz#20efa342807606ada5483731a8137cb1561e5fe9"
 
 "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
@@ -4724,9 +4754,9 @@ hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.5:
   version "2.5.5"
   resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
-hoist-non-react-statics@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
+hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#101685d3aff3b23ea213163f6e8e12f4f111e19f"
   dependencies:
     react-is "^16.7.0"
 
@@ -5050,33 +5080,26 @@ internal-ip@^4.2.0:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
 
-intl-format-cache@^2.0.5:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/intl-format-cache/-/intl-format-cache-2.1.0.tgz#04a369fecbfad6da6005bae1f14333332dcf9316"
+intl-format-cache@^4.2.10:
+  version "4.2.10"
+  resolved "https://registry.yarnpkg.com/intl-format-cache/-/intl-format-cache-4.2.10.tgz#5a79c8374d88eeb5f0cea78ed40069310b449c48"
 
-intl-messageformat-parser@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/intl-messageformat-parser/-/intl-messageformat-parser-1.4.0.tgz#b43d45a97468cadbe44331d74bb1e8dea44fc075"
+intl-locales-supported@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/intl-locales-supported/-/intl-locales-supported-1.8.3.tgz#8b8c5b024d916c5cfa634077eb61dc701941ef14"
 
-intl-messageformat@^2.0.0, intl-messageformat@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-2.2.0.tgz#345bcd46de630b7683330c2e52177ff5eab484fc"
+intl-messageformat-parser@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/intl-messageformat-parser/-/intl-messageformat-parser-3.3.0.tgz#54d6cbb52db2c7ec87a4c785bc8f84ee3df5db3b"
+
+intl-messageformat@^7.6.0:
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-7.6.0.tgz#90a96d4afd282d76c9fa0951d5cf1ed7687d4018"
   dependencies:
-    intl-messageformat-parser "1.4.0"
+    intl-format-cache "^4.2.10"
+    intl-messageformat-parser "^3.3.0"
 
-intl-relativeformat@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/intl-relativeformat/-/intl-relativeformat-2.1.0.tgz#010f1105802251f40ac47d0e3e1a201348a255df"
-  dependencies:
-    intl-messageformat "^2.0.0"
-
-invariant@^2.1.1, invariant@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
-  dependencies:
-    loose-envify "^1.0.0"
-
-invariant@^2.2.4:
+invariant@^2.1.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
@@ -8626,14 +8649,23 @@ react-error-overlay@^5.1.5:
   version "5.1.5"
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-5.1.5.tgz#884530fd055476c764eaa8ab13b8ecf1f57bbf2c"
 
-react-intl@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-2.4.0.tgz#66c14dc9df9a73b2fbbfbd6021726e80a613eb15"
+react-intl@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-3.7.0.tgz#27d377f2795da4590c49cc1410dc40c528f1f3a0"
   dependencies:
-    intl-format-cache "^2.0.5"
-    intl-messageformat "^2.1.0"
-    intl-relativeformat "^2.0.0"
+    "@formatjs/intl-listformat" "^1.2.6"
+    "@formatjs/intl-relativetimeformat" "^4.4.5"
+    "@formatjs/intl-unified-numberformat" "^2.1.6"
+    "@formatjs/macro" "^0.2.5"
+    "@types/hoist-non-react-statics" "^3.3.1"
+    "@types/invariant" "^2.2.30"
+    hoist-non-react-statics "^3.3.1"
+    intl-format-cache "^4.2.10"
+    intl-locales-supported "^1.8.3"
+    intl-messageformat "^7.6.0"
+    intl-messageformat-parser "^3.3.0"
     invariant "^2.1.1"
+    shallow-equal "^1.1.0"
 
 react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.8.6"
@@ -9399,9 +9431,9 @@ shallow-clone@^1.0.0:
     kind-of "^5.0.0"
     mixin-object "^2.0.1"
 
-shallow-equal@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/shallow-equal/-/shallow-equal-1.1.0.tgz#cc022f030dcba0d1c198abf658a3c6c744e171ca"
+shallow-equal@^1.0.0, shallow-equal@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/shallow-equal/-/shallow-equal-1.2.0.tgz#fd828d2029ff4e19569db7e19e535e94e2d1f5cc"
 
 shallowequal@^0.2.2:
   version "0.2.2"
