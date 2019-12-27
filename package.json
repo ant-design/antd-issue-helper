@@ -8,7 +8,7 @@
     "react": "^16.8.6",
     "react-context-io": "^0.0.7",
     "react-dom": "^16.8.6",
-    "react-intl": "^2.4.0",
+    "react-intl": "^3.10.0",
     "react-scripts": "3.0.0",
     "remarkable": "^1.7.1",
     "whatwg-fetch": "^2.0.3"
