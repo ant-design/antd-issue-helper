@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form, Col, Input, Select, Button, Radio } from "antd.macro";
+import { Form, Row, Col, Input, Select, Button, Radio } from "antd";
 import { FormattedMessage } from "react-intl";
 import BugForm from "./BugForm";
 import FeatureForm from "./FeatureForm";
@@ -27,10 +27,19 @@ if (!params.repo) {
 }
 
 const IssueForm: React.FC<{}> = () => {
-  let preview = state(false);
   let reproModal = state(false);
 
   const [form] = Form.useForm();
+
+  const getContent = (type: string) =>
+    createPreview(type, form.getFieldsValue());
+
+  const [content, setContent] = React.useState("");
+  const [preview, setPreview] = React.useState(false);
+  const triggerPreview = (newPreview: boolean) => {
+    setContent(getContent(form.getFieldValue("type")));
+    setPreview(newPreview);
+  };
 
   const formRef = React.useRef<HTMLDivElement | null>(null);
   const { similarIssues, searchIssues } = useSimilarIssues();
@@ -126,12 +135,6 @@ ${content}
     restoreValues();
   }, []);
 
-  const getContent = (issueType: string) => {
-    return createPreview(issueType, form.getFieldsValue());
-  };
-
-  const issueType = form.getFieldValue("type");
-  const content = getContent(issueType);
   const repo = form.getFieldValue("repo");
   const versions = repoVersions[repo] || [];
 
@@ -154,14 +157,14 @@ ${content}
     <div ref={formRef}>
       <Form
         form={form}
-        layout="horizontal"
+        layout="vertical"
         initialValues={{
           repo: params.repo,
           type: "bug",
           version: versions[0]
         }}
         onFinish={() => {
-          preview = true;
+          triggerPreview(true);
         }}
         onValuesChange={(_, values) => {
           let preForm = {};
@@ -184,14 +187,16 @@ ${content}
         <PreviewModal
           visible={preview}
           content={content}
-          onCancel={() => (preview = false)}
+          onCancel={() => {
+            triggerPreview(false);
+          }}
           onCreate={handleCreate}
         />
         <ReproModal
           visible={reproModal}
           onCancel={() => (reproModal = false)}
         />
-        <FormItem>
+        <Row>
           <Col span={11}>
             <FormItem
               name="repo"
@@ -243,7 +248,7 @@ ${content}
               </Radio.Group>
             </FormItem>
           </Col>
-        </FormItem>
+        </Row>
         <FormItem
           name="title"
           label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
@@ -252,11 +257,18 @@ ${content}
           <Input onBlur={handleTitleBlur} />
         </FormItem>
         {similarIssues.length > 0 && similarIssuesList}
-        {issueType !== "feature" ? (
-          <BugForm form={form} versions={versions} />
-        ) : (
-          <FeatureForm form={form} />
-        )}
+        <FormItem
+          noStyle
+          shouldUpdate={(prev, next) => prev.type !== next.type}
+        >
+          {() =>
+            form.getFieldValue("type") === "feature" ? (
+              <FeatureForm />
+            ) : (
+              <BugForm versions={versions} />
+            )
+          }
+        </FormItem>
         <FormItem>
           <div className={styles.submitBtn}>
             <Button type="primary" size="large" htmlType="submit">

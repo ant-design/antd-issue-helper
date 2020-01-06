@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form, Col, Input, Select } from "antd.macro";
+import { Form, Row, Col, Input, Select } from "antd";
 import { FormattedMessage } from "react-intl";
 import I18n from "./I18n";
 
@@ -14,83 +14,89 @@ interface Props {
 const BugForm: React.FC<Props> = ({ versions }) => (
   <div>
     {/* ==================================== Environment ==================================== */}
-    <FormItem>
-      <Col span={11}>
-        {/* antd version */}
-        <FormItem
-          name="version"
-          label={
-            <FormattedMessage id="issue.version" defaultMessage="Version" />
-          }
-          help={
-            <FormattedMessage
-              id="issue.versionHelp"
-              defaultMessage="Check if the issue is reproducible with the latest stable version."
-            />
-          }
-        >
-          <Select showSearch={true}>
-            {versions.map(version => (
-              <Option value={version}>{version}</Option>
-            ))}
-          </Select>
-        </FormItem>
-      </Col>
-      <Col span={12} offset={1}>
-        {/* react version */}
-        <FormItem
-          name="react"
-          rules={[{ required: true }]}
-          label={<FormattedMessage id="issue.react" defaultMessage="React" />}
-          help={
-            <FormattedMessage
-              id="issue.reactHelp"
-              defaultMessage="react/react-native version..."
-            />
-          }
-        >
-          <Input />
-        </FormItem>
-      </Col>
-    </FormItem>
+    <Form.Item>
+      <Row>
+        <Col span={11}>
+          {/* antd version */}
+          <FormItem
+            name="version"
+            label={
+              <FormattedMessage id="issue.version" defaultMessage="Version" />
+            }
+            help={
+              <FormattedMessage
+                id="issue.versionHelp"
+                defaultMessage="Check if the issue is reproducible with the latest stable version."
+              />
+            }
+          >
+            <Select showSearch={true}>
+              {versions.map(version => (
+                <Option value={version}>{version}</Option>
+              ))}
+            </Select>
+          </FormItem>
+        </Col>
+        <Col span={12} offset={1}>
+          {/* react version */}
+          <FormItem
+            name="react"
+            rules={[{ required: true }]}
+            label={<FormattedMessage id="issue.react" defaultMessage="React" />}
+            help={
+              <FormattedMessage
+                id="issue.reactHelp"
+                defaultMessage="react/react-native version..."
+              />
+            }
+          >
+            <Input />
+          </FormItem>
+        </Col>
+      </Row>
+    </Form.Item>
 
-    <FormItem>
-      {/* System */}
-      <Col span={11}>
-        <FormItem
-          name="system"
-          rules={[{ required: true }]}
-          label={<FormattedMessage id="issue.system" defaultMessage="System" />}
-          help={
-            <FormattedMessage
-              id="issue.systemHelp"
-              defaultMessage="System version..."
-            />
-          }
-        >
-          <Input />
-        </FormItem>
-      </Col>
+    <Form.Item>
+      <Row>
+        {/* System */}
+        <Col span={11}>
+          <FormItem
+            name="system"
+            rules={[{ required: true }]}
+            label={
+              <FormattedMessage id="issue.system" defaultMessage="System" />
+            }
+            help={
+              <FormattedMessage
+                id="issue.systemHelp"
+                defaultMessage="System version..."
+              />
+            }
+          >
+            <Input />
+          </FormItem>
+        </Col>
 
-      {/* Browser */}
-      <Col span={12} offset={1}>
-        <FormItem
-          name="browser"
-          rules={[{ required: true }]}
-          label={
-            <FormattedMessage id="issue.browser" defaultMessage="Browser" />
-          }
-          help={
-            <FormattedMessage
-              id="issue.browserHelp"
-              defaultMessage="Browser version..."
-            />
-          }
-        >
-          <Input />
-        </FormItem>
-      </Col>
-    </FormItem>
+        {/* Browser */}
+        <Col span={12} offset={1}>
+          <FormItem
+            name="browser"
+            rules={[{ required: true }]}
+            label={
+              <FormattedMessage id="issue.browser" defaultMessage="Browser" />
+            }
+            help={
+              <FormattedMessage
+                id="issue.browserHelp"
+                defaultMessage="Browser version..."
+              />
+            }
+          >
+            <Input />
+          </FormItem>
+        </Col>
+      </Row>
+    </Form.Item>
 
     {/* ==================================== Reproduce ==================================== */}
     <FormItem
