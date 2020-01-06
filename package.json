@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.16.6",
+    "antd": "^4.0.0-rc.0",
     "compare-versions": "^3.1.0",
     "react": "^16.8.6",
     "react-context-io": "^0.0.7",

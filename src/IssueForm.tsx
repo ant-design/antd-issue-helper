@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Form, Col, Input, Select, Button, Radio } from "antd.macro";
-import { WrappedFormUtils } from "antd/lib/form/Form";
 import { FormattedMessage } from "react-intl";
 import BugForm from "./BugForm";
 import FeatureForm from "./FeatureForm";
@@ -15,10 +14,6 @@ import styles from "./IssueForm.module.scss";
 const FormItem = Form.Item;
 const { Option } = Select;
 
-export interface Props {
-  form: WrappedFormUtils;
-}
-
 const params: any = window.location.search
   .slice(1)
   .split("&")
@@ -31,20 +26,15 @@ if (!params.repo) {
   params.repo = "ant-design";
 }
 
-const IssueForm: React.FC<Props> = ({ form }) => {
+const IssueForm: React.FC<{}> = () => {
   let preview = state(false);
   let reproModal = state(false);
+
+  const [form] = Form.useForm();
 
   const formRef = React.useRef<HTMLDivElement | null>(null);
   const { similarIssues, searchIssues } = useSimilarIssues();
   const { repoVersions, fetchVersions } = useVersions();
-
-  const {
-    getFieldDecorator,
-    getFieldValue,
-    getFieldsValue,
-    setFieldsValue
-  } = form;
 
   const bindModalHandler = React.useCallback(() => {
     formRef.current!.addEventListener("click", (e: Event) => {
@@ -68,7 +58,7 @@ const IssueForm: React.FC<Props> = ({ form }) => {
       });
 
       if (values.type) {
-        setFieldsValue({
+        form.setFieldsValue({
           type: values.type
         });
       }
@@ -76,14 +66,14 @@ const IssueForm: React.FC<Props> = ({ form }) => {
       // Next frame (IE 9 not support RAF)
       setTimeout(() => {
         // Remove useless value
-        const currentValues = getFieldsValue();
+        const currentValues = form.getFieldsValue();
         keys.forEach(key => {
           if (!(key in currentValues)) {
             delete values[key];
           }
         });
 
-        setFieldsValue(values);
+        form.setFieldsValue(values);
       }, 100);
     }
   }, []);
@@ -100,27 +90,15 @@ const IssueForm: React.FC<Props> = ({ form }) => {
   }, []);
 
   const handleTitleBlur = React.useCallback(() => {
-    const repo = getFieldValue("repo");
-    const title = getFieldValue("title");
+    const repo = form.getFieldValue("repo");
+    const title = form.getFieldValue("title");
     searchIssues(repo, title);
   }, []);
 
-  const handlePreview = React.useCallback(
-    (e: React.SyntheticEvent<HTMLElement>) => {
-      e.preventDefault();
-      form.validateFieldsAndScroll((err: any) => {
-        if (!err) {
-          preview = true;
-        }
-      });
-    },
-    []
-  );
-
   const handleCreate = React.useCallback(() => {
-    const issueType = getFieldValue("type");
-    const repo = getFieldValue("repo");
-    const title = encodeURIComponent(getFieldValue("title")).replace(
+    const issueType = form.getFieldValue("type");
+    const repo = form.getFieldValue("repo");
+    const title = encodeURIComponent(form.getFieldValue("title")).replace(
       /%2B/gi,
       "+"
     );
@@ -149,12 +127,12 @@ ${content}
   }, []);
 
   const getContent = (issueType: string) => {
-    return createPreview(issueType, getFieldsValue());
+    return createPreview(issueType, form.getFieldsValue());
   };
 
-  const issueType = getFieldValue("type");
+  const issueType = form.getFieldValue("type");
   const content = getContent(issueType);
-  const repo = getFieldValue("repo");
+  const repo = form.getFieldValue("repo");
   const versions = repoVersions[repo] || [];
 
   const similarIssuesList = (
@@ -174,7 +152,35 @@ ${content}
 
   return (
     <div ref={formRef}>
-      <Form layout="horizontal" onSubmit={handlePreview}>
+      <Form
+        form={form}
+        layout="horizontal"
+        initialValues={{
+          repo: params.repo,
+          type: "bug",
+          version: versions[0]
+        }}
+        onFinish={() => {
+          preview = true;
+        }}
+        onValuesChange={(_, values) => {
+          let preForm = {};
+          try {
+            preForm = JSON.parse(localStorage.getItem("form") as string) || {};
+          } catch (err) {
+            // Do nothing
+          }
+          const cacheForm: any = {
+            ...preForm
+          };
+          Object.keys(values).forEach(key => {
+            if (values[key]) {
+              cacheForm[key] = values[key];
+            }
+          });
+          localStorage.setItem("form", JSON.stringify(cacheForm, null, 2));
+        }}
+      >
         <PreviewModal
           visible={preview}
           content={content}
@@ -188,6 +194,7 @@ ${content}
         <FormItem>
           <Col span={11}>
             <FormItem
+              name="repo"
               label={
                 <FormattedMessage
                   id="issue.repo"
@@ -201,55 +208,48 @@ ${content}
                 />
               }
             >
-              {getFieldDecorator("repo", {
-                initialValue: params.repo
-              })(
-                <Select onChange={handleRepoChange}>
-                  <Option key="ant-design">ant-design</Option>
-                  <Option key="ant-design-mobile">ant-design-mobile</Option>
-                  <Option key="ant-design-mobile-rn">
-                    ant-design-mobile-rn
-                  </Option>
-                </Select>
-              )}
+              <Select onChange={handleRepoChange}>
+                <Option value="ant-design">ant-design</Option>
+                <Option value="ant-design-mobile">ant-design-mobile</Option>
+                <Option value="ant-design-mobile-rn">
+                  ant-design-mobile-rn
+                </Option>
+              </Select>
             </FormItem>
           </Col>
           <Col span={12} offset={1}>
             <FormItem
+              name="type"
               label={
                 <FormattedMessage id="issue.type" defaultMessage="This is a" />
               }
             >
-              {getFieldDecorator("type", {
-                initialValue: "bug"
-              })(
-                <Radio.Group
-                  onChange={handleTypeChange}
-                  className={styles.radioGroup}
-                >
-                  <Radio.Button value="bug">
-                    <FormattedMessage
-                      id="issue.type.bug"
-                      defaultMessage="Bug Report"
-                    />
-                  </Radio.Button>
-                  <Radio.Button value="feature">
-                    <FormattedMessage
-                      id="issue.type.feature"
-                      defaultMessage="Feature Request"
-                    />
-                  </Radio.Button>
-                </Radio.Group>
-              )}
+              <Radio.Group
+                onChange={handleTypeChange}
+                className={styles.radioGroup}
+              >
+                <Radio.Button value="bug">
+                  <FormattedMessage
+                    id="issue.type.bug"
+                    defaultMessage="Bug Report"
+                  />
+                </Radio.Button>
+                <Radio.Button value="feature">
+                  <FormattedMessage
+                    id="issue.type.feature"
+                    defaultMessage="Feature Request"
+                  />
+                </Radio.Button>
+              </Radio.Group>
             </FormItem>
           </Col>
         </FormItem>
         <FormItem
+          name="title"
           label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
+          rules={[{ required: true }]}
         >
-          {getFieldDecorator("title", {
-            rules: [{ required: true }]
-          })(<Input onBlur={handleTitleBlur} />)}
+          <Input onBlur={handleTitleBlur} />
         </FormItem>
         {similarIssues.length > 0 && similarIssuesList}
         {issueType !== "feature" ? (
@@ -269,24 +269,4 @@ ${content}
   );
 };
 
-export default Form.create({
-  // Types is wrong in antd 3.3.0, have to cast as any
-  onValuesChange(...args: any[]) {
-    const values: any = args[2];
-    let preForm = {};
-    try {
-      preForm = JSON.parse(localStorage.getItem("form") as string) || {};
-    } catch (err) {
-      // Do nothing
-    }
-    const cacheForm: any = {
-      ...preForm
-    };
-    Object.keys(values).forEach(key => {
-      if (values[key]) {
-        cacheForm[key] = values[key];
-      }
-    });
-    localStorage.setItem("form", JSON.stringify(cacheForm, null, 2));
-  }
-})(IssueForm);
+export default IssueForm;
