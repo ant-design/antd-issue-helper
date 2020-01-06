@@ -27,7 +27,7 @@ function orderVersions(versions: string[]): string[] {
   const normalVersions: string[] = [];
   const nextVersions: string[] = [];
   versions.forEach(version => {
-    if (version.match(/^\d+\.\d+\.\d+$/)) {
+    if (version.match(/^\d+\.\d+\.\d+$/) || version.includes("-rc.")) {
       normalVersions.push(version);
     } else {
       nextVersions.push(version);
