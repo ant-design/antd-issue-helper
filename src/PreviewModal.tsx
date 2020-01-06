@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal, Button } from "antd.macro";
+import { Modal, Button } from "antd";
 import { FormattedMessage } from "react-intl";
 import Remarkable from "remarkable";
 

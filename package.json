@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.16.6",
+    "antd": "^4.0.0-rc.0",
     "compare-versions": "^3.1.0",
     "react": "^16.8.6",
     "react-context-io": "^0.0.7",
@@ -28,7 +28,6 @@
     "@types/react-dom": "16.8.4",
     "@types/react-intl": "^2.3.2",
     "@types/remarkable": "^1.7.4",
-    "antd.macro": "^1.0.1",
     "husky": "^2.2.0",
     "mdx.macro": "^0.2.8",
     "node-sass": "^4.12.0",

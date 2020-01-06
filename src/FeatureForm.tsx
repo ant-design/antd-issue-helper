@@ -1,19 +1,16 @@
 import * as React from "react";
-import { Form, Input } from "antd.macro";
-import { WrappedFormUtils } from "antd/lib/form/Form";
+import { Form, Input } from "antd";
 import { FormattedMessage } from "react-intl";
 import I18n from "./I18n";
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-interface Props {
-  form: WrappedFormUtils;
-}
-
-const FeatureForm: React.FC<Props> = ({ form: { getFieldDecorator } }) => (
+const FeatureForm: React.FC<{}> = () => (
   <div>
     <FormItem
+      name="motivation"
+      rules={[{ required: true }]}
       label={
         <FormattedMessage
           id="issue.motivation"
@@ -22,11 +19,11 @@ const FeatureForm: React.FC<Props> = ({ form: { getFieldDecorator } }) => (
       }
       help={<I18n id="motivationHelp" />}
     >
-      {getFieldDecorator("motivation", {
-        rules: [{ required: true }]
-      })(<TextArea autosize={{ minRows: 2 }} />)}
+      <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
     <FormItem
+      name="proposal"
+      rules={[{ required: true }]}
       label={
         <FormattedMessage
           id="issue.proposal"
@@ -35,9 +32,7 @@ const FeatureForm: React.FC<Props> = ({ form: { getFieldDecorator } }) => (
       }
       help={<I18n id="proposalHelp" />}
     >
-      {getFieldDecorator("proposal", {
-        rules: [{ required: true }]
-      })(<TextArea autosize={{ minRows: 2 }} />)}
+      <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
   </div>
 );

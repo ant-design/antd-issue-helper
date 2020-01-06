@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Form, Col, Input, Select } from "antd.macro";
-import { WrappedFormUtils } from "antd/lib/form/Form";
+import { Form, Row, Col, Input, Select } from "antd";
 import { FormattedMessage } from "react-intl";
 import I18n from "./I18n";
 
@@ -9,99 +8,100 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 interface Props {
-  form: WrappedFormUtils;
   versions: string[];
 }
 
-const BugForm: React.FC<Props> = ({
-  form: { getFieldDecorator },
-  versions
-}) => (
+const BugForm: React.FC<Props> = ({ versions }) => (
   <div>
     {/* ==================================== Environment ==================================== */}
-    <FormItem>
-      <Col span={11}>
-        {/* antd version */}
-        <FormItem
-          label={
-            <FormattedMessage id="issue.version" defaultMessage="Version" />
-          }
-          help={
-            <FormattedMessage
-              id="issue.versionHelp"
-              defaultMessage="Check if the issue is reproducible with the latest stable version."
-            />
-          }
-        >
-          {getFieldDecorator("version", {
-            initialValue: versions[0]
-          })(
+    <Form.Item>
+      <Row>
+        <Col span={11}>
+          {/* antd version */}
+          <FormItem
+            name="version"
+            label={
+              <FormattedMessage id="issue.version" defaultMessage="Version" />
+            }
+            help={
+              <FormattedMessage
+                id="issue.versionHelp"
+                defaultMessage="Check if the issue is reproducible with the latest stable version."
+              />
+            }
+          >
             <Select showSearch={true}>
               {versions.map(version => (
-                <Option key={version}>{version}</Option>
+                <Option value={version}>{version}</Option>
               ))}
             </Select>
-          )}
-        </FormItem>
-      </Col>
-      <Col span={12} offset={1}>
-        {/* react version */}
-        <FormItem
-          label={<FormattedMessage id="issue.react" defaultMessage="React" />}
-          help={
-            <FormattedMessage
-              id="issue.reactHelp"
-              defaultMessage="react/react-native version..."
-            />
-          }
-        >
-          {getFieldDecorator("react", {
-            rules: [{ required: true }]
-          })(<Input />)}
-        </FormItem>
-      </Col>
-    </FormItem>
+          </FormItem>
+        </Col>
+        <Col span={12} offset={1}>
+          {/* react version */}
+          <FormItem
+            name="react"
+            rules={[{ required: true }]}
+            label={<FormattedMessage id="issue.react" defaultMessage="React" />}
+            help={
+              <FormattedMessage
+                id="issue.reactHelp"
+                defaultMessage="react/react-native version..."
+              />
+            }
+          >
+            <Input />
+          </FormItem>
+        </Col>
+      </Row>
+    </Form.Item>
 
-    <FormItem>
-      {/* System */}
-      <Col span={11}>
-        <FormItem
-          label={<FormattedMessage id="issue.system" defaultMessage="System" />}
-          help={
-            <FormattedMessage
-              id="issue.systemHelp"
-              defaultMessage="System version..."
-            />
-          }
-        >
-          {getFieldDecorator("system", {
-            rules: [{ required: true }]
-          })(<Input />)}
-        </FormItem>
-      </Col>
+    <Form.Item>
+      <Row>
+        {/* System */}
+        <Col span={11}>
+          <FormItem
+            name="system"
+            rules={[{ required: true }]}
+            label={
+              <FormattedMessage id="issue.system" defaultMessage="System" />
+            }
+            help={
+              <FormattedMessage
+                id="issue.systemHelp"
+                defaultMessage="System version..."
+              />
+            }
+          >
+            <Input />
+          </FormItem>
+        </Col>
 
-      {/* Browser */}
-      <Col span={12} offset={1}>
-        <FormItem
-          label={
-            <FormattedMessage id="issue.browser" defaultMessage="Browser" />
-          }
-          help={
-            <FormattedMessage
-              id="issue.browserHelp"
-              defaultMessage="Browser version..."
-            />
-          }
-        >
-          {getFieldDecorator("browser", {
-            rules: [{ required: true }]
-          })(<Input />)}
-        </FormItem>
-      </Col>
-    </FormItem>
+        {/* Browser */}
+        <Col span={12} offset={1}>
+          <FormItem
+            name="browser"
+            rules={[{ required: true }]}
+            label={
+              <FormattedMessage id="issue.browser" defaultMessage="Browser" />
+            }
+            help={
+              <FormattedMessage
+                id="issue.browserHelp"
+                defaultMessage="Browser version..."
+              />
+            }
+          >
+            <Input />
+          </FormItem>
+        </Col>
+      </Row>
+    </Form.Item>
 
     {/* ==================================== Reproduce ==================================== */}
     <FormItem
+      name="reproduction"
+      rules={[{ required: true }]}
       label={
         <FormattedMessage
           id="issue.reproduction"
@@ -110,22 +110,22 @@ const BugForm: React.FC<Props> = ({
       }
       help={<I18n id="reproHelp" />}
     >
-      {getFieldDecorator("reproduction", {
-        rules: [{ required: true }]
-      })(<Input type="url" />)}
+      <Input type="url" />
     </FormItem>
 
     <FormItem
+      name="steps"
+      rules={[{ required: true }]}
       label={
         <FormattedMessage id="issue.steps" defaultMessage="Step to reproduce" />
       }
       help={<I18n id="stepsHelp" />}
     >
-      {getFieldDecorator("steps", {
-        rules: [{ required: true }]
-      })(<TextArea autosize={{ minRows: 2 }} />)}
+      <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
     <FormItem
+      name="expected"
+      rules={[{ required: true }]}
       label={
         <FormattedMessage
           id="issue.expected"
@@ -133,11 +133,11 @@ const BugForm: React.FC<Props> = ({
         />
       }
     >
-      {getFieldDecorator("expected", {
-        rules: [{ required: true }]
-      })(<TextArea autosize={{ minRows: 2 }} />)}
+      <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
     <FormItem
+      name="actual"
+      rules={[{ required: true }]}
       label={
         <FormattedMessage
           id="issue.actually"
@@ -145,11 +145,10 @@ const BugForm: React.FC<Props> = ({
         />
       }
     >
-      {getFieldDecorator("actual", {
-        rules: [{ required: true }]
-      })(<TextArea autosize={{ minRows: 2 }} />)}
+      <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
     <FormItem
+      name="extra"
       label={
         <FormattedMessage
           id="issue.extra"
@@ -163,7 +162,7 @@ const BugForm: React.FC<Props> = ({
         />
       }
     >
-      {getFieldDecorator("extra", {})(<TextArea autosize={{ minRows: 2 }} />)}
+      <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
   </div>
 );
