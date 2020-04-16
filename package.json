@@ -32,7 +32,7 @@
     "mdx.macro": "^0.2.8",
     "node-sass": "^4.12.0",
     "prettier": "^1.17.0",
-    "pretty-quick": "^1.10.0",
+    "pretty-quick": "^2.0.1",
     "reactive.macro": "^0.0.7",
     "source-map-explorer": "^1.8.0",
     "typescript": "^3.4.5"
