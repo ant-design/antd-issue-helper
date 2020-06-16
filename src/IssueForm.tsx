@@ -1,17 +1,17 @@
 import * as React from "react";
 import { Form, Row, Col, Input, Select, Button, Radio } from "antd";
 import { FormattedMessage } from "react-intl";
+import { BugOutlined } from "@ant-design/icons";
+import { state } from "reactive.macro";
 import BugForm from "./BugForm";
 import FeatureForm from "./FeatureForm";
 import PreviewModal from "./PreviewModal";
 import ReproModal from "./ReproModal";
 import createPreview from "./createPreview";
-import { state } from "reactive.macro";
 import useSimilarIssues from "./hooks/useSimilarIssues";
 import useVersions from "./hooks/useVersions";
 import styles from "./IssueForm.module.scss";
 
-const FormItem = Form.Item;
 const { Option } = Select;
 
 const params: any = window.location.search
@@ -139,7 +139,7 @@ ${content}
   const versions = repoVersions[repo] || [];
 
   const similarIssuesList = (
-    <FormItem>
+    <Form.Item className={styles.similar}>
       <h3>Similar Issues:</h3>
       <ul>
         {similarIssues.map(issue => (
@@ -150,7 +150,7 @@ ${content}
           </li>
         ))}
       </ul>
-    </FormItem>
+    </Form.Item>
   );
 
   return (
@@ -158,6 +158,7 @@ ${content}
       <Form
         form={form}
         layout="vertical"
+        size="large"
         initialValues={{
           repo: params.repo,
           type: "bug",
@@ -198,7 +199,7 @@ ${content}
         />
         <Row>
           <Col span={11}>
-            <FormItem
+            <Form.Item
               name="repo"
               label={
                 <FormattedMessage
@@ -220,10 +221,10 @@ ${content}
                   ant-design-mobile-rn
                 </Option>
               </Select>
-            </FormItem>
+            </Form.Item>
           </Col>
           <Col span={12} offset={1}>
-            <FormItem
+            <Form.Item
               name="type"
               label={
                 <FormattedMessage id="issue.type" defaultMessage="This is a" />
@@ -246,18 +247,18 @@ ${content}
                   />
                 </Radio.Button>
               </Radio.Group>
-            </FormItem>
+            </Form.Item>
           </Col>
         </Row>
-        <FormItem
+        <Form.Item
           name="title"
           label={<FormattedMessage id="issue.title" defaultMessage="Title" />}
           rules={[{ required: true }]}
         >
           <Input onBlur={handleTitleBlur} />
-        </FormItem>
+        </Form.Item>
         {similarIssues.length > 0 && similarIssuesList}
-        <FormItem
+        <Form.Item
           noStyle
           shouldUpdate={(prev, next) => prev.type !== next.type}
         >
@@ -268,14 +269,19 @@ ${content}
               <BugForm versions={versions} />
             )
           }
-        </FormItem>
-        <FormItem>
+        </Form.Item>
+        <Form.Item>
           <div className={styles.submitBtn}>
-            <Button type="primary" size="large" htmlType="submit">
+            <Button
+              type="primary"
+              size="large"
+              htmlType="submit"
+              icon={<BugOutlined />}
+            >
               <FormattedMessage id="issue.preview" defaultMessage="Preview" />
             </Button>
           </div>
-        </FormItem>
+        </Form.Item>
       </Form>
     </div>
   );

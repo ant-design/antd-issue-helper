@@ -5,7 +5,6 @@ import Intro from "./Intro";
 import IssueForm from "./IssueForm";
 import LocaleContext, { switchLocale } from "./LocaleContext";
 import styles from "./App.module.scss";
-import "antd/dist/antd.min.css";
 
 const { Header, Content, Footer } = Layout;
 
