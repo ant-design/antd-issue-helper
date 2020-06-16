@@ -103,14 +103,24 @@ const BugForm: React.FC<Props> = ({ versions }) => (
     {/* ==================================== Reproduce ==================================== */}
     <FormItem
       name="reproduction"
-      rules={[{ required: true }]}
+      rules={[
+        {
+          required: true,
+          validator: async (rule, value) => {
+            if (value.includes("new-issue.ant.design")) {
+              return Promise.reject("Please provide valid reproduction url");
+            }
+            return Promise.resolve();
+          }
+        }
+      ]}
       label={
         <FormattedMessage
           id="issue.reproduction"
           defaultMessage="Link to minimal reproduction"
         />
       }
-      help={<I18n id="reproHelp" />}
+      extra={<I18n id="reproHelp" />}
     >
       <Input type="url" />
     </FormItem>
