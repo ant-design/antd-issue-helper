@@ -28,7 +28,7 @@
     "@types/react-dom": "16.8.4",
     "@types/react-intl": "^2.3.2",
     "@types/remarkable": "^1.7.4",
-    "husky": "^2.2.0",
+    "husky": "^4.2.5",
     "mdx.macro": "^0.2.8",
     "node-sass": "^4.12.0",
     "prettier": "^1.17.0",
