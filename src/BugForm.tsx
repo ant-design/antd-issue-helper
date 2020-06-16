@@ -32,7 +32,9 @@ const BugForm: React.FC<Props> = ({ versions }) => (
           >
             <Select showSearch={true}>
               {versions.map(version => (
-                <Option value={version}>{version}</Option>
+                <Option key={version} value={version}>
+                  {version}
+                </Option>
               ))}
             </Select>
           </FormItem>

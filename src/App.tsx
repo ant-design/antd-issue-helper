@@ -10,8 +10,9 @@ const { Header, Content, Footer } = Layout;
 
 const App: React.FC = () => {
   const locale = React.useContext(LocaleContext);
+  const [localeString, forceUpdateLocale] = React.useState(locale);
 
-  const appLocale = window.appLocale[locale];
+  const appLocale = window.appLocale[localeString];
   addLocaleData(appLocale.data);
 
   return (
@@ -27,13 +28,16 @@ const App: React.FC = () => {
               <h1>Issue Helper</h1>
             </div>
             <div className={styles.locale}>
-              <Button size="small" onClick={switchLocale}>
-                {locale === "en" ? "中文" : "English"}
+              <Button
+                size="small"
+                onClick={() => switchLocale(forceUpdateLocale)}
+              >
+                {localeString === "en" ? "中文" : "English"}
               </Button>
             </div>
           </div>
         </Header>
-        <IntlProvider locale={appLocale.locale} messages={appLocale.messages}>
+        <IntlProvider locale={localeString} messages={appLocale.messages}>
           <Content className={styles.content}>
             <Intro />
             <IssueForm />

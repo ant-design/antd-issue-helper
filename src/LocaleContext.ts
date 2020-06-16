@@ -10,8 +10,10 @@ function getLocale() {
 
 const LocaleContext = createContextIO<string>(getLocale());
 
-export function switchLocale() {
-  LocaleContext.write(LocaleContext.read() === "en" ? "zh" : "en");
+export function switchLocale(forceUpdateLocale: any) {
+  const locale = LocaleContext.read() === "en" ? "zh" : "en";
+  forceUpdateLocale(locale);
+  LocaleContext.write(locale);
   window.localStorage.setItem("locale", LocaleContext.read());
 }
 
