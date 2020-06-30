@@ -35,7 +35,7 @@
     "prettier": "^1.17.0",
     "pretty-quick": "^2.0.1",
     "reactive.macro": "^0.0.7",
-    "source-map-explorer": "^1.8.0",
+    "source-map-explorer": "^2.4.2",
     "typescript": "^3.4.5"
   },
   "husky": {
