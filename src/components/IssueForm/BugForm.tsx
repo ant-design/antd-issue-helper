@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form, Col, Input, Select } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import I18n from '../I18n';
 
 const FormItem = Form.Item;
@@ -87,7 +87,12 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
     >
       {getFieldDecorator('steps', {
         rules: [{ required: true }],
-      })(<TextArea autosize={{ minRows: 2 }} />)}
+      })(
+        <TextArea
+          placeholder={formatMessage({ id: 'issue.helpHint' })}
+          autosize={{ minRows: 2 }}
+        />,
+      )}
     </FormItem>
 
     {/* <FormItem label={<FormattedMessage id="issue.expected" defaultMessage="What is expected?" />}>

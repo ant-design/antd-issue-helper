@@ -24,6 +24,7 @@ export default {
   "issue.steps": "重现步骤",
   "issue.version": "版本",
   "issue.versionHelp": "请检查问题是否存在于最新版本中。",
+  "issue.helpHint": "如需要贴截图，请在点击预览提交后在 Github 页面添加截图。",
   "previewModal.title": "Issue 预览",
   "repro.about": "关于重现"
 }

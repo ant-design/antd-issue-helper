@@ -23,6 +23,7 @@ export default {
   "issue.steps": "Step to reproduce",
   "issue.version": "Version",
   "issue.versionHelp": "Check if the issue is reproducible with the latest stable version.",
+  "issue.helpHint": "If need to paste screenshot, please paste your screenshot after click submit.",
   "previewModal.title": "Preview Issue",
   "repro.about": "About Reproductions"
 }
