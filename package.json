@@ -9,7 +9,8 @@
     "lint": "npm run lint:ts",
     "lint:es": "eslint --ext .js src",
     "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
-    "prettier": "prettier --write '**/*.{js,ts,json,md}'"
+    "prettier": "prettier --write '**/*.{js,ts,json,md}'",
+    "deploy": "npm run build && cp CNAME dist && cd dist && git init && git commit --allow-empty -m 'Update' && git checkout -b gh-pages && git add . && git commit -am 'Update' && git push https://github.com/antvis/antv-issue-helper.git gh-pages --force"
   },
   "husky": {
     "hooks": {

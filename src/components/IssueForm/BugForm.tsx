@@ -51,7 +51,7 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
           help={<FormattedMessage id="issue.systemHelp" defaultMessage="System version..." />}
         >
           {getFieldDecorator('system', {
-            rules: [{ required: true }],
+            rules: [{ required: false }],
           })(<Input />)}
         </FormItem>
       </Col>
@@ -63,7 +63,7 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
           help={<FormattedMessage id="issue.browserHelp" defaultMessage="Browser version..." />}
         >
           {getFieldDecorator('browser', {
-            rules: [{ required: true }],
+            rules: [{ required: false }],
           })(<Input />)}
         </FormItem>
       </Col>
@@ -89,18 +89,20 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
         rules: [{ required: true }],
       })(<TextArea autosize={{ minRows: 2 }} />)}
     </FormItem>
-    <FormItem label={<FormattedMessage id="issue.expected" defaultMessage="What is expected?" />}>
+
+    {/* <FormItem label={<FormattedMessage id="issue.expected" defaultMessage="What is expected?" />}>
       {getFieldDecorator('expected', {
-        rules: [{ required: true }],
+        rules: [{ required: false }],
       })(<TextArea autosize={{ minRows: 2 }} />)}
     </FormItem>
     <FormItem
       label={<FormattedMessage id="issue.actually" defaultMessage="What is actually happening?" />}
     >
       {getFieldDecorator('actual', {
-        rules: [{ required: true }],
+        rules: [{ required: false }],
       })(<TextArea autosize={{ minRows: 2 }} />)}
-    </FormItem>
+    </FormItem> */}
+
     <FormItem
       label={
         <FormattedMessage id="issue.extra" defaultMessage="Any additional comments?(optional)" />
