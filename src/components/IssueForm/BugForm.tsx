@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form, Col, Input, Select } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import I18n from '../I18n';
 
 const FormItem = Form.Item;
@@ -51,7 +51,7 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
           help={<FormattedMessage id="issue.systemHelp" defaultMessage="System version..." />}
         >
           {getFieldDecorator('system', {
-            rules: [{ required: true }],
+            rules: [{ required: false }],
           })(<Input />)}
         </FormItem>
       </Col>
@@ -63,7 +63,7 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
           help={<FormattedMessage id="issue.browserHelp" defaultMessage="Browser version..." />}
         >
           {getFieldDecorator('browser', {
-            rules: [{ required: true }],
+            rules: [{ required: false }],
           })(<Input />)}
         </FormItem>
       </Col>
@@ -87,20 +87,27 @@ const BugForm: React.FC<Props> = ({ form: { getFieldDecorator }, versions }) => 
     >
       {getFieldDecorator('steps', {
         rules: [{ required: true }],
-      })(<TextArea autosize={{ minRows: 2 }} />)}
+      })(
+        <TextArea
+          placeholder={formatMessage({ id: 'issue.helpHint' })}
+          autosize={{ minRows: 2 }}
+        />,
+      )}
     </FormItem>
-    <FormItem label={<FormattedMessage id="issue.expected" defaultMessage="What is expected?" />}>
+
+    {/* <FormItem label={<FormattedMessage id="issue.expected" defaultMessage="What is expected?" />}>
       {getFieldDecorator('expected', {
-        rules: [{ required: true }],
+        rules: [{ required: false }],
       })(<TextArea autosize={{ minRows: 2 }} />)}
     </FormItem>
     <FormItem
       label={<FormattedMessage id="issue.actually" defaultMessage="What is actually happening?" />}
     >
       {getFieldDecorator('actual', {
-        rules: [{ required: true }],
+        rules: [{ required: false }],
       })(<TextArea autosize={{ minRows: 2 }} />)}
-    </FormItem>
+    </FormItem> */}
+
     <FormItem
       label={
         <FormattedMessage id="issue.extra" defaultMessage="Any additional comments?(optional)" />

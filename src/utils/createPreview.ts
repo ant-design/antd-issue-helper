@@ -23,17 +23,11 @@ ${createReproductionLink(reproduction)}
 ### Steps to reproduce
 ${steps}
 
-### What is expected?
-${expected}
-
-### What is actually happening?
-${actual}
-
 | Environment | Info |
 |---|---|
 | ${repo} | ${version} |
-| System | ${system} |
-| Browser | ${browser} |
+| System | ${system || '-'} |
+| Browser | ${browser || '-'} |
 
 ${extra ? `---\n${extra}` : ''}
 `.trim();
