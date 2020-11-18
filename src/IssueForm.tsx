@@ -88,10 +88,12 @@ const IssueForm: React.FC<{}> = () => {
   }, []);
 
   const handleRepoChange = React.useCallback((repo: string) => {
-    form.resetFields(["version"]);
     if (!repoVersions[repo]) {
       fetchVersions(repo);
     }
+    form.setFieldsValue({
+      version: repoVersions[repo][0]
+    });
   }, []);
 
   const handleTypeChange = React.useCallback(() => {
