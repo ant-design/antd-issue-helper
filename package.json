@@ -36,7 +36,7 @@
     "pretty-quick": "^2.0.1",
     "reactive.macro": "^0.0.7",
     "source-map-explorer": "^1.8.0",
-    "typescript": "^3.4.5"
+    "typescript": "^4.1.2"
   },
   "husky": {
     "hooks": {
