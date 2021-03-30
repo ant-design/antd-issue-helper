@@ -27,7 +27,7 @@
     "@types/node": "^11.13.9",
     "@types/react": "^16.8.15",
     "@types/react-dom": "^16.8.4",
-    "@types/react-intl": "^2.3.2",
+    "@types/react-intl": "^3.0.0",
     "@types/remarkable": "^1.7.4",
     "husky": "^4.2.5",
     "mdx.macro": "^0.2.8",
