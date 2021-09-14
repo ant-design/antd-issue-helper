@@ -188,9 +188,9 @@ ${content}
                 initialValue: params.repo,
               })(
                 <Select onChange={handleRepoChange}>
-                  {REPO_LIST.map(item => (
-                    <Option key={item} value={item}>
-                      {item}
+                  {REPO_LIST.map(repo => (
+                    <Option key={repo.id} value={repo.id}>
+                      {repo.name}
                     </Option>
                   ))}
                 </Select>,
