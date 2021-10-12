@@ -91,9 +91,17 @@ p {
 
   ul {
     list-style-type: disc;
+    padding-bottom: 0;
   }
 
   ol {
     list-style-type: decimal;
+    padding-bottom: 0;
+  }
+
+  blockquote {
+    color: #888;
+    border-left: 3px solid #ddd;
+    padding-left: 1em;
   }
 }
