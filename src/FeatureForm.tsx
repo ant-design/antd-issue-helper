@@ -7,7 +7,7 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 const FeatureForm: React.FC<{}> = () => (
-  <div>
+  <>
     <FormItem
       name="motivation"
       rules={[{ required: true }]}
@@ -34,7 +34,7 @@ const FeatureForm: React.FC<{}> = () => (
     >
       <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
-  </div>
+  </>
 );
 
 export default FeatureForm;

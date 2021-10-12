@@ -25,7 +25,7 @@ const App: React.FC = () => {
                 alt="logo"
                 src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
               />
-              <h1>Issue Helper</h1>
+              <h1>Ant Design Issue Helper</h1>
             </div>
             <div className={styles.locale}>
               <Button
