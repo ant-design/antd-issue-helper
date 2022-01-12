@@ -12,7 +12,7 @@
     "react-intl": "^2.4.0",
     "react-scripts": "^3.0.0",
     "remarkable": "^1.7.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^3.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
