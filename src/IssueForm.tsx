@@ -31,8 +31,10 @@ const IssueForm: React.FC<{}> = () => {
 
   const [form] = Form.useForm();
 
-  const getContent = (type: string) =>
-    createPreview(type, form.getFieldsValue());
+  const getContent = React.useCallback(
+    (type: string) => createPreview(type, form.getFieldsValue()),
+    [form]
+  );
 
   const [content, setContent] = React.useState("");
   const [preview, setPreview] = React.useState(false);
@@ -49,62 +51,68 @@ const IssueForm: React.FC<{}> = () => {
     formRef.current!.addEventListener("click", (e: Event) => {
       if ((e.target as any).getAttribute("href") === "#repro-modal") {
         e.preventDefault();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         reproModal = true;
       }
     });
   }, []);
 
   // Load form data from localStorage
-  const restoreValues = React.useCallback((omitFields: Array<string> = []) => {
-    const cache = localStorage.getItem("form");
-    if (cache) {
-      const values = JSON.parse(cache);
-      const keys = Object.keys(values);
+  const restoreValues = React.useCallback(
+    (omitFields: Array<string> = []) => {
+      const cache = localStorage.getItem("form");
+      if (cache) {
+        const values = JSON.parse(cache);
+        const keys = Object.keys(values);
 
-      // Remove unless fields
-      omitFields.forEach(key => {
-        delete values[key];
-      });
-
-      if (values.type) {
-        form.setFieldsValue({
-          type: values.type
+        // Remove unless fields
+        omitFields.forEach(key => {
+          delete values[key];
         });
+
+        if (values.type) {
+          form.setFieldsValue({
+            type: values.type
+          });
+        }
+
+        // Next frame (IE 9 not support RAF)
+        setTimeout(() => {
+          // Remove useless value
+          const currentValues = form.getFieldsValue();
+          keys.forEach(key => {
+            if (!(key in currentValues)) {
+              delete values[key];
+            }
+          });
+          form.setFieldsValue(values);
+        }, 100);
       }
+    },
+    [form]
+  );
 
-      // Next frame (IE 9 not support RAF)
-      setTimeout(() => {
-        // Remove useless value
-        const currentValues = form.getFieldsValue();
-        keys.forEach(key => {
-          if (!(key in currentValues)) {
-            delete values[key];
-          }
-        });
-
-        form.setFieldsValue(values);
-      }, 100);
-    }
-  }, []);
-
-  const handleRepoChange = React.useCallback((repo: string) => {
-    if (!repoVersions[repo]) {
-      fetchVersions(repo);
-    }
-    form.setFieldsValue({
-      version: repoVersions?.[repo]?.[0]
-    });
-  }, []);
+  const handleRepoChange = React.useCallback(
+    (repo: string) => {
+      if (!repoVersions[repo]) {
+        fetchVersions(repo);
+      }
+      form.setFieldsValue({
+        version: repoVersions?.[repo]?.[0]
+      });
+    },
+    [form, fetchVersions, repoVersions]
+  );
 
   const handleTypeChange = React.useCallback(() => {
     restoreValues(["type"]);
-  }, []);
+  }, [restoreValues]);
 
   const handleTitleBlur = React.useCallback(() => {
     const repo = form.getFieldValue("repo");
     const title = form.getFieldValue("title");
     searchIssues(repo, title);
-  }, []);
+  }, [form, searchIssues]);
 
   const handleCreate = React.useCallback(() => {
     const issueType = form.getFieldValue("type");
@@ -125,13 +133,13 @@ const IssueForm: React.FC<{}> = () => {
     window.open(
       `https://github.com/ant-design/${repo}/issues/new?title=${title}&body=${body}${label}`
     );
-  }, []);
+  }, [form, getContent]);
 
   React.useEffect(() => {
     fetchVersions(params.repo);
     bindModalHandler();
     restoreValues();
-  }, []);
+  }, [fetchVersions, bindModalHandler, restoreValues]);
 
   const repo = form.getFieldValue("repo");
   const versions = repoVersions[repo] || [];

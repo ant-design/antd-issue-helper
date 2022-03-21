@@ -12,6 +12,7 @@ const Intro: React.FC = () => {
     introRef.current!.addEventListener("click", (e: Event) => {
       if ((e.target as any).getAttribute("href") === "#intro-modal") {
         e.preventDefault();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         modalVisible = true;
       }
     });
