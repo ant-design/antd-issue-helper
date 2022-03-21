@@ -3,7 +3,6 @@ import { Form, Row, Col, Input, Select } from "antd";
 import { FormattedMessage } from "react-intl";
 import I18n from "./I18n";
 
-const FormItem = Form.Item;
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -18,34 +17,34 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       <Row>
         <Col span={11}>
           {/* antd version */}
-          <FormItem
+          <Form.Item
             name="version"
             label={
               <FormattedMessage id="issue.version" defaultMessage="Version" />
             }
-            help={
+            extra={
               <FormattedMessage
                 id="issue.versionHelp"
                 defaultMessage="Check if the issue is reproducible with the latest stable version."
               />
             }
           >
-            <Select showSearch={true}>
+            <Select showSearch>
               {versions.map(version => (
                 <Option key={version} value={version}>
                   {version}
                 </Option>
               ))}
             </Select>
-          </FormItem>
+          </Form.Item>
         </Col>
         <Col span={12} offset={1}>
           {/* react version */}
-          <FormItem
+          <Form.Item
             name="react"
             rules={[{ required: true }]}
             label={<FormattedMessage id="issue.react" defaultMessage="React" />}
-            help={
+            extra={
               <FormattedMessage
                 id="issue.reactHelp"
                 defaultMessage="react/react-native version..."
@@ -53,7 +52,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
             }
           >
             <Input />
-          </FormItem>
+          </Form.Item>
         </Col>
       </Row>
     </Form.Item>
@@ -62,13 +61,13 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       <Row>
         {/* System */}
         <Col span={11}>
-          <FormItem
+          <Form.Item
             name="system"
             rules={[{ required: true }]}
             label={
               <FormattedMessage id="issue.system" defaultMessage="System" />
             }
-            help={
+            extra={
               <FormattedMessage
                 id="issue.systemHelp"
                 defaultMessage="System version..."
@@ -76,18 +75,18 @@ const BugForm: React.FC<Props> = ({ versions }) => (
             }
           >
             <Input />
-          </FormItem>
+          </Form.Item>
         </Col>
 
         {/* Browser */}
         <Col span={12} offset={1}>
-          <FormItem
+          <Form.Item
             name="browser"
             rules={[{ required: true }]}
             label={
               <FormattedMessage id="issue.browser" defaultMessage="Browser" />
             }
-            help={
+            extra={
               <FormattedMessage
                 id="issue.browserHelp"
                 defaultMessage="Browser version..."
@@ -95,19 +94,20 @@ const BugForm: React.FC<Props> = ({ versions }) => (
             }
           >
             <Input />
-          </FormItem>
+          </Form.Item>
         </Col>
       </Row>
     </Form.Item>
 
     {/* ==================================== Reproduce ==================================== */}
-    <FormItem
+    <Form.Item
       name="reproduction"
       rules={[
         {
           required: true,
           validator: async (rule, value) => {
-            if (value.includes("new-issue.ant.design")) {
+            console.log(value);
+            if (!value || value.includes("new-issue.ant.design")) {
               return Promise.reject("Please provide valid reproduction url");
             }
             return Promise.resolve();
@@ -123,19 +123,19 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       extra={<I18n id="reproHelp" />}
     >
       <Input type="url" />
-    </FormItem>
+    </Form.Item>
 
-    <FormItem
+    <Form.Item
       name="steps"
       rules={[{ required: true }]}
       label={
         <FormattedMessage id="issue.steps" defaultMessage="Step to reproduce" />
       }
-      help={<I18n id="stepsHelp" />}
+      extra={<I18n id="stepsHelp" />}
     >
       <TextArea autoSize={{ minRows: 2 }} />
-    </FormItem>
-    <FormItem
+    </Form.Item>
+    <Form.Item
       name="expected"
       rules={[{ required: true }]}
       label={
@@ -146,8 +146,8 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       }
     >
       <TextArea autoSize={{ minRows: 2 }} />
-    </FormItem>
-    <FormItem
+    </Form.Item>
+    <Form.Item
       name="actual"
       rules={[{ required: true }]}
       label={
@@ -158,8 +158,8 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       }
     >
       <TextArea autoSize={{ minRows: 2 }} />
-    </FormItem>
-    <FormItem
+    </Form.Item>
+    <Form.Item
       name="extra"
       label={
         <FormattedMessage
@@ -167,7 +167,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
           defaultMessage="Any additional comments?(optional)"
         />
       }
-      help={
+      extra={
         <FormattedMessage
           id="issue.extraHelp"
           defaultMessage="e.g. some background/context of how you ran into this bug."
@@ -175,7 +175,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       }
     >
       <TextArea autoSize={{ minRows: 2 }} />
-    </FormItem>
+    </Form.Item>
   </div>
 );
 

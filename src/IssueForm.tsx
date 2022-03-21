@@ -92,7 +92,7 @@ const IssueForm: React.FC<{}> = () => {
       fetchVersions(repo);
     }
     form.setFieldsValue({
-      version: repoVersions[repo][0]
+      version: repoVersions?.[repo]?.[0]
     });
   }, []);
 
@@ -205,7 +205,7 @@ const IssueForm: React.FC<{}> = () => {
                   defaultMessage="I am opening an issue for"
                 />
               }
-              help={
+              extra={
                 <FormattedMessage
                   id="issue.repoHelp"
                   defaultMessage="Please make sure to file the issue at appropriate repo."

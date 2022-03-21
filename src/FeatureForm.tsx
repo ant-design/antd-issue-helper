@@ -17,7 +17,7 @@ const FeatureForm: React.FC<{}> = () => (
           defaultMessage="What problem does this feature solve?"
         />
       }
-      help={<I18n id="motivationHelp" />}
+      extra={<I18n id="motivationHelp" />}
     >
       <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>
@@ -30,7 +30,7 @@ const FeatureForm: React.FC<{}> = () => (
           defaultMessage="What does the proposed API look like?"
         />
       }
-      help={<I18n id="proposalHelp" />}
+      extra={<I18n id="proposalHelp" />}
     >
       <TextArea autoSize={{ minRows: 2 }} />
     </FormItem>

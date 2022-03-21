@@ -6,7 +6,7 @@ interface Response {
   json(): any;
 }
 
-const npmEndpoint = "https://registry.npm.taobao.org";
+const npmEndpoint = "https://registry.npmmirror.com";
 const endpoint = "https://api.github.com";
 
 const npmMapping: { [repo: string]: string } = {
