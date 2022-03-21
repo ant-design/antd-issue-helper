@@ -1,5 +1,5 @@
 export default function createPreview(issueType: string, values: any) {
-  if (issueType === 'bug') {
+  if (issueType === "bug") {
     return createBugPreview(values);
   }
   return createFeaturePreview(values);
@@ -15,7 +15,7 @@ function createBugPreview({
   expected,
   actual,
   extra,
-  repo,
+  repo
 }: any) {
   return `
 ### Reproduction link
@@ -30,14 +30,13 @@ ${expected}
 ### What is actually happening?
 ${actual}
 
-| Environment | Info |
-|---|---|
-| antd | ${version} |
-| React | ${react} |
-| System | ${system} |
-| Browser | ${browser} |
+### Environment and version
+- antd: \`${version}\`
+- React: \`${react}\`
+- System: \`${version}\`
+- Browser: \`${browser}\`
 
-${extra ? `---\n${extra}` : ''}
+${extra ? `---\n${extra}` : ""}
 `.trim();
 }
 
@@ -56,7 +55,7 @@ function createReproductionLink(link: string) {
     return;
   }
 
-  if (link.indexOf('codesandbox.io') >= 0) {
+  if (link.indexOf("codesandbox.io") >= 0) {
     return `[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](${link})`;
   }
 
