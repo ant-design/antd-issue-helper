@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "deploy": "npm run build && cp CNAME build && cd build && git init && git commit --allow-empty -m 'Update' && git checkout -b gh-pages && git add . && git commit -am 'Update' && git push git@github.com:ant-design/antd-issue-helper.git gh-pages --force"
+    "deploy": "npm run build && cp CNAME build && gh-pages -d build"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
