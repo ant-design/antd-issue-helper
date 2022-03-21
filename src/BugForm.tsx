@@ -106,7 +106,6 @@ const BugForm: React.FC<Props> = ({ versions }) => (
         {
           required: true,
           validator: async (rule, value) => {
-            console.log(value);
             if (!value || value.includes("new-issue.ant.design")) {
               return Promise.reject("Please provide valid reproduction url");
             }

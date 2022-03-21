@@ -31,10 +31,10 @@ ${expected}
 ${actual}
 
 ### Environment and version
-- antd: \`${version}\`
-- React: \`${react}\`
-- System: \`${version}\`
-- Browser: \`${browser}\`
+- antd: \`${version || "not specified"}\`
+- React: \`${react || "not specified"}\`
+- System: \`${version || "not specified"}\`
+- Browser: \`${browser || "not specified"}\`
 
 ${extra ? `---\n${extra}` : ""}
 `.trim();
@@ -56,7 +56,7 @@ function createReproductionLink(link: string) {
   }
 
   if (link.indexOf("codesandbox.io") >= 0) {
-    return `[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](${link})`;
+    return `[![Edit on CodeSandbox](https://gw.alipayobjects.com/zos/antfincdn/ytEWA%26gOl/c.svg)](${link})`;
   }
 
   return `[${link}](${link})`;
