@@ -10,9 +10,7 @@ const npmEndpoint = "https://registry.npmmirror.com";
 const endpoint = "https://api.github.com";
 
 const npmMapping: { [repo: string]: string } = {
-  "ant-design": "antd",
-  "ant-design-mobile": "antd-mobile",
-  "ant-design-mobile-rn": "@ant-design/react-native"
+  "ant-design": "antd"
 };
 
 function checkStatus(response: Response) {

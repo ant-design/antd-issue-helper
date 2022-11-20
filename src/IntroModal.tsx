@@ -3,12 +3,12 @@ import { Modal } from "antd";
 import { FormattedMessage } from "react-intl";
 import I18n from "./I18n";
 
-interface Props {
-  visible: boolean;
+interface IntroModalProps {
+  open: boolean;
   onCancel: () => any;
 }
 
-const IntroModal: React.FC<Props> = ({ visible, onCancel }) => (
+const IntroModal: React.FC<IntroModalProps> = ({ open, onCancel }) => (
   <Modal
     title={
       <FormattedMessage
@@ -17,9 +17,9 @@ const IntroModal: React.FC<Props> = ({ visible, onCancel }) => (
       />
     }
     footer=""
-    visible={visible}
+    open={open}
     onCancel={onCancel}
-    width="680px"
+    width={680}
   >
     <I18n className="paragraph" id="introModal" />
   </Modal>

@@ -192,17 +192,14 @@ const IssueForm: React.FC<{}> = () => {
         }}
       >
         <PreviewModal
-          visible={preview}
+          open={preview}
           content={content}
           onCancel={() => {
             triggerPreview(false);
           }}
           onCreate={handleCreate}
         />
-        <ReproModal
-          visible={reproModal}
-          onCancel={() => (reproModal = false)}
-        />
+        <ReproModal open={reproModal} onCancel={() => (reproModal = false)} />
         <Row>
           <Col span={11}>
             <Form.Item
@@ -222,10 +219,6 @@ const IssueForm: React.FC<{}> = () => {
             >
               <Select onChange={handleRepoChange}>
                 <Option value="ant-design">ant-design</Option>
-                <Option value="ant-design-mobile">ant-design-mobile</Option>
-                <Option value="ant-design-mobile-rn">
-                  ant-design-mobile-rn
-                </Option>
               </Select>
             </Form.Item>
           </Col>
