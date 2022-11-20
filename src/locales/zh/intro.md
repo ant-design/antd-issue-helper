@@ -4,7 +4,7 @@ Ant Design 的 issue 列表只接受 Bug 报告或是新功能请求 (Feature Re
 
 对于使用中遇到的问题，请使用以下资源：
 
-- 仔细阅读 <a href="https://ant.design/docs/react/introduce-cn" target="_blank">使用文档</a> 和 <a href="https://ant.design/docs/react/introduce-cn" target="_blank">组件文档</a>。
+- 仔细阅读 <a href="https://ant.design/docs/react/introduce-cn" target="_blank">使用文档</a> 和 <a href="https://ant.design/components/overview-cn" target="_blank">组件文档</a>。
 - 提问前确保你在 <a href="https://ant.design/docs/react/faq-cn" target="_blank">常见问题</a> 和 <a href="https://ant.design/changelog-cn" target="_blank">更新日志</a> 中搜索过
 - 在 <a href="https://stackoverflow.com/questions/ask?tags=antd" target="_blank">StackOverflow</a> (英文) 或是 <a href="https://segmentfault.com/t/antd" target="_blank">SegmentFault</a>（中文）搜索和提问
 
