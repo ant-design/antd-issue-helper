@@ -5,7 +5,7 @@ import { state } from "reactive.macro";
 import styles from "./Intro.module.scss";
 
 const Intro: React.FC = () => {
-  let modalVisible = state(false);
+  let modalOpen = state(false);
   const introRef = React.useRef<null | HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -13,17 +13,14 @@ const Intro: React.FC = () => {
       if ((e.target as any).getAttribute("href") === "#intro-modal") {
         e.preventDefault();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        modalVisible = true;
+        modalOpen = true;
       }
     });
   }, []);
 
   return (
     <div className={`${styles.intro} paragraph`} ref={introRef}>
-      <IntroModal
-        visible={modalVisible}
-        onCancel={() => (modalVisible = false)}
-      />
+      <IntroModal open={modalOpen} onCancel={() => (modalOpen = false)} />
       <I18n id="intro" />
     </div>
   );

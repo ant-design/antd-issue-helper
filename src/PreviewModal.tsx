@@ -6,14 +6,14 @@ import Remarkable from "remarkable";
 const md = new Remarkable();
 
 interface Props {
-  visible: boolean;
+  open: boolean;
   content: string;
   onCancel: () => any;
   onCreate: () => any;
 }
 
 const PreviewModal: React.FC<Props> = ({
-  visible,
+  open,
   content,
   onCancel,
   onCreate
@@ -27,7 +27,7 @@ const PreviewModal: React.FC<Props> = ({
     }
     cancelText=""
     width="680px"
-    visible={visible}
+    open={open}
     onCancel={onCancel}
     footer={
       <Button onClick={onCreate} type="primary">

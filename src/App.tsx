@@ -17,7 +17,7 @@ const App: React.FC = () => {
 
   return (
     <LocaleContext.Provider>
-      <Layout className="layout">
+      <Layout className={styles.layout}>
         <Header className={styles.header}>
           <div className={styles.headerContainer}>
             <div className={styles.logo}>

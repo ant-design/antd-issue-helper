@@ -4,11 +4,11 @@ import { FormattedMessage } from "react-intl";
 import I18n from "./I18n";
 
 interface Props {
-  visible: boolean;
+  open: boolean;
   onCancel: () => any;
 }
 
-const ReproModal: React.FC<Props> = ({ visible, onCancel }) => {
+const ReproModal: React.FC<Props> = ({ open, onCancel }) => {
   return (
     <Modal
       title={
@@ -18,7 +18,7 @@ const ReproModal: React.FC<Props> = ({ visible, onCancel }) => {
         />
       }
       footer=""
-      visible={visible}
+      open={open}
       onCancel={onCancel}
       width="680px"
     >
