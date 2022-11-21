@@ -245,6 +245,12 @@ const IssueForm: React.FC<{}> = () => {
                     defaultMessage="Feature Request"
                   />
                 </Radio.Button>
+                <Radio.Button value="other">
+                  <FormattedMessage
+                    id="issue.type.other"
+                    defaultMessage="Other"
+                  />
+                </Radio.Button>
               </Radio.Group>
             </Form.Item>
           </Col>
@@ -261,13 +267,17 @@ const IssueForm: React.FC<{}> = () => {
           noStyle
           shouldUpdate={(prev, next) => prev.type !== next.type}
         >
-          {() =>
-            form.getFieldValue("type") === "feature" ? (
-              <FeatureForm />
-            ) : (
-              <BugForm versions={versions} />
-            )
-          }
+          {() => {
+            const type = form.getFieldValue("type");
+            if (type === "feature") {
+              return <FeatureForm />;
+            } else if (type === "bug") {
+              return <BugForm versions={versions} />;
+            }
+            return (
+              <>https://github.com/ant-design/ant-design/discussions/new</>
+            );
+          }}
         </Form.Item>
         <Form.Item>
           <div className={styles.submitBtn}>
