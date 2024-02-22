@@ -1,5 +1,5 @@
 export default function createPreview(issueType: string, values: any) {
-  if (issueType === "bug") {
+  if (issueType === 'bug') {
     return createBugPreview(values);
   }
   return createFeaturePreview(values);
@@ -15,7 +15,7 @@ function createBugPreview({
   expected,
   actual,
   extra,
-  repo
+  repo,
 }: any) {
   return `
 ### Reproduction link
@@ -41,7 +41,7 @@ ${actual}
 | System | ${system} |
 | Browser | ${browser} |
 
-${extra ? `---\n${extra}` : ""}
+${extra ? `---\n${extra}` : ''}
 `.trim();
 }
 
@@ -63,8 +63,10 @@ function createReproductionLink(link: string) {
     return;
   }
 
-  if (link.indexOf("codesandbox.io") >= 0) {
+  if (link.indexOf('codesandbox.io') >= 0) {
     return `[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](${link})`;
+  } else if (link.indexOf('stackblitz.com') >= 0) {
+    return `[![Edit on StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](${link})`;
   }
 
   return `[${link}](${link})`;
