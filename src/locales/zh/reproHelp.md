@@ -1,2 +1,2 @@
-请提供一个尽可能精简的链接 <a href="https://ant.design/components/overview-cn" target="_blank">antd@5.x</a> / <a href="https://4x.ant.design/components/overview-cn/" target="_blank">antd@4.x</a> 或是 GitHub 仓库的链接。
+请在你遇到问题的组件下面用 <a href="https://ant.design/components/button-cn#components-button-demo-basic" target="_blank">在 Stackblitz 中打开</a> 或是 GitHub 仓库的链接。
 [什么是最小化重现，为什么这是必需的？](#repro-modal)
