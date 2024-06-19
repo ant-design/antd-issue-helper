@@ -20,7 +20,4 @@
 
 ##### 如何提供一个重现
 
-请在你遇到问题的组件下面用 <a href="https://ant.design/components/button-cn#components-button-demo-basic" target="_blank">在 Stackblitz 中打开</a> 或是 GitHub 仓库的链接。
-[什么是最小化重现，为什么这是必需的？](#repro-modal)
-
-除非你的 bug 只有在构建工具下才能重现，否则我们建议在遇到问题的组件下面用 <a href="https://ant.design/components/button-cn#components-button-demo-basic" target="_blank">在 Stackblitz 中打开</a> 来提供重现。如果你的 bug 必须用到构建工具，那么我们建议使用 <a href="https://ant.design/docs/react/use-with-create-react-app-cn" target="_blank">create-react-app</a> 来搭建一个新项目，推送到 GitHub 并提供仓库的链接。
+除非你的 bug 只有在构建工具下才能重现，否则我们建议使用 <a href="https://u.ant.design/reproduce" target="_blank">CodeSandbox for antd@5.x</a> 或 <a href="https://u.ant.design/codesandbox-repro-4x" target="_blank">CodeSandbox for antd@4.x</a> 来提供重现。如果你的 bug 必须用到构建工具，那么我们建议使用 <a href="https://ant.design/docs/react/use-with-create-react-app-cn" target="_blank">create-react-app</a> 来搭建一个新项目，推送到 GitHub 并提供仓库的链接。
