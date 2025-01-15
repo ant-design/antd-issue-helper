@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IntlProvider, addLocaleData } from "react-intl";
 import { Layout, Button } from "antd";
+import { HappyProvider } from '@ant-design/happy-work-theme';
 import Intro from "./Intro";
 import IssueForm from "./IssueForm";
 import LocaleContext, { switchLocale } from "./LocaleContext";
@@ -16,6 +17,7 @@ const App: React.FC = () => {
   addLocaleData(appLocale.data);
 
   return (
+    <HappyProvider>
     <LocaleContext.Provider>
       <Layout className={styles.layout}>
         <Header className={styles.header}>
@@ -59,6 +61,7 @@ const App: React.FC = () => {
         </Footer>
       </Layout>
     </LocaleContext.Provider>
+    </HappyProvider>
   );
 };
 

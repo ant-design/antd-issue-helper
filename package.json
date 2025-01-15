@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/happy-work-theme": "^1.0.0",
     "@ant-design/icons": "^4.2.1",
     "antd": "^5.0.0",
     "compare-versions": "^3.1.0",
     "gh-pages": "^3.2.3",
-    "react": "^16.8.6",
+    "react": "^18.0.0",
     "react-context-io": "^0.0.7",
-    "react-dom": "^16.8.6",
+    "react-dom": "^18.0.0",
     "react-intl": "^2.4.0",
-    "react-scripts": "^3.0.0",
+    "react-scripts": "^5.0.0",
     "remarkable": "^1.7.1",
     "sass": "^1.49.9",
     "whatwg-fetch": "^2.0.3"
@@ -37,7 +38,7 @@
     "pretty-quick": "^2.0.1",
     "reactive.macro": "^0.0.7",
     "source-map-explorer": "^1.8.0",
-    "typescript": "^4.0.0"
+    "typescript": "^5.0.0"
   },
   "husky": {
     "hooks": {
