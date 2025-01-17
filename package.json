@@ -16,48 +16,33 @@
     "react-scripts": "^5.0.0",
     "remarkable": "^1.7.1",
     "sass": "^1.49.9",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "mdx.macro": "^0.2.8",
+    "reactive.macro": "^0.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "deploy": "npm run build && cp CNAME build && gh-pages -d build"
+    "deploy": "npm run build && cp CNAME build && gh-pages -d build",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/jest": "^24.0.18",
     "@types/node": "^11.13.9",
-    "@types/react": "^16.8.15",
-    "@types/react-dom": "^16.8.4",
+    "@types/react": "^16.0.0",
+    "@types/react-dom": "^16.0.0",
     "@types/react-intl": "^2.3.2",
     "@types/remarkable": "^1.7.4",
-    "husky": "^4.2.5",
-    "mdx.macro": "^0.2.8",
-    "prettier": "^1.17.0",
-    "pretty-quick": "^2.0.1",
-    "reactive.macro": "^0.0.7",
-    "source-map-explorer": "^1.8.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2",
+    "pretty-quick": "^4.0.0",
     "typescript": "^5.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    "defaults"
+  ],
   "repository": "https://github.com/ant-design/antd-issue-helper.git"
 }

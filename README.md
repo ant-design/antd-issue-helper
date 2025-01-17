@@ -5,12 +5,12 @@ Inspired by https://github.com/vuejs/vue-issue-helper
 ## Development
 
 ```
-$ yarn
-$ yarn start
+$ bun i
+$ bun start
 ```
 
 ## Deployment
 
 ```
-$ yarn deploy
+$ bun run deploy
 ```
