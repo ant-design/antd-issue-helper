@@ -3,15 +3,6 @@
   text-align: center;
 }
 
-.radioGroup {
-  width: 100%;
-  text-align: center;
-
-  :global(.ant-radio-button-wrapper) {
-    width: 50%;
-  }
-}
-
 .similar {
   border-radius: 2px;
   background-color: #f6f7fb;

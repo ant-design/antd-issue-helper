@@ -1,11 +1,7 @@
-import * as appLocaleData from 'react-intl/locale-data/en';
+const enMessages: any = require("./locales/en.json");
 
-const enMessages: any = require('./locales/en.json');
-
+// react-intl v7 不再需要 addLocaleData/locale-data 预加载
 (window as any).appLocale.en = {
-  messages: {
-    ...enMessages,
-  },
-  locale: 'en-US',
-  data: appLocaleData,
+  messages: enMessages,
+  locale: "en",
 };

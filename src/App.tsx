@@ -1,7 +1,7 @@
 import * as React from "react";
-import { IntlProvider, addLocaleData } from "react-intl";
+import { IntlProvider } from "react-intl";
 import { Layout, Button } from "antd";
-import { HappyProvider } from '@ant-design/happy-work-theme';
+import { HappyProvider } from "@ant-design/happy-work-theme";
 import Intro from "./Intro";
 import IssueForm from "./IssueForm";
 import LocaleContext, { switchLocale } from "./LocaleContext";
@@ -14,53 +14,52 @@ const App: React.FC = () => {
   const [localeString, forceUpdateLocale] = React.useState(locale);
 
   const appLocale = window.appLocale[localeString];
-  addLocaleData(appLocale.data);
 
   return (
     <HappyProvider>
-    <LocaleContext.Provider>
-      <Layout className={styles.layout}>
-        <Header className={styles.header}>
-          <div className={styles.headerContainer}>
-            <div className={styles.logo}>
-              <img
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-              />
-              <h1>Ant Design Issue Helper</h1>
+      <LocaleContext.Provider value={localeString}>
+        <Layout className={styles.layout}>
+          <Header className={styles.header}>
+            <div className={styles.headerContainer}>
+              <div className={styles.logo}>
+                <img
+                  alt="logo"
+                  src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                />
+                <h1>Ant Design Issue Helper</h1>
+              </div>
+              <div className={styles.locale}>
+                <Button
+                  size="small"
+                  onClick={() => switchLocale(forceUpdateLocale)}
+                >
+                  {localeString === "en" ? "中文" : "English"}
+                </Button>
+              </div>
             </div>
-            <div className={styles.locale}>
-              <Button
-                size="small"
-                onClick={() => switchLocale(forceUpdateLocale)}
-              >
-                {localeString === "en" ? "中文" : "English"}
-              </Button>
-            </div>
-          </div>
-        </Header>
-        <IntlProvider locale={localeString} messages={appLocale.messages}>
-          <Content className={styles.content}>
-            <Intro />
-            <IssueForm />
-          </Content>
-        </IntlProvider>
-        <Footer style={{ textAlign: "center" }}>
-          Inspired by{" "}
-          <a
-            href="https://new-issue.vuejs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vue Issue Helper
-          </a>{" "}
-          ·{" "}
-          <a href="https://github.com/ant-design/antd-issue-helper">
-            Source Code
-          </a>
-        </Footer>
-      </Layout>
-    </LocaleContext.Provider>
+          </Header>
+          <IntlProvider locale={localeString} messages={appLocale.messages}>
+            <Content className={styles.content}>
+              <Intro />
+              <IssueForm />
+            </Content>
+          </IntlProvider>
+          <Footer style={{ textAlign: "center" }}>
+            Inspired by{" "}
+            <a
+              href="https://new-issue.vuejs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vue Issue Helper
+            </a>{" "}
+            ·{" "}
+            <a href="https://github.com/ant-design/antd-issue-helper">
+              Source Code
+            </a>
+          </Footer>
+        </Layout>
+      </LocaleContext.Provider>
     </HappyProvider>
   );
 };
