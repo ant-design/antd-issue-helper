@@ -29,8 +29,8 @@ const BugForm: React.FC<Props> = ({ versions }) => (
               />
             }
           >
-            <Select showSearch>
-              {versions.map(version => (
+            <Select showSearch variant="filled">
+              {versions.map((version) => (
                 <Option key={version} value={version}>
                   {version}
                 </Option>
@@ -51,7 +51,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
               />
             }
           >
-            <Input />
+            <Input variant="filled" />
           </Form.Item>
         </Col>
       </Row>
@@ -74,7 +74,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
               />
             }
           >
-            <Input />
+            <Input variant="filled" />
           </Form.Item>
         </Col>
 
@@ -93,7 +93,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
               />
             }
           >
-            <Input />
+            <Input variant="filled" />
           </Form.Item>
         </Col>
       </Row>
@@ -110,8 +110,8 @@ const BugForm: React.FC<Props> = ({ versions }) => (
               return Promise.reject("Please provide valid reproduction url");
             }
             return Promise.resolve();
-          }
-        }
+          },
+        },
       ]}
       label={
         <FormattedMessage
@@ -121,7 +121,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       }
       extra={<I18n id="reproHelp" />}
     >
-      <Input type="url" />
+      <Input type="url" variant="filled" />
     </Form.Item>
 
     <Form.Item
@@ -132,7 +132,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
       }
       extra={<I18n id="stepsHelp" />}
     >
-      <TextArea autoSize={{ minRows: 2 }} />
+      <TextArea variant="filled" autoSize={{ minRows: 2 }} />
     </Form.Item>
     <Form.Item
       name="expected"
@@ -144,7 +144,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
         />
       }
     >
-      <TextArea autoSize={{ minRows: 2 }} />
+      <TextArea variant="filled" autoSize={{ minRows: 2 }} />
     </Form.Item>
     <Form.Item
       name="actual"
@@ -156,7 +156,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
         />
       }
     >
-      <TextArea autoSize={{ minRows: 2 }} />
+      <TextArea variant="filled" autoSize={{ minRows: 2 }} />
     </Form.Item>
     <Form.Item
       name="extra"
@@ -173,7 +173,7 @@ const BugForm: React.FC<Props> = ({ versions }) => (
         />
       }
     >
-      <TextArea autoSize={{ minRows: 2 }} />
+      <TextArea variant="filled" autoSize={{ minRows: 2 }} />
     </Form.Item>
   </div>
 );

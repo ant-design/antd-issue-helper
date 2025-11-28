@@ -19,7 +19,7 @@ const FeatureForm: React.FC<{}> = () => (
       }
       extra={<I18n id="motivationHelp" />}
     >
-      <TextArea autoSize={{ minRows: 2 }} />
+      <TextArea variant="filled" autoSize={{ minRows: 2 }} />
     </FormItem>
     <FormItem
       name="proposal"
@@ -32,7 +32,7 @@ const FeatureForm: React.FC<{}> = () => (
       }
       extra={<I18n id="proposalHelp" />}
     >
-      <TextArea autoSize={{ minRows: 2 }} />
+      <TextArea variant="filled" autoSize={{ minRows: 2 }} />
     </FormItem>
   </>
 );
